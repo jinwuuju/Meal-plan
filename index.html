@@ -4,723 +4,760 @@
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>
 <meta name='apple-mobile-web-app-capable' content='yes'>
-<meta name='theme-color' content='#f2f2f7' media='(prefers-color-scheme: light)'>
+<meta name='theme-color' content='#F5F5F7' media='(prefers-color-scheme: light)'>
 <meta name='theme-color' content='#000000' media='(prefers-color-scheme: dark)'>
 <title>한 끼</title>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css'>
 <style>
-:root{--bg:#f2f2f7;--card:#fff;--ink:#000;--sub:rgba(60,60,67,.6);--mute:rgba(60,60,67,.3);--sep:rgba(60,60,67,.2);--fill:rgba(120,120,128,.12);--bar:rgba(249,249,249,.82);--blue:#007aff;--green:#34c759;--orange:#ff9500;--red:#ff3b30;--xS:#ff2d55;--xE:#ff9500;--xV:#007aff;--xA:#af52de;--cF:#5856d6;--cB:#a2845e;--cL:#ffcc00;--cP:#ff6482;--cS:#00c7be;--cW:#8e8e93;--cV:#34c759}
-@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--ink:#fff;--sub:rgba(235,235,245,.6);--mute:rgba(235,235,245,.3);--sep:rgba(84,84,88,.65);--fill:rgba(118,118,128,.24);--bar:rgba(22,22,24,.8);--blue:#0a84ff;--green:#30d158;--orange:#ff9f0a;--red:#ff453a;--xS:#ff375f;--xE:#ff9f0a;--xV:#0a84ff;--xA:#bf5af2;--cF:#5e5ce6;--cB:#ac8e68;--cL:#ffd60a;--cS:#63e6e2;--cW:#98989d;--cV:#30d158}}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--font:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;--bg:#F5F5F7;--card:#fff;--tx:#1D1D1F;--tx2:#6E6E73;--tx3:#86868B;--tx4:#C7C7CC;--sep:rgba(0,0,0,.08);--bl:#0071E3;--bl2:#E8F0FE;--bl3:#0062C4;--red:#E5484D;--red2:#FDECEC;--fill:#F0F0F3;--sh:0 1px 2px rgba(0,0,0,.05);--top:rgba(255,255,255,.86)}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1C1C1E;--tx:#F5F5F7;--tx2:#A1A1A6;--tx3:#8E8E93;--tx4:#48484A;--sep:rgba(255,255,255,.1);--bl:#2997FF;--bl2:rgba(41,151,255,.16);--bl3:#0A84FF;--red:#FF6961;--red2:rgba(255,105,97,.16);--fill:#2C2C2E;--sh:none;--top:rgba(28,28,30,.82)}}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.4 -apple-system,BlinkMacSystemFont,'SF Pro Text','Apple SD Gothic Neo','Noto Sans KR',sans-serif;letter-spacing:-.02em;word-break:keep-all;-webkit-font-smoothing:antialiased}
-button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
-button{background:none;border:0;padding:0;cursor:pointer;text-align:inherit}
-details>summary{list-style:none;cursor:pointer}
-details>summary::-webkit-details-marker{display:none}
-.hide{display:none!important}
-.wrap{max-width:640px;margin:0 auto;padding:0 16px}
-.nav{position:sticky;top:0;z-index:20;background:var(--bar);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:.5px solid transparent;transition:border-color .2s}
-.nav.sc{border-bottom-color:var(--sep)}
-.nav .wrap{display:flex;align-items:center;gap:12px;height:50px}
-.nav .ttl{flex:1;font-size:17px;font-weight:600;opacity:0;transition:opacity .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nav.sc .ttl{opacity:1}
-.nav .rt{flex:1;display:flex;justify-content:flex-end}
-.ib{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--blue);flex:none}
-.ib svg{width:22px;height:22px}
-.ib[disabled]{opacity:.3;pointer-events:none}
-.tabs{display:flex;padding:2px;border-radius:9px;background:var(--fill)}
-.tabs button{display:flex;align-items:center;gap:6px;padding:5px 20px;border-radius:7px;font-size:13px;font-weight:500}
-.tabs button svg{display:none}
-.tabs button[aria-current=page]{background:var(--card);font-weight:600;box-shadow:0 3px 8px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04)}
-@media (prefers-color-scheme:dark){.tabs button[aria-current=page]{background:#636366}}
-main{padding-bottom:40px}
-.lt{padding:8px 4px 14px}
-.lt small{display:block;font-size:13px;font-weight:600;color:var(--sub)}
-.lt h1{margin:2px 0 0;font-size:34px;line-height:1.15;font-weight:700;letter-spacing:-.03em}
-.card{display:block;width:100%;background:var(--card);border-radius:18px;margin-bottom:14px;overflow:hidden;text-align:left}
-.pad{padding:14px 16px}
-.hero{padding:18px 18px 16px}
-.eye{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:13px;font-weight:600;color:var(--c)}
-.eye>i{width:8px;height:8px;border-radius:50%;background:var(--c)}
-.hero h2{margin:5px 0 14px;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-.035em}
-.cap{font-size:12px;font-weight:600;color:var(--sub);margin-bottom:8px;display:flex;justify-content:space-between}
-.cap span:last-child{font-weight:500;color:var(--mute)}
-.nbs{display:grid;gap:9px}
-.nb{display:grid;grid-template-columns:92px 62px minmax(0,1fr) 46px;gap:10px;align-items:center;font-size:15px}
-.nl{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nl small{display:block;font-size:11px;font-weight:500;color:var(--sub);margin-top:-1px}
-.na{font-variant-numeric:tabular-nums;text-align:right;color:var(--ink)}
-.nbar{height:8px;border-radius:4px;background:color-mix(in srgb,var(--x) 16%,transparent);overflow:hidden}
-.nbar b{display:block;height:100%;border-radius:4px;background:var(--x)}
-.np{font-size:13px;font-weight:600;color:var(--x);text-align:right;font-variant-numeric:tabular-nums}
-.learn{margin:14px 0 0;padding:11px 13px;border-radius:12px;background:var(--fill);font-size:14px;color:var(--ink);line-height:1.45}
-.learn b{color:var(--blue);font-weight:600;margin-right:6px}
-.two{display:flex;gap:8px;margin-top:16px}
-.btn{flex:1;min-width:0;height:46px;padding:0 12px;border-radius:12px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.btn.gh{background:var(--fill);color:var(--blue)}
-.ovr{margin-top:12px;font-size:13px;color:var(--sub);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.ovr .lnk{font-size:13px;font-weight:600}
-.more{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:46px;padding:0 16px 0 18px;border-top:.5px solid var(--sep);font-size:15px;color:var(--sub)}
-.chev{color:var(--mute);font-size:22px;line-height:1;font-weight:300;transition:transform .2s}
-.ch{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:600;color:var(--sub);padding:14px 16px 2px}
-.ch span:last-child{font-weight:400}
-.list{padding-left:16px}
-.row{display:flex;align-items:center;gap:12px;min-height:44px;padding:11px 16px 11px 0;width:100%;text-align:left}
-.list>.row+.row,.list>details+details,.list>details+.row,.list>.row+details{border-top:.5px solid var(--sep)}
-.row .k{width:48px;flex:none;font-size:15px;color:var(--sub);align-self:flex-start;padding-top:1px}
-.v{flex:1;min-width:0}
-.t{font-size:17px}
-.t15{font-size:15px}
-.sb{font-weight:600}
-.s{font-size:13px;color:var(--sub);margin-top:2px}
-.lb{font-size:13px;font-weight:600;color:var(--sub);margin-bottom:1px}
-.lnk{color:var(--blue)}
-.tb{display:inline-flex;align-items:center;justify-content:center;height:30px;padding:0 14px;border-radius:999px;background:var(--fill);color:var(--blue);font-size:15px;font-weight:600;white-space:nowrap;flex:none}
-.tb.f{background:var(--blue);color:#fff}
-.pill{font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px;background:var(--fill);color:var(--sub);white-space:nowrap}
-.pill.w{color:var(--orange);background:color-mix(in srgb,var(--orange) 15%,transparent)}
-.pill.g{color:var(--green);background:color-mix(in srgb,var(--green) 15%,transparent)}
-.ab{width:32px;height:32px;border-radius:50%;background:var(--c);color:#fff;font-size:14px;font-weight:700;display:grid;place-items:center;flex:none}
-.ic{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;flex:none;color:#fff;background:var(--c)}
-.ic svg{width:21px;height:21px}
-.ellip{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wkh{display:flex;align-items:center;gap:2px;padding:0 0 4px}
-.wkh span{margin-right:auto;font-size:15px;font-weight:600;color:var(--sub);font-variant-numeric:tabular-nums}
-.wkh .tb{height:28px;padding:0 12px;font-size:13px;margin-right:4px}
-.strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin-bottom:16px}
-.day{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0}
-.day .w{font-size:11px;font-weight:600;color:var(--sub)}
-.day .n{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:19px;font-variant-numeric:tabular-nums}
-.day i{width:5px;height:5px;border-radius:50%;background:var(--c)}
-.day.today .n{color:var(--red);font-weight:600}
-.day.on .n{background:var(--ink);color:var(--bg);font-weight:600}
-.day.on.today .n{background:var(--red);color:#fff}
-.rings{display:flex;align-items:center;gap:22px;padding:10px 16px 14px}
-.rg{flex:none}
-.legs{flex:1;display:grid;gap:7px}
-.lg{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--ink)}
-.lg i{width:10px;height:10px;border-radius:50%;background:var(--x)}
-.lg b{margin-left:auto;color:var(--x);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
-.mini{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 16px;border-top:.5px solid var(--sep);font-size:13px;color:var(--sub)}
-.mini b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
-.mini .chev{margin-left:auto}
-.nts{display:flex;flex-wrap:wrap;gap:6px}
-.nt{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:3px 9px;border-radius:999px;background:var(--fill);color:var(--sub);white-space:nowrap}
-.nt::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--x)}
-.nt.plain::before{display:none}
-.nt em{font-style:normal;color:var(--mute);margin-left:2px}
-.dd{width:40px;flex:none;display:flex;flex-direction:column;line-height:1.2}
-.dd b{font-size:17px;font-weight:600}
-.dd small{font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums}
-.dd.td b{color:var(--red)}
-.cb{width:4px;align-self:stretch;border-radius:2px;background:var(--c);flex:none}
-.habit{font-size:13px;color:var(--sub);text-align:center;margin:6px 0 24px}
-.sec{margin-bottom:26px}
-.sh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:0 16px 7px;font-size:13px;color:var(--sub)}
-.sf{padding:7px 16px 0;font-size:13px;color:var(--sub);margin:0}
-.grp{background:var(--card);border-radius:14px;overflow:hidden}
-.cell{padding:14px 16px}
-.axn{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--x);font-size:13px}
-.axn::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--x)}
-.ngh,.ng{display:grid;grid-template-columns:minmax(0,1fr) repeat(7,14px) 40px;gap:0 6px;align-items:center}
-.ngh{padding:0 16px 7px;font-size:12px;color:var(--sub)}
-.ngh>i{font-style:normal;text-align:center}
-.ngh>i.cur{color:var(--ink);font-weight:700}
-summary.row.ng{display:grid}
-.nn{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dt{width:9px;height:9px;border-radius:50%;background:var(--fill);justify-self:center;display:inline-block}
-.dt.m{background:var(--x)}
-.dt.s{background:transparent;box-shadow:inset 0 0 0 1.5px var(--x)}
-.fr{text-align:right;font-size:15px;font-weight:600;color:var(--orange);font-variant-numeric:tabular-nums}
-.fr.ok{color:var(--green)}
-.nd{padding:0 16px 14px 0;font-size:15px;color:var(--sub)}
-.nd>p{margin:0}
-.kv{display:grid;grid-template-columns:52px 1fr;gap:7px 10px;margin-top:10px}
-.kv>span{font-size:13px;color:var(--sub);padding-top:2px}
-.kv>p{margin:0;font-size:15px;color:var(--ink)}
-.lv{font-style:normal;font-size:11px;font-weight:600;padding:1px 7px;border-radius:6px;background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green);margin-left:4px;white-space:nowrap}
-.lv.r{background:color-mix(in srgb,var(--orange) 15%,transparent);color:var(--orange)}
-.lg2{display:flex;gap:12px;align-items:center}
-.lg2 span{display:inline-flex;align-items:center;gap:5px}
-.ck{color:var(--green);font-weight:700;margin-left:4px;font-size:13px}
-.srcl{font-size:12px;color:var(--sub);grid-column:1/-1;margin-top:-4px}
-.search{display:flex;align-items:center;gap:6px;height:38px;padding:0 10px;border-radius:10px;background:var(--card);color:var(--sub);margin-bottom:12px}
-.search svg{width:18px;height:18px;flex:none}
-.search input{flex:1;border:0;background:none;outline:none;font-size:17px;color:var(--ink);min-width:0;-webkit-appearance:none}
-.seg{display:flex;gap:8px;overflow-x:auto;padding-bottom:16px;scrollbar-width:none}
-.seg::-webkit-scrollbar{display:none}
-.seg button,.segsel{flex:none;height:32px;padding:0 14px;border-radius:999px;background:var(--card);font-size:15px;font-weight:500;border:0}
-.seg button.on{background:var(--ink);color:var(--bg)}
-.segsel{-webkit-appearance:none;appearance:none;color:var(--blue)}
-.mi[open] .chev{transform:rotate(90deg)}
-.mdot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
-.rq{display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--fill)}
-.rq p{flex:1;margin:0;color:var(--ink);font-size:15px}
-.acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
-.nd .nbs{margin-top:12px}
-.nd .nts{margin-top:10px}
-.tier .k{width:46px;font-size:20px;font-weight:700;color:var(--ink);padding-top:0;line-height:1.2}
-.tier .k small{display:block;font-size:11px;font-weight:500;color:var(--sub)}
-.tier .nts{margin-top:8px}
-.amr{align-items:flex-start}
-.amr .nm{width:110px;flex:none;font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
-.amr .nm::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--x);flex:none}
-.pat{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;text-align:center;font-size:12px;line-height:1.25}
-.pat div{padding:10px 2px;border-radius:10px;background:var(--fill)}
-.pat b{display:block;font-size:15px}
-.pat i{display:block;width:8px;height:8px;border-radius:50%;margin:6px auto;background:var(--c)}
-.pat small{display:block;color:var(--sub);font-size:11px;margin-top:3px}
-.top5{display:grid;gap:6px;margin-top:6px}
-.top5 div{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:var(--ink)}
-.top5 span:last-child{color:var(--sub);font-variant-numeric:tabular-nums}
-.sheet{position:fixed;inset:0;z-index:60;display:flex;align-items:flex-end;justify-content:center}
-.sheet .bd{position:absolute;inset:0;background:rgba(0,0,0,.4);animation:fd .25s}
-.sheet .sc{position:relative;width:100%;max-width:640px;height:93vh;overflow:auto;background:var(--bg);border-radius:14px 14px 0 0;padding:6px 16px calc(28px + env(safe-area-inset-bottom));animation:up .32s cubic-bezier(.2,.8,.2,1);overscroll-behavior:contain}
-@media(min-width:760px){.sheet{align-items:center}.sheet .sc{height:auto;max-height:88vh;border-radius:14px}}
-@keyframes up{from{transform:translateY(60px);opacity:.4}}
-@keyframes fd{from{opacity:0}}
-.grab{width:36px;height:5px;border-radius:3px;background:var(--mute);margin:0 auto}
-.shd{position:sticky;top:-6px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;height:50px;margin:0 -16px 6px;padding:0 16px;background:var(--bg)}
-.shd b{font-size:17px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;flex:1}
-.shd span,.shd .lnk{width:44px;flex:none}
-.shd .lnk{font-weight:600;text-align:right}
-.sheet select,.sheet input[type=time]{border:0;background:var(--fill);border-radius:8px;height:34px;padding:0 10px;font-size:17px;color:var(--ink);-webkit-appearance:none;appearance:none}
-.sw{-webkit-appearance:none;appearance:none;width:51px;height:31px;border-radius:999px;background:var(--fill);position:relative;transition:background .2s;flex:none;margin:0;cursor:pointer}
-.sw::after{content:'';position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.15),0 1px 1px rgba(0,0,0,.16);transition:transform .2s}
-.sw:checked{background:var(--green)}
-.sw:checked::after{transform:translateX(20px)}
-.bts{display:flex;gap:10px;margin:18px 0 14px}
-.bts .btn.gh{background:var(--card)}
-.toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,10px) scale(.96);opacity:0;pointer-events:none;background:var(--bar);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);color:var(--ink);padding:12px 20px;border-radius:999px;font-size:15px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.18);transition:.25s;z-index:70;max-width:90vw;text-align:center}
-.toast.on{opacity:1;transform:translate(-50%,0) scale(1)}
-@media(max-width:759px){
-.nav .ttl{text-align:center}
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;border-radius:0;padding:6px 0 calc(4px + env(safe-area-inset-bottom));background:var(--bar);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-top:.5px solid var(--sep);display:grid;grid-template-columns:repeat(3,1fr)}
-.tabs button{flex-direction:column;gap:2px;padding:2px 0;font-size:10px;font-weight:500;color:var(--sub);border-radius:0;justify-content:center;background:none!important;box-shadow:none!important}
-.tabs button svg{display:block;width:26px;height:26px}
-.tabs button[aria-current=page]{color:var(--blue);font-weight:600}
-main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
-.toast{bottom:calc(96px + env(safe-area-inset-bottom))}
-}
-@media(max-width:420px){.lt h1{font-size:32px}.hero h2{font-size:26px}.rings{gap:14px}.rg{width:110px;height:110px}.nb{grid-template-columns:80px 58px minmax(0,1fr) 42px;gap:8px;font-size:14px}.amr{flex-wrap:wrap}.amr .nm{width:100%}}
+body{font:15px/1.5 var(--font);color:var(--tx);background:var(--bg);font-feature-settings:'tnum';-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;letter-spacing:-.01em;min-height:100vh}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:inherit;letter-spacing:inherit}
+button[disabled]{cursor:default}
+.top{position:sticky;top:0;z-index:20;background:var(--top);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--sep);padding-top:env(safe-area-inset-top)}
+.top .in{max-width:880px;margin:0 auto;height:52px;display:flex;align-items:center;gap:10px;padding:0 16px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;letter-spacing:-.02em}
+.mk{width:28px;height:28px;border-radius:8px;background:var(--bl);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.sp{flex:1}
+.seg{display:flex;background:var(--fill);border-radius:10px;padding:3px;gap:2px}
+.seg button{padding:5px 13px;border-radius:8px;font-size:14px;font-weight:500;color:var(--tx2)}
+.seg button.on{background:var(--card);color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+main{max-width:880px;margin:0 auto;padding:26px 16px calc(96px + env(safe-area-inset-bottom))}
+@media(min-width:760px){main{padding:40px 32px 120px}}
+.hd{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+h1{font-size:28px;font-weight:700;letter-spacing:-.025em;line-height:1.2}
+@media(min-width:760px){h1{font-size:32px}}
+.lead{color:var(--tx2);font-size:14.5px;margin-top:4px}
+.nav{display:flex;gap:6px;align-items:center;flex-shrink:0;padding-bottom:2px}
+.ib{width:34px;height:34px;border-radius:50%;background:var(--card);box-shadow:var(--sh);display:grid;place-items:center;color:var(--bl);font-size:20px;line-height:1;padding-bottom:2px}
+.ib[disabled]{opacity:.35}
+.chipb{padding:6px 12px;border-radius:999px;background:var(--bl2);color:var(--bl);font-size:13px;font-weight:600}
+.wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:18px}
+.wd{display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 0 6px;border-radius:12px;background:var(--card);box-shadow:var(--sh);border:1px solid transparent}
+.wd small{font-size:11px;color:var(--tx3);font-weight:500}
+.wd b{font-size:17px;font-weight:600}
+.wd i{width:5px;height:5px;border-radius:50%;margin-top:2px}
+.wd.rec i{background:var(--bl)}
+.wd.td b{color:var(--bl)}
+.wd.fut{background:transparent;box-shadow:none;border:1px dashed var(--tx4)}
+.wd.fut b{color:var(--tx2);font-weight:500}
+.wd[disabled]{opacity:.35}
+.wd.on{background:var(--bl);box-shadow:none;border-color:var(--bl)}
+.wd.on small,.wd.on b{color:#fff}
+.wd.on.rec i{background:#fff}
+.sec{margin-top:32px;scroll-margin-top:70px}
+.sec>h2{font-size:13px;font-weight:600;color:var(--tx2);margin:0 0 10px 6px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.sec>h2 span{font-weight:400;color:var(--tx3);font-size:12.5px;text-align:right}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:860px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.fc{background:var(--card);border-radius:16px;padding:12px 13px 12px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:4px;min-height:120px;width:100%;transition:transform .15s,box-shadow .15s}
+@media(hover:hover){.fc:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.08)}}
+.fc:active{transform:scale(.98)}
+.fc .no{font-size:12px;color:var(--tx3);display:flex;gap:6px;align-items:baseline;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fc .no b{color:var(--bl);font-weight:700;font-size:13px}
+.fc .nm{font-size:15px;font-weight:650;line-height:1.32;letter-spacing:-.015em}
+.cps{display:flex;flex-wrap:wrap;gap:4px}
+.fc .cps{margin-top:auto;padding-top:6px}
+.cp{display:inline-flex;align-items:center;font-size:11.5px;line-height:1.55;padding:0 7px;border-radius:999px;background:var(--fill);color:var(--tx2);white-space:nowrap;font-style:normal}
+.cp.bl{background:var(--bl2);color:var(--bl);font-weight:600}
+.cp.rd{background:var(--red2);color:var(--red);font-weight:600}
+.fc.sel{box-shadow:0 0 0 2px var(--bl)}
+.pk{background:var(--card);border-radius:22px;padding:20px 20px 16px;box-shadow:var(--sh)}
+.pk .k{font-size:13px;font-weight:600;color:var(--bl)}
+.pk h3{font-size:23px;font-weight:700;letter-spacing:-.025em;margin-top:3px;line-height:1.28}
+.pk .sb{color:var(--tx2);font-size:14px;margin-top:3px}
+.pk .cps{margin-top:12px}
+.pk .cp{font-size:12.5px;padding:1px 9px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 15px;border-radius:10px;background:var(--fill);color:var(--tx);font-weight:500;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--bl);color:#fff}
+.btn.ghost{background:transparent;color:var(--bl)}
+.btn.danger{color:var(--red)}
+.btn.sm{padding:6px 12px;font-size:13px;border-radius:8px}
+.lnk{display:inline-block;color:var(--bl);font-size:13.5px;font-weight:500;padding:10px 6px 4px}
+.hint{font-size:12.5px;color:var(--tx3);margin:10px 6px 0;line-height:1.5}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--sh);overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--sep);width:100%;text-align:left}
+.row:last-child{border-bottom:0}
+.row .mn{flex:1;min-width:0}
+.row .nm{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.row .sb{font-size:12.5px;color:var(--tx3);margin-top:1px}
+.row .t{font-size:14.5px;color:var(--tx)}
+.row .rt{font-size:13px;color:var(--tx2);text-align:right;white-space:nowrap;min-width:64px}
+.row .rt.bl{color:var(--bl);font-weight:600}
+.row .rt.rd{color:var(--red);font-weight:600}
+.row .chev{color:var(--tx4);font-size:18px}
+button.row:active{background:var(--fill)}
+.gh{font-size:12px;font-weight:600;color:var(--tx3);padding:12px 18px 2px;border-bottom:0}
+.bar{width:64px;height:6px;border-radius:3px;background:var(--fill);overflow:hidden;flex-shrink:0;display:block}
+.bar b{display:block;height:100%;background:var(--bl);border-radius:3px}
+.bar b.rd{background:var(--red)}
+.note{margin-top:14px;padding:11px 14px;border-radius:12px;background:var(--bl2);color:var(--bl);font-size:13.5px;line-height:1.5}
+.note.rd{background:var(--red2);color:var(--red)}
+.empty{text-align:center;padding:44px 20px;color:var(--tx3);background:var(--card);border-radius:18px;box-shadow:var(--sh)}
+.txt{padding:16px 18px;font-size:14.5px;color:var(--tx2);line-height:1.65}
+.txt b{color:var(--tx);font-weight:600}
+details.row{display:block;padding:0}
+details.row>summary{display:flex;align-items:center;gap:12px;padding:12px 18px;list-style:none;cursor:pointer}
+details.row>summary::-webkit-details-marker{display:none}
+details.row[open]>summary .chev{transform:rotate(90deg)}
+details.row .chev{transition:transform .15s}
+details.row .dd{padding:0 18px 14px;font-size:14px;color:var(--tx2);line-height:1.6}
+.top5{display:grid;gap:3px;margin-top:8px}
+.top5 div{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.top5 span:last-child{color:var(--tx3)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.32);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.ov.on{display:flex}
+.modal{background:var(--bg);border-radius:20px 20px 0 0;width:100%;max-width:640px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.25);animation:up .28s cubic-bezier(.2,.8,.2,1)}
+@media(min-width:760px){.ov{align-items:center}.modal{border-radius:20px;max-height:86vh}}
+@keyframes up{from{transform:translateY(40px);opacity:.5}}
+.mh{padding:18px 20px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.mh h2{font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.mh .sub{color:var(--tx2);font-size:13.5px;margin-top:2px}
+.mh .x{color:var(--tx3);font-size:15px;width:30px;height:30px;border-radius:50%;background:var(--fill);display:grid;place-items:center;flex-shrink:0}
+.mb{padding:0 16px 18px;overflow:auto;overscroll-behavior:contain}
+.mb h4{font-size:13px;font-weight:600;color:var(--tx2);margin:18px 6px 8px;display:flex;justify-content:space-between}
+.mb h4 span{font-weight:400;color:var(--tx3)}
+.mb .cps{padding:0 4px}
+.mb .cp{font-size:13px;padding:2px 10px;background:var(--card)}
+.mb .t{font-size:14.5px;padding:0 6px}
+.mf{padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--sep);display:flex;gap:8px}
+.mf:empty{display:none}
+.mf .btn{flex:1;padding:13px;font-size:15px;font-weight:600}
+.nt{display:grid;grid-template-columns:minmax(0,1fr) auto 56px 46px;gap:10px;align-items:center;font-size:14px;padding:9px 16px;border-bottom:1px solid var(--sep)}
+.nt:last-child{border-bottom:0}
+.nt .a{text-align:right;color:var(--tx2);font-size:13px}
+.nt .p{text-align:right;font-weight:600;font-size:13px}
+.nt .bar{width:56px}
+#toast{position:fixed;bottom:calc(28px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(16px);background:rgba(29,29,31,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:99;max-width:92vw;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%)}
 </style>
 </head>
 <body>
-<header class='nav' id='nav'><div class='wrap'>
-<span class='ttl' id='ttl'></span>
-<nav class='tabs' id='tabs'></nav>
-<span class='rt'><button class='ib' data-open='ics' aria-label='캘린더 알림' id='bell'></button></span>
-</div></header>
-<main class='wrap'>
-<div class='lt'><small id='eyb'></small><h1 id='h1'></h1></div>
-<section id='v-today'></section>
-<section id='v-week' class='hide'></section>
-<section id='v-guide' class='hide'></section>
-</main>
-<div id='sheet' class='sheet hide'><div class='bd' data-close></div>
-<div class='sc' role='dialog'>
-<div class='shd'><span></span><b id='sht'></b><button class='lnk' data-close>완료</button></div>
-<div id='shb'></div>
-</div></div>
-<div id='toast' class='toast' role='status'></div>
+<header class='top'><div class='in'><div class='brand'><span class='mk'>한</span>한 끼</div><span class='sp'></span><nav class='seg' id='tabs'><button data-tab='today'>오늘</button><button data-tab='log'>기록</button><button data-tab='guide'>원칙</button></nav></div></header>
+<main id='main'></main>
+<div class='ov' id='ov' data-close><div class='modal' role='dialog' aria-modal='true'><div class='mh'><div><h2 id='mt'></h2><div class='sub' id='ms'></div></div><button class='x' data-close aria-label='닫기'>✕</button></div><div class='mb' id='mb'></div><div class='mf' id='mf'></div></div></div>
+<div id='toast' role='status'></div>
 <script>
-const EPOCH='2026-01-05',GAP=11,FAM_GAP=5,RAW_OFF=[6,7,8,9],O3T=3.5,SALT_MAX=3,GRILL_MAX=3;
-const BS=String.fromCharCode(92),CR=String.fromCharCode(13),NL=String.fromCharCode(10),CRLF=CR+NL;
-const AX={S:{n:'피부',c:'var(--xS)'},E:{n:'눈',c:'var(--xE)'},V:{n:'혈관',c:'var(--xV)'},A:{n:'건강한 노화',c:'var(--xA)'}};
-const CAT={F:{n:'등푸른생선',c:'var(--cF)'},B:{n:'소고기',c:'var(--cB)'},L:{n:'양고기',c:'var(--cL)'},P:{n:'돼지고기',c:'var(--cP)'},S:{n:'조개·해산물',c:'var(--cS)'},W:{n:'흰살생선',c:'var(--cW)'},V:{n:'두부·계란·채소',c:'var(--cV)'}};
-const SHOP={sal:'샐러드·포케',gri:'생선구이집',raw:'횟집',eel:'장어집',bbq:'고깃집',soup:'국·탕집',shabu:'샤브·전골',west:'양식·브런치',bossam:'보쌈집',jok:'족발집',sea:'해물찜·탕',hansik:'한식 정식',lamb:'양고기집',yuk:'육회집',don:'덮밥집'};
+/* 한 끼 v2 데이터 — 성분은 100g(음료는 100ml)당 추정치. 국가표준식품성분표·USDA·일본식품표준성분표 근사 */
+const HARD=[
+{k:'pro',n:'단백질',u:'g',ref:65,W:1,min:35,w:1.1,why:'근육·피부·면역 단백질의 재료. 몸에 따로 저장하지 않아 매일 먹어야 합니다.'},
+{k:'c',n:'비타민C',u:'mg',ref:100,W:1,min:75,w:1,why:'콜라겐을 만드는 효소의 보조인자이자 항산화제. 저장량이 적고 열에 약해 생과일·생채소로 매일 채웁니다.'},
+{k:'zn',n:'아연',u:'mg',ref:10,W:4,min:18,w:1.2,why:'세포 분열·상처 회복·피부 재생, 망막의 비타민A 대사. 따로 저장하는 곳이 없어 나흘 안에 다시 채웁니다.'},
+{k:'fol',n:'엽산',u:'μg',ref:400,W:3,min:480,w:1,why:'호모시스테인(혈관 손상 지표)을 낮추고 세포 분열에 필요. 열에 약해 생채소·콩이 유리합니다.'},
+{k:'mg',n:'마그네슘',u:'mg',ref:360,W:3,min:360,w:.8,why:'300가지 넘는 효소의 보조인자. 혈압·혈당·근육 이완에 관여하고 견과·씨앗·잎채소에 많습니다.'},
+{k:'kal',n:'칼륨',u:'mg',ref:3500,W:2,min:2400,w:.8,why:'나트륨을 내보내 혈압을 조절합니다. 배달 음식의 나트륨과 짝으로 챙깁니다.'},
+{k:'fib',n:'식이섬유',u:'g',ref:30,W:2,min:14,w:.9,why:'수용성 섬유는 LDL 콜레스테롤과 식후 혈당을 낮추고 장내 미생물의 먹이가 됩니다.'},
+{k:'cu',n:'구리',u:'mg',ref:.85,W:4,min:1.8,w:.8,why:'콜라겐·엘라스틴을 서로 엮는 효소(라이실 옥시데이스)에 필요. 아연과 짝으로 챙깁니다.'},
+{k:'e',n:'비타민E',u:'mg',ref:12,W:4,min:16,w:.9,why:'세포막 지질의 산화를 막는 지용성 항산화제. 비타민C가 재생시켜 줘서 둘이 짝입니다.'},
+{k:'vk',n:'비타민K',u:'μg',ref:75,W:4,min:300,w:.6,why:'혈액 응고 단백질과 혈관벽 석회화를 막는 단백질에 필요. 와파린 복용 중이면 양을 일정하게 유지하세요.'},
+{k:'o3',n:'오메가3 (EPA·DHA)',u:'g',ref:.5,W:7,min:3.5,w:1.2,why:'DHA는 망막 세포막의 주성분. EPA·DHA는 중성지방을 낮추고 염증을 줄입니다.'},
+{k:'d',n:'비타민D',u:'μg',ref:10,W:7,min:25,w:1.1,why:'뼈·근육·면역. 10~3월엔 햇빛으로 거의 만들지 못해 등푸른생선이 특히 중요합니다.'},
+{k:'a',n:'비타민A',u:'μg',ref:800,W:7,min:2100,w:.9,why:'어두운 곳의 시각·각막·피부 표피 분화. 간에 저장돼 주 단위로 봅니다.'},
+{k:'se',n:'셀레늄',u:'μg',ref:60,W:7,min:350,w:.7,why:'항산화 효소(글루타치온 퍼옥시다제)의 핵심. 몸에 저장돼 주 단위로 봅니다.'}
+];
+const SOFT=[
+{k:'lut',n:'루테인',u:'mg',T:30,why:'황반 색소. 청색광을 걸러 황반을 보호합니다. 연구 용량은 하루 10mg.'},
+{k:'lyc',n:'라이코펜',u:'mg',T:40,why:'익힌 토마토로 하루 16mg을 10~12주 먹었을 때 자외선 홍반이 줄었다는 무작위 시험이 있습니다.'},
+{k:'col',n:'콜라겐 원료',u:'g',T:12,why:'껍질·힘줄·연골의 글리신·프롤린. 음식으로 먹는 건 원료 공급 수준으로 보는 게 정확합니다.'},
+{k:'no3',n:'식이 질산염',u:'mg',T:1000,why:'몸에서 산화질소로 바뀌어 혈관 확장에 관여 — 연구 단계입니다.'}
+];
+const UL={se:400,zn:35,ret:3000,cu:10,d:100};
+const RULE={GAP:11,FAM:5,SGAP:4,SALT:3,GRILL:3,REDG:650,RAW_OFF:[6,7,8,9],KOPT:12};
+/* 자주 먹는 것 — 저녁 순서에서 조금 앞에 */
+const FAV=['blueb','mango','greek','granola'];
+const RED_ING=['beef','galbi','shank','tendon','oxtail','lamb','porkl','belly','porkbone','jok'];
+const CAT={F:'등푸른생선',W:'흰살생선',S:'조개·해산물',B:'소고기',L:'양고기',P:'돼지고기',V:'두부·계란·채소'};
+const SHOP={sal:'샐러드·포케',gri:'생선구이집',raw:'횟집',eel:'장어집',bbq:'고깃집',soup:'국·탕집',shabu:'샤브·전골',west:'양식·브런치',bossam:'보쌈집',jok:'족발집',sea:'해물찜·탕',hansik:'한식',lamb:'양고기집',yuk:'육회집',don:'덮밥집'};
 const UB={3:'어디서나',2:'흔함',1:'지역 따라'};
-/* 요일 칸: 월 등푸른 · 화 소/양 · 수 해산물 · 목 등푸른 · 금 돼지 · 토 해산물/흰살 · 일 가벼운 날 */
-const SLOT=[['F'],['B','L'],['S'],['F'],['P'],['S','W'],['V','W']];
-/* 4축 MECE: 각 영양소는 주된 축 하나에만 속함. g=다시 먹어야 하는 간격(일), w=가중치, lv=근거 수준 */
-const NUT={
-col:{n:'콜라겐 원료',ax:'S',g:4,w:1.3,lv:'연구',rel:'',why:'껍질·힘줄·연골의 글리신·프롤린. 콜라겐 펩타이드를 8~12주 꾸준히 먹으면 보습·탄력이 소폭 좋아진다는 메타분석이 있지만 주름 개선 근거는 약하고, 음식으로 먹는 건 「원료 공급」 수준으로 보는 게 정확합니다.',amt:'권장량 없음 · 연구 용량은 펩타이드 하루 2.5~10g · 음식으론 족발·수육 150g, 도가니·꼬리 건더기 한 그릇',src:'족발·보쌈·도가니·꼬리곰탕·갈비탕·아귀·장어'},
-c:{n:'비타민C',ax:'S',g:1,w:1,lv:'확립',rel:'눈·혈관',why:'콜라겐을 만드는 효소의 필수 보조인자이자 항산화제. 거의 저장되지 않고 열에 약해 생과일·생채소로 채웁니다.',amt:'하루 100mg · 키위 2개 ≈ 130mg · 빨간 파프리카 1개 ≈ 150mg 이상 · 귤 2개 ≈ 50mg',src:'키위·파프리카·귤·딸기·오렌지·케일'},
-zn:{n:'아연',ax:'S',g:2,w:1.5,lv:'확립',rel:'눈',why:'세포 분열·상처 회복·피부 재생, 망막의 비타민A 대사. 몸에 따로 저장하는 곳이 없어 자주 먹어야 합니다.',amt:'하루 남 10·여 8mg (상한 35mg) · 굴 100g ≈ 15mg · 소고기 150g ≈ 7mg · 꽃게 1마리 ≈ 4mg · 호박씨 한 줌 ≈ 2mg',src:'굴·소고기·양고기·게·조개·호박씨'},
-cu:{n:'구리',ax:'S',g:4,w:1,lv:'확립',rel:'혈관',why:'콜라겐·엘라스틴을 서로 엮는 효소(라이실 옥시데이스)에 필요. 아연만 많이 먹으면 구리 흡수가 떨어지니 짝으로 챙깁니다.',amt:'하루 남 850·여 650μg · 굴·오징어 100g ≈ 하루치 이상 · 다크초콜릿 2조각 ≈ 40%',src:'굴·오징어·문어·게·조개·견과·다크초콜릿'},
-e:{n:'비타민E',ax:'S',g:4,w:1,lv:'확립',rel:'눈',why:'세포막 지질의 산화를 막는 지용성 항산화제. 비타민C가 다시 재생시켜 줘서 둘이 짝입니다.',amt:'하루 12mg · 아몬드 20알 ≈ 6mg · 해바라기씨 한 줌 ≈ 7mg · 아보카도 반 개 ≈ 2mg',src:'아몬드·해바라기씨·아보카도·올리브유·장어'},
-lyc:{n:'라이코펜',ax:'S',g:4,w:1.1,lv:'연구',rel:'노화',why:'붉은 카로티노이드. 토마토 페이스트로 라이코펜 하루 16mg을 10~12주 먹었을 때 자외선 홍반이 줄었다는 무작위 시험이 있습니다. 자외선차단제를 대신하진 않습니다.',amt:'연구 용량 하루 16mg · 무가당 토마토주스 1병 ≈ 15mg · 익히고 기름과 함께 먹어야 흡수가 잘 됨',src:'익힌 토마토·토마토주스·방울토마토'},
-lut:{n:'루테인·지아잔틴',ax:'E',g:3,w:1.2,lv:'확립',rel:'피부',why:'황반 색소를 이루는 성분 — 청색광을 걸러 황반을 보호합니다. 피부에도 쌓입니다.',amt:'권장량 없음 · 연구 기준 하루 10mg · 익힌 시금치 반 컵 ≈ 10mg · 계란 노른자는 양은 적어도 흡수율이 높음',src:'시금치·케일·깻잎·상추·계란 노른자'},
-a:{n:'비타민A',ax:'E',g:7,w:.9,lv:'확립',rel:'피부',why:'어두운 곳의 시각과 각막, 피부 표피 분화에 필요. 간에 몇 달 저장되므로 매일 많이 먹을 필요는 없습니다.',amt:'하루 남 750~800·여 650μg RAE · 장어 100g ≈ 1,500μg 이상 · 군고구마 1개 ≈ 900μg · 당근 반 개 ≈ 500μg',src:'장어·고구마·당근·단감·깻잎·시금치'},
-o3:{n:'오메가3 (EPA·DHA)',ax:'E',g:4,w:1.3,lv:'확립',rel:'혈관·피부',why:'DHA는 망막 세포막의 주성분. EPA·DHA는 중성지방을 낮추고 염증을 줄이며 피부 장벽에도 관여합니다.',amt:'주 2회 이상 · 주 합계 3.5g(하루 평균 500mg) · 고등어·연어 한 토막(100g) ≈ 2g',src:'고등어·연어·삼치·방어·장어·과메기'},
-km:{n:'칼륨·마그네슘',ax:'V',g:2,w:.9,lv:'확립',rel:'',why:'나트륨을 내보내 혈압을 조절하고 심장 리듬을 지킵니다. 거의 저장되지 않아 짠 배달 음식과 짝으로 챙깁니다.',amt:'칼륨 하루 3,500mg · 마그네슘 남 360·여 280mg 안팎 · 아보카도 반 개 ≈ 칼륨 480mg · 아몬드 20알 ≈ 마그네슘 75mg',src:'잎채소·아보카도·고구마·미역·견과·두부'},
-fib:{n:'식이섬유',ax:'V',g:2,w:1,lv:'확립',rel:'노화',why:'수용성 섬유는 LDL 콜레스테롤과 식후 혈당을 낮추고 장내 미생물의 먹이가 됩니다.',amt:'하루 남 30·여 20g · 쌈채소+나물 한 끼 ≈ 5~8g · 군고구마 1개 ≈ 4g',src:'채소·버섯·해조류·콩·과일'},
-fol:{n:'엽산',ax:'V',g:3,w:1,lv:'확립',rel:'',why:'호모시스테인(혈관 손상 지표)을 낮추고 세포 분열에 필요합니다. 열에 약해 생채소가 유리합니다.',amt:'하루 400μg · 익힌 시금치 반 컵 ≈ 130μg · 아보카도 반 개 ≈ 80μg',src:'시금치·쌈채소·아보카도·청국장·브로콜리'},
-k:{n:'비타민K',ax:'V',g:4,w:.7,lv:'확립',rel:'',why:'혈액 응고 단백질에 필요하고, K2는 칼슘이 혈관벽에 쌓이지 않게 하는 단백질에 관여합니다.',amt:'하루 남 75·여 65μg · 잎채소 한 줌이면 충분 · 와파린 복용 중이면 양을 일정하게',src:'케일·시금치·깻잎·청국장(K2)·치즈'},
-no3:{n:'식이 질산염',ax:'V',g:3,w:.6,lv:'연구',rel:'',why:'몸에서 산화질소로 바뀌어 혈관을 넓히는 데 관여 — 혈압·혈관 기능은 연구 단계입니다.',amt:'권장량 없음 · 비트즙 1병, 또는 루꼴라·시금치·상추 한 접시',src:'루꼴라·시금치·상추·비트·청경채'},
-poly:{n:'폴리페놀',ax:'A',g:3,w:.6,lv:'연구',rel:'혈관·피부',why:'녹차 카테킨·코코아 플라바놀·베리 안토시아닌. 혈관 내피·산화 스트레스 연구가 많지만 보충제 연구 결과를 일반 식품 효과로 그대로 옮기긴 어렵습니다.',amt:'권장량 없음 · 녹차 1~2잔 · 블루베리 한 줌 · 카카오 70% 이상 2조각',src:'녹차·블루베리·딸기·다크초콜릿·양파·마늘·올리브유'},
-d:{n:'비타민D',ax:'A',g:7,w:1,lv:'확립',rel:'',why:'뼈·근육·면역. 10~3월엔 햇빛으로 거의 만들어지지 않아 등푸른생선이 특히 중요합니다.',amt:'하루 10μg(400IU) · 연어·고등어 100g ≈ 9~11μg · 계란 1개 ≈ 1μg',src:'연어·고등어·장어·굴·계란 노른자'},
-se:{n:'셀레늄',ax:'A',g:7,w:.7,lv:'확립',rel:'피부',why:'글루타치온 퍼옥시다제 등 항산화 효소의 핵심. 몸에 저장됩니다.',amt:'하루 60μg (상한 400μg) · 생선 100g ≈ 30~50μg · 브라질너트 1알 ≈ 50~90μg (하루 2알 이하)',src:'생선·조개·새우·계란·브라질너트'}};
-const NK=Object.keys(NUT);
-/* [id, 분류, 가게, 흔함(3~1), 이름, 검색어, 주문팁, 요청사항, 원산지, 영양태그, EPA+DHA(g), 플래그, 제철월, 재료군] */
+const ANIMAL=['mack','salm','smsalm','sawara','eel','buri','shad','hair','tuna','saury','atka','whitef','sekk','oyster','mussel','egg','mozz'];
+const ING={
+mack:['고등어','pro:20 o3:2.3 d:7 a:37 e:1.3 se:44 zn:1.1 cu:.12 kal:330 mg:30 fol:11'],
+salm:['연어','pro:20 o3:2.1 d:8 a:14 e:3.8 se:24 zn:.4 cu:.05 kal:360 mg:27 fol:26'],
+smsalm:['훈제연어','pro:21 o3:1.5 d:8 a:20 e:1.5 se:30 zn:.4 cu:.05 kal:250 mg:20 fol:10'],
+sawara:['삼치','pro:20 o3:1.4 d:7 a:12 e:.3 se:36 zn:1 cu:.03 kal:490 mg:32 fol:8'],
+eel:['장어','pro:21 o3:2 d:17 a:1500 e:5.3 se:45 zn:1.9 cu:.04 kal:300 mg:18 fol:14 col:2'],
+buri:['방어','pro:21 o3:2.6 d:8 a:50 e:2 se:57 zn:.7 cu:.08 kal:380 mg:26 fol:7'],
+shad:['전어','pro:19 o3:1.1 d:9 a:15 e:.4 se:40 zn:1 cu:.1 kal:370 mg:27 fol:8'],
+hair:['갈치','pro:17 o3:1.4 d:14 a:52 e:1.2 se:36 zn:.5 cu:.02 kal:290 mg:29 fol:2'],
+tuna:['참치(뱃살 포함)','pro:23 o3:1.5 d:8 a:120 e:1 se:80 zn:.5 cu:.05 kal:300 mg:40 fol:8'],
+saury:['꽁치·과메기','pro:22 o3:3 d:15 a:16 e:1.7 se:40 zn:.8 cu:.12 kal:200 mg:28 fol:15'],
+atka:['임연수','pro:17 o3:.9 d:3 a:25 e:1.7 se:40 zn:1.1 cu:.05 kal:360 mg:33 fol:9'],
+whitef:['흰살생선','pro:20 o3:.4 d:3 a:10 e:.6 se:38 zn:.4 cu:.03 kal:350 mg:30 fol:6'],
+sekk:['세꼬시(뼈째)','pro:19 o3:.4 d:3 a:10 e:.6 se:38 zn:.8 cu:.04 kal:330 mg:35 fol:6 col:1.5'],
+cod:['대구','pro:18 o3:.2 d:1 e:.8 se:30 zn:.5 cu:.03 kal:400 mg:30 fol:7'],
+pollock:['명태','pro:18 o3:.2 d:1 e:.6 se:30 zn:.5 cu:.03 kal:350 mg:30 fol:5'],
+monk:['아귀','pro:15 o3:.2 d:1 e:.7 se:36 zn:.7 cu:.03 kal:300 mg:20 fol:5 col:1.5'],
+beef:['소고기 살코기','pro:21 zn:5 se:20 cu:.08 kal:330 mg:22 fol:7 e:.4'],
+galbi:['소갈비','pro:17 zn:4 se:16 cu:.07 kal:280 mg:18 fol:6 col:.8'],
+shank:['양지·사태','pro:21 zn:6 se:22 cu:.09 kal:320 mg:22 fol:7 col:2.5'],
+tendon:['도가니(힘줄)','pro:27 col:25 zn:1 se:5 kal:50 mg:5'],
+oxtail:['소꼬리','pro:19 zn:4 se:15 cu:.08 kal:150 mg:15 col:6'],
+lamb:['양고기','pro:20 zn:4.5 se:26 cu:.1 kal:280 mg:23 fol:18'],
+porkl:['돼지 수육(앞다리·목살)','pro:19 zn:3.5 se:30 cu:.08 kal:330 mg:22 fol:5 col:1.5'],
+belly:['삼겹·항정','pro:14 zn:1.5 se:10 cu:.05 kal:230 mg:15 fol:2'],
+porkbone:['돼지 등뼈 살','pro:18 zn:3 se:20 cu:.06 kal:250 mg:18 col:3'],
+jok:['족발','pro:23 zn:2 se:18 cu:.05 kal:120 mg:10 col:8'],
+oyster:['굴(익힌 것)','pro:9.5 zn:16 cu:1.6 se:77 d:8 o3:.7 e:1.2 a:8 kal:170 mg:22 fol:10'],
+mussel:['홍합(익힌 살)','pro:24 zn:2.7 cu:.15 se:90 o3:.8 fol:76 a:90 kal:270 mg:37 e:1'],
+clam:['바지락·백합','pro:13 zn:1.4 cu:.34 se:24 o3:.2 kal:200 mg:19 fol:16'],
+abalone:['전복','pro:17 se:44 e:4 zn:.8 cu:.2 kal:250 mg:48 fol:5'],
+crab:['꽃게 살','pro:18 zn:3.5 cu:.7 se:37 o3:.3 kal:330 mg:34 fol:44'],
+nakji:['낙지','pro:15 cu:.4 se:45 zn:1.7 e:1 kal:350 mg:30 fol:16'],
+octo:['문어(익힌 것)','pro:30 zn:3.4 cu:.9 se:90 e:1.2 kal:630 mg:60 fol:24'],
+shrimp:['새우(익힌 것)','pro:24 se:40 zn:1.6 cu:.3 e:1.4 o3:.3 kal:260 mg:35 fol:4'],
+squid:['오징어','pro:16 cu:1.9 se:45 zn:1.5 e:1.2 o3:.5 kal:250 mg:33 fol:5'],
+scallop:['가리비','pro:17 zn:1.8 se:25 cu:.05 o3:.2 kal:300 mg:40 fol:16'],
+cockle:['꼬막','pro:13 zn:2.4 se:50 cu:.2 kal:200 mg:30 fol:20'],
+haemul:['해물 모둠','pro:17 zn:2 cu:.6 se:40 o3:.3 e:1 kal:280 mg:30 fol:15'],
+greens:['케일·시금치','pro:2.9 c:60 a:400 vk:400 fol:150 lut:8 kal:500 mg:60 fib:3 no3:220 e:1.5 cu:.1 zn:.5'],
+ssam:['쌈채소(상추·깻잎)','pro:1.5 c:15 a:400 vk:150 fol:70 lut:4 kal:300 mg:20 fib:2 no3:150 cu:.05 zn:.3'],
+paprika:['빨간 파프리카','pro:1 c:128 a:157 e:1.6 vk:5 fol:46 kal:210 mg:12 fib:2.1 cu:.02'],
+avo:['아보카도','pro:2 c:10 e:2.1 vk:21 fol:81 kal:485 mg:29 fib:6.7 cu:.19 zn:.6 lut:.27'],
+tomsauce:['익힌 토마토','pro:1.3 lyc:15 c:12 e:2 a:25 vk:3 fol:9 kal:330 mg:15 fib:1.5 cu:.1'],
+tomraw:['생토마토','pro:.9 lyc:2.6 c:14 a:42 e:.5 vk:8 fol:15 kal:237 mg:11 fib:1.2 cu:.06'],
+tomj:['토마토주스','pro:.8 lyc:9 c:10 a:23 fol:20 kal:220 mg:11 fib:.4 e:.3'],
+radish:['무','pro:.6 c:12 fol:24 kal:230 mg:9 fib:1.6'],
+wakame:['미역(불린 것)','pro:1.5 fol:100 vk:5 kal:90 mg:60 fib:2 a:15'],
+mush:['버섯','pro:3 fib:2.5 cu:.3 se:9 zn:.5 fol:17 kal:320 mg:12 d:.2'],
+sprout:['콩나물·미나리','pro:3.5 c:8 a:100 vk:80 fol:70 kal:250 mg:25 fib:2.5 lut:.5'],
+chive:['부추·대파','pro:2.5 c:20 a:250 vk:180 fol:100 kal:450 mg:25 fib:3 lut:2'],
+woog:['우거지·고사리','pro:2 a:100 vk:100 fol:40 kal:300 mg:30 fib:4'],
+napa:['배추·청경채','pro:1.2 c:20 a:100 vk:50 fol:50 kal:200 mg:15 fib:1.5 no3:150'],
+cgj:['청국장(찌개 건더기)','pro:10 vk:200 fol:60 kal:400 mg:50 fib:4 zn:1 cu:.3 se:5'],
+tofu:['두부','pro:8 kal:150 mg:45 cu:.2 se:9 zn:.8 fol:15 e:.1 fib:.3'],
+egg:['계란','pro:12.5 se:30 d:2 a:160 lut:.5 e:1 fol:47 zn:1.3 cu:.07 kal:138 mg:12'],
+nara:['나물 반찬','pro:2.5 c:10 a:300 vk:200 fol:80 lut:3 kal:350 mg:40 fib:3.5'],
+olive:['올리브유','e:14 vk:60'],
+rice:['밥','pro:2.7 fib:.4 kal:35 mg:12 zn:.5 cu:.07 se:7.5 fol:3'],
+mozz:['모짜렐라','pro:22 a:180 zn:2.9 se:17 kal:76 mg:20 cu:.01'],
+kiwi:['키위','pro:1.1 c:93 vk:40 e:1.5 fol:25 kal:312 mg:17 fib:3 cu:.13 lut:.12'],
+gkiwi:['골드키위','pro:1 c:161 vk:6 e:1.4 fol:31 kal:315 mg:12 fib:1.4 cu:.15'],
+orange:['오렌지','pro:.9 c:53 a:11 fol:30 kal:181 mg:10 fib:2.4 cu:.05'],
+oj:['오렌지주스 100%','pro:.7 c:50 fol:30 kal:200 mg:11 fib:.2'],
+tang:['귤','pro:.7 c:32 a:30 fol:20 kal:150 mg:10 fib:1 cu:.04'],
+straw:['딸기','pro:.7 c:59 fol:24 kal:153 mg:13 fib:2 cu:.05'],
+blueb:['블루베리','pro:.7 c:10 vk:19 e:.6 kal:77 mg:6 fib:2.4 cu:.06'],
+pine:['파인애플','pro:.5 c:48 fol:18 kal:109 mg:12 fib:1.4 cu:.11'],
+mango:['망고','pro:.8 c:36 a:54 e:.9 vk:4 fol:43 kal:168 mg:10 fib:1.6 cu:.11'],
+grapef:['자몽','pro:.8 c:31 a:58 lyc:1.4 fol:13 kal:135 mg:9 fib:1.6'],
+banana:['바나나','pro:1.1 c:9 fol:20 kal:358 mg:27 fib:2.6 cu:.08'],
+brocc:['데친 브로콜리','pro:2.4 c:65 a:77 e:1.5 vk:141 fol:108 lut:1.4 kal:293 mg:21 fib:3.3 cu:.06 zn:.5'],
+kabo:['찐 단호박','pro:1.6 c:32 a:330 e:4.7 vk:25 fol:38 lut:1 kal:430 mg:24 fib:4.1 cu:.07'],
+sweetp:['군고구마(호박고구마)','pro:2 c:20 a:400 e:.7 fol:6 kal:475 mg:27 fib:3.3 cu:.16'],
+kaki:['단감','pro:.6 c:40 a:81 fol:8 kal:161 mg:9 fib:3.6 cu:.11'],
+carrot:['당근','pro:.9 c:6 a:835 vk:13 lut:.26 kal:320 mg:12 fib:2.8 cu:.05'],
+cupsal:['컵샐러드','pro:1.2 c:10 a:250 vk:100 fol:50 lut:1.5 kal:250 mg:14 fib:2 no3:150'],
+kalej:['케일 녹즙','pro:1 c:30 a:200 vk:200 fol:30 lut:4 kal:300 mg:25'],
+beetj:['비트즙','pro:1 no3:120 fol:20 kal:250 mg:20'],
+pump:['호박씨','pro:30 zn:7.8 cu:1.3 se:9 e:2.2 fol:58 kal:800 mg:590 fib:6'],
+sunfl:['해바라기씨','pro:21 e:35 se:53 cu:1.8 zn:5 fol:227 kal:645 mg:325 fib:8.6'],
+almond:['아몬드','pro:21 e:25.6 cu:1 zn:3.1 fol:44 kal:733 mg:270 fib:12.5'],
+walnut:['호두','pro:15 e:.7 cu:1.6 zn:3.1 fol:98 kal:441 mg:158 fib:6.7'],
+brazil:['브라질너트','pro:14 se:1900 e:5.7 cu:1.7 zn:4 kal:659 mg:376 fib:7.5'],
+mixnut:['하루견과','pro:18 e:10 cu:1.2 zn:3.5 se:10 fol:50 kal:600 mg:220 fib:7'],
+choc:['다크초콜릿(카카오 70% 이상)','pro:8 cu:1.8 zn:3.3 e:.6 kal:715 mg:228 fib:11'],
+pb:['땅콩버터','pro:25 e:9 cu:.5 zn:2.8 fol:87 kal:560 mg:170 fib:6'],
+greek:['그릭요거트(무가당)','pro:10 zn:.55 se:10 kal:141 mg:11 cu:.02'],
+edam:['에다마메(풋콩)','pro:11.9 c:6 e:.7 vk:27 fol:311 zn:1.4 cu:.35 kal:436 mg:64 fib:5.2'],
+hummus:['후무스','pro:7.9 e:.8 vk:3 fol:83 zn:1.8 cu:.5 kal:228 mg:71 fib:6'],
+chick:['병아리콩','pro:8.9 fib:7.6 fol:172 kal:291 mg:48 zn:1.5 cu:.35 e:.35 vk:4 c:1.3'],
+cashew:['캐슈넛','pro:18 zn:5.8 cu:2.2 se:20 e:.9 fol:25 kal:660 mg:292 fib:3.3'],
+granola:['저당 그래놀라','pro:11 fib:9 mg:110 zn:2.5 cu:.4 se:12 kal:380 fol:30 e:1.5'],
+oats:['귀리(오트밀)','pro:13 fib:10 mg:138 zn:3.6 cu:.4 se:29 kal:362 fol:32 e:.4'],
+chia:['치아씨드','pro:16.5 fib:34 mg:335 zn:4.6 cu:.92 se:55 kal:407 fol:49 e:.5'],
+pist:['피스타치오','pro:20 fib:10.6 kal:1025 mg:121 cu:1.3 zn:2.2 e:2.9 fol:51 se:7 lut:2'],
+natto:['낫토','pro:16.5 fib:6.7 vk:600 fol:120 mg:100 kal:690 zn:1.9 cu:.61 e:.5 se:16'],
+apple:['사과','pro:.3 c:4 fib:2.4 kal:107 mg:5 vk:2'],
+hallabong:['한라봉·천혜향','pro:.9 c:45 a:40 fol:25 kal:170 mg:11 fib:1'],
+melon:['참외','pro:.8 c:20 fol:20 kal:240 mg:12 fib:1'],
+soy:['무가당 두유','pro:3.3 fol:18 kal:120 mg:25 cu:.12 zn:.3 fib:.5']
+};
+/* [id, 분류, 가게, 흔함, 이름, 검색어, 주문팁, 요청사항, 원산지, 구성(재료:g), 플래그, 제철월, 재료군, 폴리페놀] */
 const D=[
-['f1','F','sal',3,'연어 포케','연어 포케','밥 대신 케일·시금치 베이스, 연어 추가','밥 대신 샐러드 베이스로 부탁드려요. 소스는 따로 주세요.','노르웨이·칠레산이 일반적','o3 d se lyc lut a k fol no3 c fib km e',2.0,'raw',0,'salmon'],
-['f2','F','gri',3,'고등어구이 정식','고등어구이','공기밥 빼고 나물 반찬 위주','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','노르웨이산·국내산 모두 무난','o3 d se',2.3,'grill',0,'mackerel'],
-['f3','F','gri',2,'삼치구이 정식','삼치구이','공기밥 빼고 쌈채소 있으면 추가','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','국내산이 일반적','o3 d se',1.3,'grill',0,'spanish'],
-['f4','F','west',2,'연어 스테이크 + 샐러드','연어 스테이크','빵·감자 대신 샐러드, 올리브유 드레싱','빵·감자 대신 샐러드로 부탁드려요. 드레싱은 따로 주세요.','노르웨이·칠레산이 일반적','o3 d se lyc lut a k fol no3 c fib e poly',2.3,'',0,'salmon'],
-['f5','F','raw',3,'연어회','연어회','초밥 말고 회로, 양파·무순 듬뿍','초밥 말고 회로만 부탁드려요. 양파 많이 주세요.','노르웨이·칠레산이 일반적','o3 d se lyc poly',2.3,'raw',0,'salmon'],
-['f6','F','eel',2,'장어 소금구이','장어구이','양념 대신 소금구이, 생강채·쌈채소','양념 말고 소금구이로 부탁드려요. 쌈채소 넉넉히 주세요.','국내산(고창·영암 등) 표기 확인 — 수입산 많음','o3 a d e col lut k fol no3',1.5,'grill',0,'eel'],
-['f7','F','raw',2,'방어회','방어회','깻잎·쌈채소와, 초장보다 간장·와사비','쌈채소 넉넉히 부탁드려요.','제주·동해 국내산이 일반적','o3 d se lut a k fol no3',2.5,'raw',[11,12,1,2],'yellowtail'],
-['f8','F','gri',1,'전어구이','전어구이','뼈째 먹기, 공기밥 빼기','공기밥은 빼주세요.','국내산이 일반적','o3 d se',1.2,'grill',[9,10],'gizzard'],
-['f9','F','gri',2,'갈치구이','갈치구이','조림보다 구이, 공기밥 빼기','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','제주·국내산 표기 확인 — 수입산 많음','o3 d se',1.0,'grill',0,'hairtail'],
-['f10','F','raw',2,'참치회 (뱃살 포함)','참치회','밥·초밥 빼고 김·쌈채소','밥은 빼주세요. 김·쌈채소 넉넉히 부탁드려요.','원양산이 일반적','o3 d se',1.2,'raw',0,'tuna'],
-['f11','F','hansik',2,'고등어 무조림','고등어조림','김치 말고 무조림, 국물은 조금만','공기밥은 빼주세요.','노르웨이산·국내산 모두 무난','o3 d se',2.0,'salt',0,'mackerel'],
-['f12','F','raw',2,'과메기','과메기','배추·생미역·김·쪽파에 싸서','쌈채소·미역 넉넉히 부탁드려요.','포항 구룡포산이 일반적','o3 d se lut a k no3 fib',3.0,'raw',[11,12,1,2],'saury'],
-['f13','F','don',3,'연어 사케동 (밥 1/3)','사케동','밥은 1/3만, 연어 추가, 양파 듬뿍','밥은 조금만 주세요. 연어 추가 부탁드려요.','노르웨이·칠레산이 일반적','o3 d se lyc poly',2.0,'raw',0,'salmon'],
-['f14','F','gri',3,'생선구이 모둠','생선구이 모둠','고등어·삼치·임연수, 공기밥 빼기','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','고등어 노르웨이산·국내산 무난','o3 d se',1.8,'grill',0,'mackerel'],
-['f15','F','don',2,'장어덮밥 (밥 1/3)','장어덮밥','밥은 1/3만, 소스 적게','밥은 조금만, 소스는 적게 부탁드려요.','국내산 표기 확인 — 수입산 많음','o3 a d e col',1.3,'grill',0,'eel'],
-['b1','B','shabu',2,'소고기 샤브샤브','샤브샤브','칼국수·죽 빼고 채소·버섯 추가','칼국수·죽 사리는 빼주세요. 채소 많이 부탁드려요.','호주·미국산이 일반적','zn fib km k fol no3',0,'salt',0,'shabu'],
-['b2','B','bbq',2,'소고기 등심 구이 + 쌈','소고기 구이','쌈채소·파채 추가, 공기밥·냉면 빼기','공기밥은 빼주세요. 쌈채소 넉넉히 부탁드려요.','한우·호주·미국산 표기 확인','zn lut a k fol no3',0,'grill',0,'beefgrill'],
-['b3','B','sal',3,'스테이크 샐러드','스테이크 샐러드','케일·시금치 베이스, 빵·감자 빼기','빵·감자는 빼주세요. 드레싱은 따로 주세요.','호주·미국산이 일반적','zn lut a k fol no3 c fib km e poly',0,'',0,'steak'],
-['b4','B','soup',3,'갈비탕','갈비탕','당면·공기밥 빼기, 국물은 1/3만','당면·공기밥은 빼주세요.','호주·미국산이 일반적','zn col',0,'salt',0,'galbi'],
-['b5','B','yuk',2,'한우 육회 (단품)','육회','비빔밥 말고 단품, 노른자·배 포함','노른자 함께 부탁드려요.','한우 표기 확인','zn',0,'raw',0,'yukhoe'],
-['b6','B','bbq',2,'생갈비살 소금구이 + 쌈','갈비살','양념 없이 소금구이','양념 없이 소금구이로 부탁드려요. 쌈채소 넉넉히 주세요.','호주·미국산이 일반적','zn lut a k fol no3',0,'grill',0,'beefgrill'],
-['b7','B','soup',2,'소고기 미역국 정식','소고기 미역국','공기밥 빼고 미역·고기 건더기 위주','공기밥은 빼주세요.','미역은 완도·기장 국내산이 일반적','zn fib km k',0,'salt',0,'miyeok'],
-['b8','B','shabu',2,'소고기 버섯전골','버섯전골','당면·칼국수 빼고 버섯 추가','당면·사리는 빼주세요.','호주·미국산이 일반적','zn fib km k',0,'salt',0,'jeongol'],
-['b9','B','soup',2,'소고기 수육 (양지·사태)','소고기 수육','곰탕집 수육 단품 + 부추·파채','부추나 파채가 있으면 넉넉히 부탁드려요.','호주·미국산이 일반적','zn col a k',0,'',0,'beefsuyuk'],
-['b10','B','west',2,'안심 스테이크 + 구운 채소','안심 스테이크','감자·빵 대신 구운 채소·샐러드','감자·빵 대신 채소로 부탁드려요.','호주·미국산이 일반적','zn k fol fib',0,'grill',0,'steak'],
-['b11','B','soup',3,'육개장 (당면 빼기)','육개장','고사리·대파 위주, 국물 1/3','당면·공기밥은 빼주세요.','고사리는 국산 표기면 더 좋음','zn fib k',0,'salt',0,'yukgaejang'],
-['b12','B','soup',2,'도가니탕','도가니탕','소면·공기밥 빼고 건더기 위주','소면·공기밥은 빼주세요.','호주·미국산이 일반적','col zn',0,'salt lite',0,'dogani'],
-['b13','B','soup',2,'꼬리곰탕','꼬리곰탕','소면·공기밥 빼고 파 많이','소면·공기밥은 빼주세요. 파 많이 부탁드려요.','호주·미국산이 일반적','col zn',0,'salt',0,'oxtail'],
-['l1','L','lamb',1,'양갈비 구이','양갈비','프렌치랙 + 구운 채소','구운 채소가 있으면 추가 부탁드려요.','호주·뉴질랜드산이 일반적','zn',0,'grill',0,'lamb'],
-['l2','L','lamb',2,'양꼬치','양꼬치','꼬치만 — 볶음밥·꿔바로우 빼고 오이무침','','호주·뉴질랜드산이 일반적','zn',0,'grill',0,'lamb'],
-['l3','L','shabu',2,'양고기 훠궈 (백탕)','훠궈','백탕, 청경채·시금치·버섯, 면 빼기','백탕으로, 면 사리는 빼주세요.','호주·뉴질랜드산이 일반적','zn fib km k no3',0,'salt',0,'hotpot'],
-['s1','S','soup',2,'굴국 (익힌 굴)','굴국밥','밥 빼고 굴 추가 — 생굴은 피하기','공기밥은 빼주세요. 굴 넉넉히 부탁드려요.','통영 등 국내산이 일반적','zn cu se d',0.5,'salt',[10,11,12,1,2,3],'oyster'],
-['s2','S','sea',1,'굴찜 (석화찜)','굴찜','충분히 익혀서, 초장 조금','충분히 익혀주세요.','통영 등 국내산이 일반적','zn cu se d',0.6,'',[10,11,12,1,2,3],'oyster'],
-['s3','S','sea',2,'홍합탕','홍합탕','칼국수 사리 빼기','칼국수 사리는 빼주세요.','국내산이 일반적','zn se',0.6,'salt',0,'mussel'],
-['s4','S','sea',2,'모둠 조개찜','조개찜','칼국수·라면사리 빼기','사리는 빼주세요.','바지락·백합은 중국산 비중 높음 — 국내산 표기 확인','zn se cu',0.4,'',0,'clam'],
-['s5','S','sea',1,'전복 버터구이','전복구이','버터구이 또는 찜, 내장(게우)까지','','완도 등 국내산이 일반적','se km',0.2,'lite',0,'abalone'],
-['s6','S','sea',2,'꽃게탕','꽃게탕','라면사리 빼기, 국물 1/3','라면사리는 빼주세요.','국내산 표기 확인 — 중국산 냉동 많음','zn cu se',0.4,'salt',0,'crab'],
-['s7','S','sea',3,'해물찜 (덜 맵게)','해물찜','덜 맵게, 콩나물·미나리 많이, 당면 빼기','덜 맵게, 당면은 빼고 콩나물 많이 부탁드려요.','원산지 혼재 — 메뉴 상세 확인','zn se fib fol',0.4,'salt',0,'haemul'],
-['s8','S','sea',1,'낙지 연포탕','연포탕','공기밥·칼국수 빼기','공기밥은 빼주세요.','낙지는 중국산 많음 — 국내산 표기 확인','cu se',0.2,'salt lite',0,'nakji'],
-['s9','S','west',2,'새우 감바스','감바스','바게트 빼고 버섯·브로콜리 추가','빵은 빼주세요.','태국·베트남산이 일반적','lyc se e poly',0.3,'',0,'shrimp'],
-['s10','S','raw',2,'문어숙회 + 쌈','문어숙회','초장 대신 기름장, 쌈채소와','초장 대신 기름장으로 부탁드려요. 쌈채소 넉넉히 주세요.','국내산·모리타니산 등','zn cu se lut k no3',0.2,'',0,'octopus'],
-['s11','S','hansik',2,'꼬막비빔밥 (밥 1/3)','꼬막비빔밥','밥은 1/3만, 꼬막·채소 위주','밥은 조금만 주세요.','벌교·여자만 국내산이 일반적','zn se k fib',0.2,'lite',0,'cockle'],
-['s12','S','sal',3,'새우 아보카도 샐러드','새우 샐러드','케일·시금치 베이스, 드레싱 따로','드레싱은 따로 주세요.','새우는 태국·베트남산이 일반적','lyc se e lut a k fol no3 c fib km',0.3,'',0,'shrimp'],
-['s13','S','raw',2,'오징어숙회','오징어숙회','초장 대신 기름장, 오이·쌈채소','초장은 조금만 주세요.','국내산·원양산 혼재','cu se',0.3,'',0,'squid'],
-['s14','S','sea',1,'가리비찜','가리비찜','칼국수 빼고 버터·마늘','사리는 빼주세요.','고성 등 국내산이 일반적','zn se',0.3,'lite',0,'scallop'],
-['s15','S','sea',1,'대하 소금구이','대하구이','머리까지 바삭하게, 쌈채소','','서해 국내산 표기 확인','lyc se',0.3,'grill',[9,10,11],'shrimp'],
-['s16','S','sea',2,'해물탕 (사리 빼기)','해물탕','미나리 많이, 국물 1/3','사리는 빼주세요. 미나리 많이 부탁드려요.','원산지 혼재 — 메뉴 상세 확인','zn cu se fol fib',0.4,'salt',0,'haemul'],
-['s17','S','west',1,'토마토 홍합 스튜','홍합 스튜','빵·파스타 빼고 스튜만','빵·파스타는 빼주세요.','홍합은 국내산이 일반적','lyc zn se e poly',0.6,'',0,'mussel'],
-['w1','W','soup',2,'대구 지리 (맑은탕)','대구탕','맑은탕, 미나리·쑥갓 많이, 국물 1/3','맑은탕으로 부탁드려요. 공기밥은 빼주세요.','러시아·국내산이 일반적','se fib fol',0.3,'salt',0,'cod'],
-['w2','W','soup',2,'우럭 매운탕','우럭매운탕','수제비·공기밥 빼고 쑥갓 많이','수제비·공기밥은 빼주세요.','국내산 양식이 일반적','se',0.4,'salt',0,'rockfish'],
-['w3','W','raw',3,'광어·우럭 모둠회 + 쌈','모둠회','깻잎·쌈채소 많이, 간장·와사비','쌈채소 넉넉히 부탁드려요.','국내산 양식이 일반적','se lut a k fol no3',0.5,'raw',0,'flatfish'],
-['w4','W','gri',3,'생선구이 정식 (가자미·조기)','생선구이','공기밥 빼고 나물 위주','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','조기는 국내·중국산 혼재 — 표기 확인','se',0.4,'grill',0,'croaker'],
-['w5','W','gri',2,'임연수구이','임연수','공기밥 빼기','공기밥은 빼주세요.','러시아·국내산이 일반적','o3 d se',1.0,'grill',0,'atka'],
-['w6','W','sea',3,'아귀찜 (덜 맵게)','아귀찜','덜 맵고 덜 달게, 콩나물·미나리 많이','덜 맵고 덜 달게, 콩나물 많이 부탁드려요.','아귀는 국내·중국산 혼재 — 표기 확인','col se fib fol',0.3,'salt',0,'monkfish'],
-['w7','W','soup',2,'황태해장국 (계란)','황태해장국','공기밥 빼고 계란 추가','공기밥은 빼고 계란 풀어주세요.','러시아산 명태를 국내 가공','se',0.2,'salt',0,'pollack'],
-['w8','W','raw',1,'세꼬시 + 쌈','세꼬시','깻잎·쌈채소 많이, 된장 조금','쌈채소 넉넉히 부탁드려요.','국내산이 일반적','se col lut a k no3',0.4,'raw',0,'sekkosi'],
-['w9','W','soup',3,'동태탕','동태탕','곤이·이리 빼고 살 위주, 국물 1/3','공기밥은 빼주세요.','러시아산이 일반적','se',0.3,'salt',0,'pollack'],
-['p1','P','bossam',3,'보쌈','보쌈','보쌈김치·막국수 빼고 쌈채소·마늘','보쌈김치·막국수는 빼주세요. 쌈채소 넉넉히 부탁드려요.','국내산이 일반적','col zn lut a k fol no3 poly',0,'',0,'porksuyuk'],
-['p2','P','bbq',3,'삼겹살 구이 + 쌈','삼겹살','쌈채소·파채·구운 마늘 추가','쌈채소·마늘 넉넉히 부탁드려요. 공기밥은 빼주세요.','국내산·수입산 모두 무난','lut a k fol no3 poly',0,'grill',0,'porkbelly'],
-['p3','P','sal',2,'목살 스테이크 샐러드','목살 스테이크','빵·감자 대신 케일·시금치 샐러드','빵·감자 대신 샐러드로 부탁드려요.','국내산·스페인산 등','zn lut a k fol no3 c fib km e',0,'',0,'porkneck'],
-['p4','P','bbq',2,'항정살 구이 + 쌈','항정살','쌈채소·구운 버섯 추가','쌈채소 넉넉히 부탁드려요. 공기밥은 빼주세요.','국내산이 일반적','lut a k fol no3',0,'grill',0,'jowl'],
-['p5','P','soup',3,'뼈해장국 (우거지 많이)','뼈해장국','감자·당면·공기밥 빼기, 국물 1/3','공기밥·당면은 빼주세요. 우거지 많이 부탁드려요.','돼지 등뼈는 수입산이 일반적','col zn fib k',0,'salt',0,'porkbone'],
-['p6','P','hansik',2,'쌈밥 정식 (수육)','쌈밥','제육 말고 수육, 밥 빼고 쌈 위주','수육으로 부탁드려요. 공기밥은 빼고 쌈채소 넉넉히 주세요.','국내산이 일반적','col zn lut a k fol no3 fib km',0,'',0,'porksuyuk'],
-['p7','P','soup',3,'돼지국밥 (살코기)','돼지국밥','순대·내장 빼고 부추 많이','순대·내장 없이 고기만 부탁드려요. 공기밥은 빼고 부추 많이 주세요.','국내산이 일반적','zn a k',0,'salt',0,'gukbap'],
-['p8','P','jok',3,'족발 (기본)','족발','막국수·주먹밥 빼고 쌈채소·마늘','막국수·주먹밥은 빼주세요. 쌈채소 넉넉히 부탁드려요.','국내산·수입산 혼재 — 표기 확인','col zn lut k no3',0,'',0,'jokbal'],
-['v1','V','hansik',3,'해물 순두부 (계란 추가)','순두부찌개','공기밥 빼고 계란·해물 추가, 국물 1/3','공기밥은 빼고 계란 하나 추가 부탁드려요.','콩은 수입산 많음 — 국산콩이면 더 좋음','se lut km',0.2,'salt lite',0,'sundubu'],
-['v2','V','hansik',2,'청국장 정식','청국장','공기밥 빼고 나물 반찬 위주','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','국산콩 표기 확인','k fib km fol',0,'salt lite',0,'cheonggukjang'],
-['v3','V','sal',2,'두부 스테이크 샐러드','두부 샐러드','케일·시금치 베이스, 드레싱 따로','드레싱은 따로 주세요.','국산콩이면 더 좋음','lut a k fol no3 c fib km e',0,'lite',0,'tofu'],
-['v4','V','sal',2,'그릭 샐러드 + 삶은 계란','그릭 샐러드','페타 치즈, 삶은 계란 2개 추가','삶은 계란 추가 부탁드려요. 드레싱은 따로 주세요.','','lut c k e km fib a poly',0,'lite',0,'greek'],
-['v5','V','hansik',2,'산채비빔밥 (밥 1/3 · 계란 2)','산채비빔밥','밥은 1/3, 계란프라이 2개, 고추장 반만','밥은 조금만, 계란프라이 2개로 부탁드려요.','나물은 국산 표기 확인','lut a k fol fib km',0,'lite',0,'bibimbap'],
-['v6','V','sal',2,'카프레제 + 삶은 계란','카프레제','모짜렐라·토마토·루꼴라, 계란 2개','삶은 계란 추가 부탁드려요. 발사믹은 따로 주세요.','','lyc a k e lut no3 poly',0,'lite',0,'caprese'],
-['v7','V','west',2,'에그인헬 (빵 빼고)','에그인헬','빵 빼고, 계란 하나 추가','빵은 빼주세요. 계란 추가 가능하면 부탁드려요.','','lyc lut e a k',0,'lite',0,'shakshuka'],
-['v8','V','sal',2,'월남쌈 (새우)','월남쌈','채소·새우 위주, 소스는 조금','소스는 따로 주세요.','','c lut a k fol no3 fib',0.1,'lite',0,'ricepaper']
-].map(a=>({id:a[0],cat:a[1],shop:a[2],ub:a[3],name:a[4],kw:a[5],tip:a[6],req:a[7],org:a[8],tags:a[9].split(' '),o3:a[10],raw:a[11].includes('raw'),salt:a[11].includes('salt'),grill:a[11].includes('grill'),lite:a[11].includes('lite'),months:a[12]||null,fam:a[13]}));
-/* 저녁 · 가볍게 — 편의점·마트·새벽배송. 점심에 비타민C가 없으면 C가 든 조합만 */
+['f1','F','sal',3,'연어 포케','연어 포케','밥 대신 케일·시금치 베이스, 연어 추가','밥 대신 샐러드 베이스로 부탁드려요. 소스는 따로 주세요.','노르웨이·칠레산이 일반적','salm:130 greens:100 avo:30','raw',0,'salmon',0],
+['f2','F','gri',3,'고등어구이 정식','고등어구이','공기밥 빼고 나물 반찬 위주','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','노르웨이산·국내산 모두 무난','mack:150 nara:60','grill',0,'mackerel',0],
+['f3','F','gri',2,'삼치구이 정식','삼치구이','공기밥 빼고 쌈채소 있으면 추가','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','국내산이 일반적','sawara:150 nara:60','grill',0,'spanish',0],
+['f4','F','west',2,'연어 스테이크 + 샐러드','연어 스테이크','빵·감자 대신 샐러드, 올리브유 드레싱','빵·감자 대신 샐러드로 부탁드려요. 드레싱은 따로 주세요.','노르웨이·칠레산이 일반적','salm:180 greens:100 tomraw:50 olive:10','',0,'salmon',1],
+['f5','F','raw',3,'연어회','연어회','초밥 말고 회로, 양파·무순 듬뿍','초밥 말고 회로만 부탁드려요. 양파 많이 주세요.','노르웨이·칠레산이 일반적','salm:150 ssam:40','raw',0,'salmon',1],
+['f6','F','eel',2,'장어 소금구이','장어구이','양념 대신 소금구이, 생강채·쌈채소','양념 말고 소금구이로 부탁드려요. 쌈채소 넉넉히 주세요.','국내산(고창·영암 등) 표기 확인 — 수입산 많음','eel:150 ssam:80','grill',0,'eel',0],
+['f7','F','raw',2,'방어회','방어회','깻잎·쌈채소와, 초장보다 간장·와사비','쌈채소 넉넉히 부탁드려요.','제주·동해 국내산이 일반적','buri:150 ssam:80','raw',[11,12,1,2],'yellowtail',0],
+['f8','F','gri',1,'전어구이','전어구이','뼈째 먹기, 공기밥 빼기','공기밥은 빼주세요.','국내산이 일반적','shad:150 nara:40','grill',[9,10],'gizzard',0],
+['f9','F','gri',2,'갈치구이','갈치구이','조림보다 구이, 공기밥 빼기','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','제주·국내산 표기 확인 — 수입산 많음','hair:150 nara:60','grill',0,'hairtail',0],
+['f10','F','raw',2,'참치회 (뱃살 포함)','참치회','밥·초밥 빼고 김·쌈채소','밥은 빼주세요. 김·쌈채소 넉넉히 부탁드려요.','원양산이 일반적','tuna:150 ssam:50','raw',0,'tuna',0],
+['f11','F','hansik',2,'고등어 무조림','고등어조림','김치 말고 무조림, 국물은 조금만','공기밥은 빼주세요.','노르웨이산·국내산 모두 무난','mack:150 radish:80','salt',0,'mackerel',0],
+['f12','F','raw',2,'과메기','과메기','배추·생미역·김·쪽파에 싸서','쌈채소·미역 넉넉히 부탁드려요.','포항 구룡포산이 일반적','saury:120 ssam:60 wakame:50 napa:50','raw',[11,12,1,2],'saury',0],
+['f13','F','don',3,'연어 사케동 (밥 1/3)','사케동','밥은 1/3만, 연어 추가, 양파 듬뿍','밥은 조금만 주세요. 연어 추가 부탁드려요.','노르웨이·칠레산이 일반적','salm:130 rice:70','raw',0,'salmon',1],
+['f14','F','gri',3,'생선구이 모둠','생선구이 모둠','고등어·삼치·임연수, 공기밥 빼기','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','고등어 노르웨이산·국내산 무난','mack:80 sawara:60 atka:60 nara:60','grill',0,'mackerel',0],
+['f15','F','don',2,'장어덮밥 (밥 1/3)','장어덮밥','밥은 1/3만, 소스 적게','밥은 조금만, 소스는 적게 부탁드려요.','국내산 표기 확인 — 수입산 많음','eel:120 rice:70','grill',0,'eel',0],
+['f16','F','sal',3,'구운 연어 포케','구운연어 포케','밥 대신 샐러드, 에다마메 토핑','밥 대신 샐러드 베이스로 부탁드려요. 소스는 따로 주세요.','노르웨이·칠레산이 일반적','salm:130 greens:100 avo:30 edam:30','',0,'salmon',0],
+['f17','F','gri',2,'꽁치구이 정식','꽁치구이','공기밥 빼고 나물 위주','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','원양·국내산 혼재','saury:150 nara:60','grill',0,'saury',0],
+['f18','F','sal',2,'연어 스테이크 샐러드','연어 스테이크 샐러드','케일·시금치 베이스, 파프리카 추가','드레싱은 따로 주세요.','노르웨이·칠레산이 일반적','salm:150 greens:120 paprika:30 olive:10','',0,'salmon',1],
+['f19','F','don',2,'연어 아보카도 비빔밥 (밥 1/3)','연어 비빔밥','밥 1/3, 아보카도·채소 듬뿍','밥은 조금만 주세요. 채소 많이 부탁드려요.','노르웨이·칠레산이 일반적','salm:120 avo:50 ssam:40 rice:70','raw',0,'salmon',0],
+['f20','F','sal',3,'참치 포케','참치 포케','밥 대신 샐러드, 에다마메 추가','밥 대신 샐러드 베이스로 부탁드려요. 소스는 따로 주세요.','원양산이 일반적','tuna:120 greens:100 avo:30 edam:30','raw',0,'tuna',0],
+['f21','F','gri',2,'연어구이 정식','연어구이','공기밥 빼고 나물 위주','공기밥은 빼주세요.','노르웨이·칠레산이 일반적','salm:150 nara:60','grill',0,'salmon',0],
+['w1','W','soup',2,'대구 지리 (맑은탕)','대구탕','맑은탕, 미나리·쑥갓 많이, 국물 1/3','맑은탕으로 부탁드려요. 공기밥은 빼주세요.','러시아·국내산이 일반적','cod:200 sprout:80 radish:40','salt',0,'cod',0],
+['w2','W','soup',2,'우럭 매운탕','우럭매운탕','수제비·공기밥 빼고 쑥갓 많이','수제비·공기밥은 빼주세요.','국내산 양식이 일반적','whitef:200 sprout:40 radish:40','salt',0,'rockfish',0],
+['w3','W','raw',3,'광어·우럭 모둠회 + 쌈','모둠회','깻잎·쌈채소 많이, 간장·와사비','쌈채소 넉넉히 부탁드려요.','국내산 양식이 일반적','whitef:150 ssam:80','raw',0,'flatfish',0],
+['w4','W','gri',3,'생선구이 정식 (가자미·조기)','생선구이','공기밥 빼고 나물 위주','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','조기는 국내·중국산 혼재 — 표기 확인','whitef:180 nara:60','grill',0,'croaker',0],
+['w5','W','gri',2,'임연수구이','임연수','공기밥 빼기','공기밥은 빼주세요.','러시아·국내산이 일반적','atka:200 nara:40','grill',0,'atka',0],
+['w6','W','sea',3,'아귀찜 (덜 맵게)','아귀찜','덜 맵고 덜 달게, 콩나물·미나리 많이','덜 맵고 덜 달게, 콩나물 많이 부탁드려요.','아귀는 국내·중국산 혼재 — 표기 확인','monk:200 sprout:150','salt',0,'monkfish',0],
+['w7','W','soup',2,'황태해장국 (계란)','황태해장국','공기밥 빼고 계란 추가','공기밥은 빼고 계란 풀어주세요.','러시아산 명태를 국내 가공','pollock:100 egg:50 sprout:40','salt',0,'pollock',0],
+['w8','W','raw',1,'세꼬시 + 쌈','세꼬시','깻잎·쌈채소 많이, 된장 조금','쌈채소 넉넉히 부탁드려요.','국내산이 일반적','sekk:150 ssam:80','raw',0,'sekkosi',0],
+['w9','W','soup',3,'동태탕','동태탕','곤이·이리 빼고 살 위주, 국물 1/3','공기밥은 빼주세요.','러시아산이 일반적','pollock:200 radish:60','salt',0,'pollock',0],
+['w10','W','sea',2,'코다리찜 (덜 달게)','코다리찜','덜 달게, 콩나물 추가','덜 달게, 콩나물 많이 부탁드려요.','러시아산 명태를 국내 가공','pollock:200 sprout:80','salt',0,'pollock',0],
+['w11','W','sea',1,'대구뽈찜 (덜 맵게)','대구뽈찜','덜 맵게, 콩나물·미나리 많이','덜 맵게, 콩나물 많이 부탁드려요.','러시아·국내산이 일반적','cod:200 sprout:150','salt',0,'cod',0],
+['s1','S','soup',2,'굴국 (익힌 굴)','굴국밥','밥 빼고 굴 추가 — 생굴은 피하기','공기밥은 빼주세요. 굴 넉넉히 부탁드려요.','통영 등 국내산이 일반적','oyster:120 chive:20 radish:40','salt',[10,11,12,1,2,3],'oyster',0],
+['s2','S','sea',1,'굴찜 (석화찜)','굴찜','충분히 익혀서, 초장 조금','충분히 익혀주세요.','통영 등 국내산이 일반적','oyster:200','',[10,11,12,1,2,3],'oyster',0],
+['s3','S','sea',2,'홍합탕','홍합탕','칼국수 사리 빼기','칼국수 사리는 빼주세요.','국내산이 일반적','mussel:120 chive:20','salt',0,'mussel',0],
+['s4','S','sea',2,'모둠 조개찜','조개찜','칼국수·라면사리 빼기','사리는 빼주세요.','바지락·백합은 중국산 비중 높음 — 국내산 표기 확인','clam:200 napa:50','',0,'clam',0],
+['s5','S','sea',1,'전복 버터구이','전복구이','버터구이 또는 찜, 내장(게우)까지','','완도 등 국내산이 일반적','abalone:150 mush:40','',0,'abalone',0],
+['s6','S','sea',2,'꽃게탕','꽃게탕','라면사리 빼기, 국물 1/3','라면사리는 빼주세요.','국내산 표기 확인 — 중국산 냉동 많음','crab:120 napa:60 radish:40','salt',0,'crab',0],
+['s7','S','sea',3,'해물찜 (덜 맵게)','해물찜','덜 맵게, 콩나물·미나리 많이, 당면 빼기','덜 맵게, 당면은 빼고 콩나물 많이 부탁드려요.','원산지 혼재 — 메뉴 상세 확인','haemul:200 sprout:150','salt',0,'haemul',0],
+['s8','S','sea',1,'낙지 연포탕','연포탕','공기밥·칼국수 빼기','공기밥은 빼주세요.','낙지는 중국산 많음 — 국내산 표기 확인','nakji:200 radish:60 chive:20','salt',0,'nakji',0],
+['s9','S','west',2,'새우 감바스','감바스','바게트 빼고 버섯·브로콜리 추가','빵은 빼주세요. 브로콜리 있으면 추가 부탁드려요.','태국·베트남산이 일반적','shrimp:150 mush:50 brocc:50 olive:15','',0,'shrimp',1],
+['s10','S','raw',2,'문어숙회 + 쌈','문어숙회','초장 대신 기름장, 쌈채소와','초장 대신 기름장으로 부탁드려요. 쌈채소 넉넉히 주세요.','국내산·모리타니산 등','octo:150 ssam:60','',0,'octopus',0],
+['s11','S','hansik',2,'꼬막비빔밥 (밥 1/3)','꼬막비빔밥','밥은 1/3만, 꼬막·채소 위주','밥은 조금만 주세요.','벌교·여자만 국내산이 일반적','cockle:100 nara:80 rice:70','',0,'cockle',0],
+['s12','S','sal',3,'새우 아보카도 샐러드','새우 샐러드','케일·시금치 베이스, 드레싱 따로','드레싱은 따로 주세요.','새우는 태국·베트남산이 일반적','shrimp:120 greens:100 avo:50 paprika:30','',0,'shrimp',0],
+['s13','S','raw',2,'오징어숙회','오징어숙회','초장 대신 기름장, 오이·쌈채소','초장은 조금만 주세요.','국내산·원양산 혼재','squid:150 ssam:40','',0,'squid',0],
+['s14','S','sea',1,'가리비찜','가리비찜','칼국수 빼고 버터·마늘','사리는 빼주세요.','고성 등 국내산이 일반적','scallop:200 chive:20','',0,'scallop',1],
+['s15','S','sea',1,'대하 소금구이','대하구이','머리까지 바삭하게, 쌈채소','','서해 국내산 표기 확인','shrimp:200 ssam:40','grill',[9,10,11],'shrimp',0],
+['s16','S','sea',2,'해물탕 (사리 빼기)','해물탕','미나리 많이, 국물 1/3','사리는 빼주세요. 미나리 많이 부탁드려요.','원산지 혼재 — 메뉴 상세 확인','haemul:200 sprout:80 radish:40','salt',0,'haemul',0],
+['s17','S','west',1,'토마토 홍합 스튜','홍합 스튜','빵·파스타 빼고 스튜만','빵·파스타는 빼주세요.','홍합은 국내산이 일반적','mussel:150 tomsauce:150 olive:10','',0,'mussel',1],
+['s18','S','sea',1,'꽃게찜','꽃게찜','통째로 쪄서, 장은 조금','','국내산 표기 확인 — 중국산 냉동 많음','crab:180','',0,'crab',0],
+['s19','S','sal',3,'새우 포케','새우 포케','밥 대신 샐러드, 에다마메 추가','밥 대신 샐러드 베이스로 부탁드려요. 소스는 따로 주세요.','새우는 태국·베트남산이 일반적','shrimp:120 greens:100 avo:30 edam:30 tomraw:30','',0,'shrimp',0],
+['s20','S','west',1,'문어 샐러드','문어 샐러드','올리브유·레몬 드레싱','드레싱은 따로 주세요.','국내산·모리타니산 등','octo:120 greens:80 tomraw:50 olive:10','',0,'octopus',1],
+['b1','B','shabu',2,'소고기 샤브샤브','샤브샤브','칼국수·죽 빼고 채소·버섯 추가','칼국수·죽 사리는 빼주세요. 채소 많이 부탁드려요.','호주·미국산이 일반적','beef:150 napa:150 mush:80 greens:40','salt',0,'shabu',0],
+['b2','B','bbq',2,'소고기 등심 구이 + 쌈','소고기 구이','쌈채소·파채 추가, 공기밥·냉면 빼기','공기밥은 빼주세요. 쌈채소 넉넉히 부탁드려요.','한우·호주·미국산 표기 확인','beef:200 ssam:100','grill',0,'beefgrill',0],
+['b3','B','sal',3,'스테이크 샐러드','스테이크 샐러드','케일·시금치 베이스, 빵·감자 빼기','빵·감자는 빼주세요. 드레싱은 따로 주세요.','호주·미국산이 일반적','beef:150 greens:120 paprika:30 olive:10','',0,'steak',1],
+['b4','B','soup',3,'갈비탕','갈비탕','당면·공기밥 빼기, 국물은 1/3만','당면·공기밥은 빼주세요.','호주·미국산이 일반적','galbi:200 radish:40','salt',0,'galbi',0],
+['b5','B','yuk',2,'한우 육회 (단품)','육회','비빔밥 말고 단품, 노른자·배 포함','노른자 함께 부탁드려요.','한우 표기 확인','beef:150 egg:20','raw',0,'yukhoe',0],
+['b6','B','bbq',2,'생갈비살 소금구이 + 쌈','갈비살','양념 없이 소금구이','양념 없이 소금구이로 부탁드려요. 쌈채소 넉넉히 주세요.','호주·미국산이 일반적','galbi:200 ssam:100','grill',0,'beefgrill',0],
+['b7','B','soup',2,'소고기 미역국 정식','소고기 미역국','공기밥 빼고 미역·고기 건더기 위주','공기밥은 빼주세요.','미역은 완도·기장 국내산이 일반적','beef:80 wakame:80 nara:60','salt',0,'miyeok',0],
+['b8','B','shabu',2,'소고기 버섯전골','버섯전골','당면·칼국수 빼고 버섯 추가','당면·사리는 빼주세요.','호주·미국산이 일반적','beef:120 mush:120 napa:100','salt',0,'jeongol',0],
+['b9','B','soup',2,'소고기 수육 (양지·사태)','소고기 수육','곰탕집 수육 단품 + 부추·파채','부추나 파채가 있으면 넉넉히 부탁드려요.','호주·미국산이 일반적','shank:200 chive:50','',0,'beefsuyuk',0],
+['b10','B','west',2,'안심 스테이크 + 구운 채소','안심 스테이크','감자·빵 대신 구운 채소·샐러드','감자·빵 대신 채소로 부탁드려요.','호주·미국산이 일반적','beef:180 paprika:50 mush:50 brocc:50','grill',0,'steak',0],
+['b11','B','soup',3,'육개장 (당면 빼기)','육개장','고사리·대파 위주, 국물 1/3','당면·공기밥은 빼주세요.','고사리는 국산 표기면 더 좋음','beef:100 woog:80 chive:30','salt',0,'yukgaejang',0],
+['b12','B','soup',2,'도가니탕','도가니탕','소면·공기밥 빼고 건더기 위주','소면·공기밥은 빼주세요.','호주·미국산이 일반적','tendon:70 shank:50 chive:20','salt',0,'dogani',0],
+['b13','B','soup',2,'꼬리곰탕','꼬리곰탕','소면·공기밥 빼고 파 많이','소면·공기밥은 빼주세요. 파 많이 부탁드려요.','호주·미국산이 일반적','oxtail:120 chive:20','salt',0,'oxtail',0],
+['b14','B','yuk',2,'육회비빔밥 (밥 1/3)','육회비빔밥','밥 1/3, 나물·노른자','밥은 조금만 주세요.','한우 표기 확인','beef:100 nara:80 egg:20 rice:70','raw',0,'yukhoe',0],
+['b15','B','sal',2,'스테이크 포케','스테이크 포케','밥 대신 샐러드, 에다마메 추가','밥 대신 샐러드 베이스로 부탁드려요. 소스는 따로 주세요.','호주·미국산이 일반적','beef:130 greens:100 avo:30 edam:30','',0,'steak',0],
+['l1','L','lamb',1,'양갈비 구이','양갈비','프렌치랙 + 구운 채소','구운 채소가 있으면 추가 부탁드려요.','호주·뉴질랜드산이 일반적','lamb:200 mush:50','grill',0,'lamb',0],
+['l2','L','lamb',2,'양꼬치','양꼬치','꼬치만 — 볶음밥·꿔바로우 빼고 오이무침','','호주·뉴질랜드산이 일반적','lamb:150 ssam:30','grill',0,'lamb',0],
+['l3','L','shabu',2,'양고기 훠궈 (백탕)','훠궈','백탕, 청경채·시금치·버섯, 면 빼기','백탕으로, 면 사리는 빼주세요.','호주·뉴질랜드산이 일반적','lamb:150 napa:120 mush:80 greens:40','salt',0,'hotpot',0],
+['p1','P','bossam',3,'보쌈','보쌈','보쌈김치·막국수 빼고 쌈채소·마늘','보쌈김치·막국수는 빼주세요. 쌈채소 넉넉히 부탁드려요.','국내산이 일반적','porkl:200 ssam:100','',0,'porksuyuk',1],
+['p2','P','bbq',3,'삼겹살 구이 + 쌈','삼겹살','쌈채소·파채·구운 마늘 추가','쌈채소·마늘 넉넉히 부탁드려요. 공기밥은 빼주세요.','국내산·수입산 모두 무난','belly:200 ssam:100','grill',0,'porkbelly',1],
+['p3','P','sal',2,'목살 스테이크 샐러드','목살 스테이크','빵·감자 대신 케일·시금치 샐러드','빵·감자 대신 샐러드로 부탁드려요.','국내산·스페인산 등','porkl:180 greens:100 paprika:30 olive:10','',0,'porkneck',0],
+['p4','P','bbq',2,'항정살 구이 + 쌈','항정살','쌈채소·구운 버섯 추가','쌈채소 넉넉히 부탁드려요. 공기밥은 빼주세요.','국내산이 일반적','belly:180 ssam:80 mush:30','grill',0,'jowl',0],
+['p5','P','soup',3,'뼈해장국 (우거지 많이)','뼈해장국','감자·당면·공기밥 빼기, 국물 1/3','공기밥·당면은 빼주세요. 우거지 많이 부탁드려요.','돼지 등뼈는 수입산이 일반적','porkbone:150 woog:100','salt',0,'porkbone',0],
+['p6','P','hansik',2,'쌈밥 정식 (수육)','쌈밥','제육 말고 수육, 밥 빼고 쌈 위주','수육으로 부탁드려요. 공기밥은 빼고 쌈채소 넉넉히 주세요.','국내산이 일반적','porkl:150 ssam:150 nara:50','',0,'porksuyuk',0],
+['p7','P','soup',3,'돼지국밥 (살코기)','돼지국밥','순대·내장 빼고 부추 많이','순대·내장 없이 고기만 부탁드려요. 공기밥은 빼고 부추 많이 주세요.','국내산이 일반적','porkl:150 chive:40','salt',0,'gukbap',0],
+['p8','P','jok',3,'족발 (기본)','족발','막국수·주먹밥 빼고 쌈채소·마늘','막국수·주먹밥은 빼주세요. 쌈채소 넉넉히 부탁드려요.','국내산·수입산 혼재 — 표기 확인','jok:200 ssam:60','',0,'jokbal',0],
+['v1','V','hansik',3,'해물 순두부 (계란 추가)','순두부찌개','공기밥 빼고 계란·해물 추가, 국물 1/3','공기밥은 빼고 계란 하나 추가 부탁드려요.','콩은 수입산 많음 — 국산콩이면 더 좋음','tofu:250 egg:50 haemul:40','salt',0,'sundubu',0],
+['v2','V','hansik',2,'청국장 정식','청국장','공기밥 빼고 나물 반찬 위주','공기밥은 빼주세요. 김치는 안 주셔도 돼요.','국산콩 표기 확인','cgj:150 tofu:50 nara:60','salt',0,'cheonggukjang',0],
+['v3','V','sal',2,'두부 스테이크 샐러드','두부 샐러드','케일·시금치 베이스, 드레싱 따로','드레싱은 따로 주세요.','국산콩이면 더 좋음','tofu:200 greens:120 paprika:30 olive:10','',0,'tofu',0],
+['v4','V','sal',2,'그릭 샐러드 + 삶은 계란','그릭 샐러드','페타 치즈, 삶은 계란 2개 추가','삶은 계란 추가 부탁드려요. 드레싱은 따로 주세요.','','tomraw:80 ssam:80 paprika:40 egg:100 mozz:30 olive:15','',0,'greek',1],
+['v5','V','hansik',2,'산채비빔밥 (밥 1/3 · 계란 2)','산채비빔밥','밥은 1/3, 계란프라이 2개, 고추장 반만','밥은 조금만, 계란프라이 2개로 부탁드려요.','나물은 국산 표기 확인','nara:150 egg:100 rice:70','',0,'bibimbap',0],
+['v6','V','sal',2,'카프레제 + 삶은 계란','카프레제','모짜렐라·토마토·루꼴라, 계란 2개','삶은 계란 추가 부탁드려요. 발사믹은 따로 주세요.','','tomraw:150 mozz:60 greens:30 egg:100 olive:15','',0,'caprese',1],
+['v7','V','west',2,'에그인헬 (빵 빼고)','에그인헬','빵 빼고, 계란 하나 추가','빵은 빼주세요. 계란 추가 가능하면 부탁드려요.','','tomsauce:200 egg:150','',0,'shakshuka',1],
+['v8','V','sal',2,'월남쌈 (새우)','월남쌈','채소·새우 위주, 소스는 조금','소스는 따로 주세요.','','shrimp:60 ssam:100 paprika:50 greens:40','',0,'ricepaper',0],
+['v9','V','sal',3,'두부 포케','두부 포케','밥 대신 샐러드, 에다마메 추가','밥 대신 샐러드 베이스로 부탁드려요. 소스는 따로 주세요.','국산콩이면 더 좋음','tofu:150 greens:100 avo:30 edam:50','',0,'tofu',0],
+['v10','V','sal',2,'콥 샐러드 (베이컨 빼고)','콥 샐러드','베이컨·크루통 빼고 계란·아보카도','베이컨·크루통은 빼주세요. 드레싱은 따로 주세요.','','egg:100 avo:60 greens:100 tomraw:50','',0,'cobb',0],
+['v11','V','hansik',2,'두부 버섯전골','두부전골','당면·사리 빼고 버섯·두부 위주','당면·사리는 빼주세요.','국산콩이면 더 좋음','tofu:200 mush:120 napa:100','salt',0,'tofujeongol',0],
+['v12','V','sal',1,'후무스 샐러드 + 계란','후무스 샐러드','병아리콩 후무스, 삶은 계란 1개','삶은 계란 추가 부탁드려요. 드레싱은 따로 주세요.','','hummus:80 greens:100 tomraw:50 egg:50 olive:10','',0,'hummus',0]
+];
+/* [id, 이름, 구성, 제철월, 장보기, 메모, 날것] */
 const SN=[
-['e1','키위 2개 + 호박씨 한 줌','c zn cu fib km',0,['키위','호박씨'],'골드키위면 1개로도 충분',0],
-['e2','그릭요거트 + 키위 + 블루베리','c poly fib',0,['무가당 그릭요거트','키위','블루베리(냉동 가능)'],'안토시아닌',1],
-['e3','삶은 계란 2개 + 빨간 파프리카','c a lut se',0,['계란','파프리카(빨강·주황)'],'노른자 루테인은 흡수율이 높음',1],
-['e4','아보카도 반 개 + 키위 1개','c e km fol k fib',0,['아보카도','키위'],'소금·올리브유 약간',0],
-['e5','오렌지 1개 + 아몬드 20알','c e km fol poly',0,['오렌지','무염 아몬드'],'헤스페리딘',0],
-['e6','케일 녹즙 + 호두 3알','c lut k fol',0,['무가당 케일 녹즙','호두'],'루테인을 가장 쉽게 채우는 방법',0],
-['e7','토마토주스 + 키위 1개','c lyc km',0,['무가당 토마토주스','키위'],'가열·가공 토마토가 라이코펜 흡수에 유리',0],
-['e8','다크초콜릿 2조각 + 키위 1개','c poly cu km',0,['카카오 70% 이상 다크초콜릿','키위'],'설탕 적은 제품으로',0],
-['e9','군고구마 1개 + 귤 2개','c a fib km',[10,11,12,1,2],['군고구마(편의점)','귤'],'제철',0],
-['e10','귤 2개 + 브라질너트 1알','c se',[10,11,12,1,2],['귤','브라질너트'],'브라질너트는 하루 2알 이하',0],
-['e11','딸기 10알 + 그릭요거트','c poly fol',[12,1,2,3,4],['딸기','무가당 그릭요거트'],'제철',1],
-['e12','파프리카 반 개 + 해바라기씨 한 줌','c a e se cu',0,['파프리카(빨강·주황)','해바라기씨'],'',0],
-['e13','토마토주스 + 아몬드 20알','lyc e km fib',0,['무가당 토마토주스','무염 아몬드'],'',0],
-['e14','삶은 계란 2개 + 방울토마토','lut lyc se',0,['계란','방울토마토'],'',1],
-['e15','컵샐러드 + 삶은 계란','lut k fol no3 fib',0,['컵샐러드','계란'],'드레싱은 절반만',1],
-['e16','해바라기씨 한 줌 + 녹차','e se cu poly',0,['해바라기씨','녹차 티백'],'',0],
-['e17','비트즙 1병 + 삶은 계란','no3 fol',0,['무가당 비트즙','계란'],'질산염 — 혈관 기능 연구',1],
-['e18','단감 1개 + 아몬드 15알','a e fib',[10,11],['단감','무염 아몬드'],'제철',0],
-['e19','당근 스틱 + 땅콩버터','a e fib',0,['당근','100% 땅콩버터'],'당·첨가물 없는 제품',0],
-['e20','두부 반 모 + 구운 김','km',0,['두부','무조미 구운 김'],'단백질 보강',1],
-['e21','그릭요거트 + 호박씨 한 줌','',0,['무가당 그릭요거트','호박씨'],'아연을 저녁에 채우는 가장 쉬운 조합',1],
-['e22','에다마메 한 그릇 + 키위 1개','',0,['냉동 에다마메(풋콩)','키위'],'엽산이 가장 풍부한 간식 — 전자레인지 3분',1],
-['e23','에다마메 한 그릇 + 귤 2개','',[10,11,12,1,2],['냉동 에다마메(풋콩)','귤'],'엽산·식이섬유',1],
-['e24','에다마메 한 그릇 + 호박씨 한 줌','',0,['냉동 에다마메(풋콩)','호박씨'],'아연·엽산 동시에',1]
-].map(a=>({id:a[0],name:a[1],tags:a[2].split(' '),months:a[3]||null,buy:a[4],note:a[5],pro:!!a[6]}));
-/* 식품 성분 — 100g(음료는 100ml)당 추정치. 학습용 정량 데이터. 출처: 국가표준식품성분표·USDA 기준 근사 */
-const ING=Object.fromEntries(Object.entries({
-mack:['고등어','o3:2.3 d:9 se:44 e:1.5 km:314 zn:.6'],
-salm:['연어','o3:2 d:10 se:24 e:3.5 km:360 a:15'],
-sawara:['삼치','o3:1.3 d:7 se:36 km:400'],
-eel:['장어','o3:1.5 a:2400 d:18 e:7.4 se:30 zn:1.4 col:2'],
-buri:['방어','o3:2.6 d:8 se:57 e:2 km:380'],
-shad:['전어','o3:1.2 d:10 se:40 km:370'],
-hair:['갈치','o3:1 d:14 se:36 km:290'],
-tuna:['참치','o3:1.5 d:10 se:80 km:300'],
-saury:['꽁치(과메기)','o3:3 d:15 se:40 e:1.5 km:200'],
-atka:['임연수','o3:1 d:3 se:40 km:300'],
-whitef:['흰살생선','o3:.4 d:3 se:38 km:350'],
-sekk:['세꼬시(뼈째)','o3:.4 d:3 se:38 col:1.5 km:300'],
-cod:['대구','o3:.2 d:1 se:30 km:400'],
-pollock:['명태','o3:.2 se:30 km:350'],
-monk:['아귀','se:36 col:1.5 km:300'],
-beef:['소고기 살코기','zn:5 se:20 km:330 cu:.08'],
-galbi:['소갈비','zn:4 se:18 km:300 col:.8'],
-shank:['양지·사태','zn:5.5 se:22 km:300 col:2.5'],
-tendon:['도가니(힘줄)','col:25 zn:1'],
-oxtail:['소꼬리','zn:4 col:6 se:15'],
-lamb:['양고기','zn:4.5 se:26 km:280 cu:.1'],
-porkl:['돼지 수육','zn:3.5 se:30 km:330 col:1.5'],
-belly:['삼겹·항정','zn:1.5 se:10 km:230'],
-porkbone:['돼지 등뼈 살','zn:3 col:3 se:20'],
-jok:['족발','col:8 zn:2 se:18'],
-oyster:['굴','zn:16 cu:1.6 se:77 d:8 o3:.7 km:170'],
-mussel:['홍합','zn:2.7 se:45 o3:.7 fol:42 cu:.1 km:320'],
-clam:['바지락·백합','zn:1.4 cu:.35 se:25 km:310'],
-abalone:['전복','se:44 km:250 cu:.2'],
-crab:['꽃게','zn:3.8 cu:.7 se:40 km:330'],
-nakji:['낙지','cu:.4 se:40 zn:1.5 km:240'],
-octo:['문어','zn:3.4 cu:.8 se:90 km:350'],
-shrimp:['새우','se:38 zn:1.6 cu:.3 e:1.3 km:260'],
-squid:['오징어','cu:1.9 se:45 zn:1.5 km:250'],
-scallop:['가리비','zn:2.5 se:25 km:300'],
-cockle:['꼬막','zn:2.4 se:50 km:200'],
-haemul:['해물 모둠','zn:2 cu:.6 se:40 km:280'],
-greens:['케일·시금치','c:60 a:400 k:400 fol:150 lut:8 km:500 fib:3 no3:220 e:1.5'],
-ssam:['쌈채소(상추·깻잎)','a:400 k:150 fol:70 lut:4 km:300 fib:2 no3:150 c:15'],
-paprika:['빨간 파프리카','c:128 a:157 e:1.6 km:210 fib:2'],
-avo:['아보카도','e:2.1 km:485 fol:81 k:21 fib:6.7'],
-tomsauce:['익힌 토마토','lyc:15 km:400 c:12 e:2'],
-tomraw:['생토마토','lyc:3 c:15 km:240 fib:1.2'],
-tomj:['토마토주스','lyc:9 km:220 c:10'],
-wakame:['미역','fib:3 km:90'],
-mush:['버섯','fib:2.5 cu:.3 km:320'],
-sprout:['콩나물·미나리','fib:2.5 fol:70 k:80 km:250'],
-chive:['부추','a:280 k:180 fol:100 km:450 fib:3'],
-woog:['우거지·고사리','fib:4 km:300 k:100'],
-napa:['배추·청경채','fib:1.5 k:50 fol:50 km:200 no3:150'],
-cgj:['청국장','k:300 fib:5 fol:100 km:600'],
-tofu:['두부','km:150 cu:.2 se:10 zn:.8'],
-egg:['계란','se:30 d:2 a:160 lut:.4 e:1'],
-nara:['나물','fib:3.5 a:300 k:200 fol:80 lut:3 km:350'],
-olive:['올리브유','e:14'],
-kiwi:['키위','c:93 k:40 fib:3 km:312 e:1.5 fol:25'],
-orange:['오렌지','c:53 fol:30 km:181 fib:2.4'],
-tang:['귤','c:35 km:150 fib:1'],
-straw:['딸기','c:59 fol:24 fib:2'],
-blueb:['블루베리','fib:2.4 c:10'],
-pump:['호박씨','zn:7.8 cu:1.3 fib:6 km:800 e:2'],
-sunfl:['해바라기씨','e:35 se:53 cu:1.8 fib:9 km:650'],
-almond:['아몬드','e:25.6 cu:1 fib:12.5 km:730'],
-walnut:['호두','cu:1.6 fib:6.7 km:440'],
-brazil:['브라질너트','se:1900 cu:1.7'],
-choc:['다크초콜릿','cu:1.8 fib:11 km:715'],
-kalej:['케일 녹즙','lut:4 c:30 k:200 fol:30 km:300'],
-beetj:['비트즙','no3:150 fol:20 km:250'],
-sweetp:['군고구마','a:961 fib:3.3 km:475 c:20'],
-kaki:['단감','a:81 fib:1.6 c:7'],
-carrot:['당근','a:835 fib:2.8 km:320'],
-pb:['땅콩버터','e:9 fib:6 km:650'],
-greek:['그릭요거트','zn:.55 km:140'],
-edam:['에다마메(풋콩)','fol:311 fib:5.2 km:436 zn:1.4 cu:.35 k:27 e:.7'],
-cupsal:['컵샐러드','no3:150 k:100 fol:50 lut:1.5 fib:2 a:250 c:10']
-}).map(([k,[n,s]])=>[k,{n,v:Object.fromEntries(s.split(' ').map(p=>{const q=p.split(':');return[q[0],+q[1]]}))}]));
-/* 하루 기준(성인) · 한 끼 인정선(기준 대비 비율, 기본 30%) */
-const REF={o3:.5,zn:9,cu:.75,c:100,e:12,a:700,d:10,se:60,fol:400,k:70,km:3500,fib:25,lut:10,lyc:16,col:5,no3:300};
-const TH={o3:2,c:.5,fol:.25,km:.2,fib:.2,lyc:.25};
-const UNIT={o3:'g',zn:'mg',cu:'mg',c:'mg',e:'mg',a:'μg',d:'μg',se:'μg',fol:'μg',k:'μg',km:'mg',fib:'g',lut:'mg',lyc:'mg',col:'g',no3:'mg'};
-const RLAB={lut:'연구 용량',lyc:'연구 용량',col:'연구 용량',no3:'연구 용량'};
-const COMP={f1:'salm:130 greens:100 avo:30',f2:'mack:150 nara:60',f3:'sawara:150 nara:60',f4:'salm:180 greens:100 tomraw:50 olive:10',f5:'salm:150',f6:'eel:150 ssam:80',f7:'buri:150 ssam:80',f8:'shad:150',f9:'hair:150 nara:60',f10:'tuna:150 ssam:50',f11:'mack:150',f12:'saury:120 ssam:80 wakame:50',f13:'salm:130',f14:'mack:80 sawara:60 atka:60 nara:60',f15:'eel:120',
-b1:'beef:150 napa:150 mush:80 greens:40',b2:'beef:200 ssam:100',b3:'beef:150 greens:120 paprika:30 olive:10',b4:'galbi:200',b5:'beef:150 egg:20',b6:'galbi:200 ssam:100',b7:'beef:80 wakame:80 nara:60',b8:'beef:120 mush:120 napa:100',b9:'shank:200 chive:50',b10:'beef:180 paprika:50 mush:50',b11:'beef:100 woog:80',b12:'tendon:70 shank:50',b13:'oxtail:120',l1:'lamb:200 mush:50',l2:'lamb:150',l3:'lamb:150 napa:120 mush:80 greens:40',
-s1:'oyster:120',s2:'oyster:200',s3:'mussel:150',s4:'clam:250',s5:'abalone:150',s6:'crab:150 napa:50',s7:'haemul:200 sprout:150',s8:'nakji:200',s9:'shrimp:150 mush:50 olive:15',s10:'octo:150 ssam:60',s11:'cockle:100 nara:80',s12:'shrimp:120 greens:100 avo:50 paprika:30',s13:'squid:150',s14:'scallop:200',s15:'shrimp:200 ssam:40',s16:'haemul:200 sprout:80',s17:'mussel:200 tomsauce:150 olive:10',
-w1:'cod:200 sprout:80',w2:'whitef:200',w3:'whitef:150 ssam:80',w4:'whitef:180 nara:60',w5:'atka:200',w6:'monk:200 sprout:150',w7:'pollock:70 egg:50',w8:'sekk:150 ssam:80',w9:'pollock:200',
-p1:'porkl:200 ssam:100',p2:'belly:200 ssam:100',p3:'porkl:180 greens:100 paprika:30 olive:10',p4:'belly:180 ssam:80',p5:'porkbone:150 woog:100',p6:'porkl:150 ssam:150 nara:50',p7:'porkl:150 chive:40',p8:'jok:200 ssam:60',
-v1:'tofu:250 egg:50 haemul:40',v2:'cgj:150 tofu:50 nara:60',v3:'tofu:200 greens:120 paprika:30 olive:10',v4:'tomraw:80 ssam:80 paprika:40 egg:100 olive:15',v5:'nara:150 egg:100',v6:'tomraw:150 greens:30 egg:100 olive:15',v7:'tomsauce:200 egg:150',v8:'shrimp:60 ssam:100 paprika:50 greens:40'};
-const COMPE={e1:'kiwi:150 pump:25',e2:'greek:150 kiwi:75 blueb:70',e3:'egg:100 paprika:150',e4:'avo:100 kiwi:75',e5:'orange:150 almond:24',e6:'kalej:140 walnut:12',e7:'tomj:190 kiwi:75',e8:'choc:20 kiwi:75',e9:'sweetp:150 tang:160',e10:'tang:160 brazil:5',e11:'straw:150',e12:'paprika:80 sunfl:25',e13:'tomj:190 almond:24',e14:'egg:100 tomraw:150',e15:'cupsal:100 egg:100',e16:'sunfl:25',e17:'beetj:200 egg:100',e18:'kaki:180 almond:18',e19:'carrot:80 pb:16',e20:'tofu:150',e21:'greek:150 pump:25',e22:'edam:100 kiwi:75',e23:'edam:100 tang:160',e24:'edam:100 pump:25'};
-function derive(x,comp){const amt={},src={};
- comp.split(' ').forEach(p=>{const q=p.split(':'),I=ING[q[0]],g=+q[1];if(!I)throw new Error('ING '+q[0]);Object.keys(I.v).forEach(n=>{const v=I.v[n]*g/100;amt[n]=(amt[n]||0)+v;(src[n]=src[n]||[]).push({n:I.n,g,v})})});
- Object.values(src).forEach(a=>a.sort((p,q)=>q.v-p.v));
- const poly=x.tags.includes('poly');x.amt=amt;x.src=src;x.comp=comp.split(' ').map(p=>{const q=p.split(':');return{n:ING[q[0]].n,g:+q[1]}});
- x.tags=NK.filter(n=>n!=='poly'&&amt[n]!==undefined&&amt[n]>=REF[n]*(TH[n]||.3));if(poly)x.tags.push('poly')}
-D.forEach(d=>{if(!COMP[d.id])throw new Error('COMP '+d.id);derive(d,COMP[d.id]);d.o3=Math.round((d.amt.o3||0)*10)/10});
-SN.forEach(x=>{if(!COMPE[x.id])throw new Error('COMPE '+x.id);derive(x,COMPE[x.id])});
+['e1','키위 2개 + 호박씨 한 줌','kiwi:150 pump:30',0,['키위','호박씨'],'아연·비타민C를 한 번에',0],
+['e2','그릭요거트 + 키위 + 블루베리','greek:150 kiwi:75 blueb:70',0,['무가당 그릭요거트','키위','블루베리(냉동 가능)'],'단백질 보강',0],
+['e3','삶은 계란 2개 + 빨간 파프리카','egg:100 paprika:150',0,['계란','파프리카(빨강)'],'노른자 루테인은 흡수율이 높아요',0],
+['e4','아보카도 반 개 + 키위 1개','avo:70 kiwi:75',0,['아보카도','키위'],'소금·올리브유 약간',0],
+['e5','오렌지 1개 + 아몬드 20알','orange:150 almond:24',0,['오렌지','무염 아몬드'],'',0],
+['e6','케일 녹즙 + 키위 1개','kalej:140 kiwi:75',0,['무가당 케일 녹즙','키위'],'루테인을 가장 쉽게 채우는 방법',0],
+['e7','토마토주스 + 키위 1개','tomj:190 kiwi:75',0,['무가당 토마토주스','키위'],'가공 토마토가 라이코펜 흡수에 유리',0],
+['e8','다크초콜릿 2조각 + 키위 2개','choc:20 kiwi:150',0,['카카오 70% 이상 다크초콜릿','키위'],'설탕 적은 제품으로',0],
+['e9','군고구마 1개 + 귤 2개','sweetp:150 tang:160',[10,11,12,1,2],['호박고구마(군고구마)','귤'],'제철',0],
+['e10','귤 3개 + 브라질너트 1알','tang:240 brazil:5',[10,11,12,1,2],['귤','브라질너트'],'브라질너트는 하루 2알 이하',0],
+['e11','딸기 10알 + 그릭요거트','straw:150 greek:100',[12,1,2,3,4],['딸기','무가당 그릭요거트'],'제철',0],
+['e12','파프리카 반 개 + 해바라기씨 한 줌','paprika:80 sunfl:25',0,['파프리카(빨강)','해바라기씨'],'비타민E가 가장 많은 조합',0],
+['e13','토마토주스 + 아몬드 20알','tomj:190 almond:24',0,['무가당 토마토주스','무염 아몬드'],'',0],
+['e14','삶은 계란 2개 + 방울토마토','egg:100 tomraw:150',0,['계란','방울토마토'],'',0],
+['e15','컵샐러드 + 삶은 계란 2개 + 파프리카','cupsal:100 egg:100 paprika:60',0,['컵샐러드','계란','파프리카'],'드레싱은 절반만',0],
+['e16','해바라기씨 한 줌 + 녹차','sunfl:25',0,['해바라기씨','녹차 티백'],'',0],
+['e17','비트즙 + 삶은 계란 2개','beetj:200 egg:100',0,['무가당 비트즙','계란'],'질산염 — 혈관 기능 연구',0],
+['e18','단감 1개 + 아몬드 15알','kaki:200 almond:18',[10,11,12],['단감','무염 아몬드'],'제철',0],
+['e19','당근 스틱 + 땅콩버터','carrot:80 pb:16',0,['당근','100% 땅콩버터'],'당·첨가물 없는 제품으로',0],
+['e20','두부 반 모 + 구운 김','tofu:150',0,['두부','무조미 구운 김'],'단백질 보강',0],
+['e21','그릭요거트 + 호박씨 한 줌','greek:150 pump:30',0,['무가당 그릭요거트','호박씨'],'아연을 저녁에 채우는 가장 쉬운 조합',0],
+['e22','에다마메 한 그릇 + 키위 1개','edam:100 kiwi:75',0,['냉동 에다마메(풋콩)','키위'],'엽산이 가장 풍부한 간식 — 전자레인지 3분',0],
+['e23','에다마메 한 그릇 + 귤 3개','edam:100 tang:240',[10,11,12,1,2],['냉동 에다마메(풋콩)','귤'],'',0],
+['e24','에다마메 한 그릇 + 호박씨 한 줌','edam:100 pump:30',0,['냉동 에다마메(풋콩)','호박씨'],'아연·엽산 동시에',0],
+['e25','골드키위 1개 + 그릭요거트','gkiwi:90 greek:150',0,['골드키위','무가당 그릭요거트'],'골드키위 1개로 하루 비타민C',0],
+['e26','골드키위 1개 + 아몬드 20알','gkiwi:90 almond:24',0,['골드키위','무염 아몬드'],'',0],
+['e27','데친 브로콜리 한 컵 + 삶은 계란 2개','brocc:150 egg:100',0,['브로콜리(냉동 가능)','계란'],'전자레인지 2분',0],
+['e28','파인애플 한 컵 + 호두 3알','pine:200 walnut:12',0,['컵 파인애플','호두'],'',0],
+['e29','냉동 망고 + 그릭요거트','mango:150 greek:150',0,['냉동 망고','무가당 그릭요거트'],'',0],
+['e30','자몽 반 개 + 삶은 계란 2개','grapef:150 egg:100',0,['자몽','계란'],'일부 고지혈증약·혈압약과 상호작용 — 복용약 확인',0],
+['e31','오렌지주스 한 병 + 하루견과','oj:200 mixnut:25',0,['100% 오렌지주스','하루견과'],'',0],
+['e32','파프리카 스틱 + 후무스','paprika:100 hummus:50',0,['파프리카','후무스'],'',0],
+['e33','방울토마토 + 모짜렐라','tomraw:150 mozz:50',0,['방울토마토','모짜렐라'],'올리브유 약간',0],
+['e34','찐 단호박 + 삶은 계란 1개','kabo:150 egg:50',0,['찐 단호박','계란'],'비타민E·A가 의외로 많아요',0],
+['e35','딸기 10알 + 아몬드 15알','straw:150 almond:18',[12,1,2,3,4],['딸기','무염 아몬드'],'제철',0],
+['e36','훈제연어 + 컵샐러드','smsalm:60 cupsal:80',0,['훈제연어','컵샐러드'],'냉훈제는 날것 — 6~9월엔 자동 제외',1],
+['e37','하루견과 + 키위 2개','mixnut:25 kiwi:150',0,['하루견과','키위'],'',0],
+['e38','무가당 두유 + 바나나','soy:190 banana:100',0,['무가당 두유','바나나'],'',0],
+['e39','그릭요거트 + 블루베리 + 호두','greek:150 blueb:70 walnut:12',0,['무가당 그릭요거트','블루베리','호두'],'',0],
+['e40','삶은 계란 2개 + 키위 2개','egg:100 kiwi:150',0,['계란','키위'],'',0],
+['e41','골드키위 2개','gkiwi:180',0,['골드키위'],'비타민C 하루 기준의 약 3배',0],
+['e42','오렌지 1개 + 삶은 계란 2개','orange:150 egg:100',0,['오렌지','계란'],'',0],
+['e43','귤 3개 + 그릭요거트','tang:240 greek:100',[10,11,12,1,2],['귤','무가당 그릭요거트'],'',0],
+['e44','두부 반 모 + 파프리카 스틱','tofu:150 paprika:80',0,['두부','파프리카'],'단백질·비타민C 한 번에',0],
+['e45','에다마메 한 그릇 + 골드키위 1개','edam:100 gkiwi:90',0,['냉동 에다마메(풋콩)','골드키위'],'엽산·비타민C 한 번에',0],
+['e46','키위 2개 + 그릭요거트','kiwi:150 greek:150',0,['키위','무가당 그릭요거트'],'',0],
+['e47','찐 단호박 + 그릭요거트','kabo:150 greek:150',0,['찐 단호박','무가당 그릭요거트'],'',0],
+['e48','아보카도 반 개 + 삶은 계란 2개','avo:70 egg:100',0,['아보카도','계란'],'',0],
+['e49','골드키위 1개 + 삶은 계란 2개','gkiwi:90 egg:100',0,['골드키위','계란'],'',0],
+['e50','병아리콩 샐러드 + 골드키위 1개','chick:100 gkiwi:90',0,['병아리콩 샐러드(또는 삶은 병아리콩)','골드키위'],'식이섬유·엽산이 많은 조합',0],
+['e51','키위 3개','kiwi:225',0,['키위'],'',0],
+['e52','군고구마 1개 + 그릭요거트','sweetp:150 greek:150',0,['군고구마(호박고구마)','무가당 그릭요거트'],'',0],
+['e53','아보카도 반 개 + 골드키위 1개','avo:70 gkiwi:90',0,['아보카도','골드키위'],'',0],
+['e54','데친 브로콜리 한 컵 + 두부 반 모','brocc:150 tofu:150',0,['브로콜리(냉동 가능)','두부'],'',0],
+['e55','캐슈넛 한 줌 + 골드키위 1개','cashew:30 gkiwi:90',0,['무염 캐슈넛','골드키위'],'아연·구리를 간식으로',0],
+['e56','그릭요거트 + 호박씨 + 골드키위','greek:150 pump:30 gkiwi:90',0,['무가당 그릭요거트','호박씨','골드키위'],'단백질·아연·비타민C를 한 번에',0],
+['e57','그릭요거트 + 키위 2개 + 아몬드 10알','greek:150 kiwi:150 almond:12',0,['무가당 그릭요거트','키위','무염 아몬드'],'',0],
+['e58','에다마메 한 그릇 + 키위 2개','edam:100 kiwi:150',0,['냉동 에다마메(풋콩)','키위'],'식이섬유·엽산·칼륨이 가장 많은 조합',0],
+['e59','삶은 계란 2개 + 골드키위 + 호박씨','egg:100 gkiwi:90 pump:20',0,['계란','골드키위','호박씨'],'',0],
+['e60','두부 반 모 + 키위 2개','tofu:150 kiwi:150',0,['두부','키위'],'',0],
+['e61','훈제연어 + 골드키위 1개','smsalm:60 gkiwi:90',0,['훈제연어','골드키위'],'비타민D를 간식으로 — 냉훈제는 날것이라 6~9월엔 제외',1],
+['e62','삶은 계란 3개 + 파프리카 반 개','egg:150 paprika:80',0,['계란','파프리카'],'계란 3개면 비타민D 3μg',0],
+['e63','캐슈넛 한 줌 + 키위 2개','cashew:30 kiwi:150',0,['무염 캐슈넛','키위'],'',0],
+['e64','호박씨 한 줌 + 오렌지 1개','pump:30 orange:150',0,['호박씨','오렌지'],'',0],
+['e65','병아리콩 샐러드 + 파프리카 스틱','chick:100 paprika:100',0,['병아리콩 샐러드(또는 삶은 병아리콩)','파프리카'],'',0],
+['e66','에다마메 한 그릇 + 오렌지 1개','edam:100 orange:150',0,['냉동 에다마메(풋콩)','오렌지'],'',0],
+['e67','하루견과 + 골드키위 1개','mixnut:25 gkiwi:90',0,['하루견과','골드키위'],'',0],
+['e68','그릭요거트 + 키위 2개 + 호박씨','greek:150 kiwi:150 pump:20',0,['무가당 그릭요거트','키위','호박씨'],'저녁 한 끼로 든든한 조합',0],
+['e69','에다마메 + 골드키위 + 호박씨','edam:100 gkiwi:90 pump:20',0,['냉동 에다마메(풋콩)','골드키위','호박씨'],'',0],
+['e70','삶은 계란 2개 + 키위 2개 + 아몬드 10알','egg:100 kiwi:150 almond:12',0,['계란','키위','무염 아몬드'],'',0],
+['e71','두부 반 모 + 골드키위 + 호박씨','tofu:150 gkiwi:90 pump:20',0,['두부','골드키위','호박씨'],'',0],
+['e72','그릭요거트 + 골드키위 + 아몬드 + 블루베리','greek:150 gkiwi:90 almond:12 blueb:50',0,['무가당 그릭요거트','골드키위','무염 아몬드','블루베리'],'',0],
+['e73','에다마메 + 파프리카 + 삶은 계란 1개','edam:100 paprika:80 egg:50',0,['냉동 에다마메(풋콩)','파프리카','계란'],'',0],
+['e74','병아리콩 샐러드 + 키위 2개','chick:100 kiwi:150',0,['병아리콩 샐러드(또는 삶은 병아리콩)','키위'],'식이섬유가 가장 많은 조합',0],
+['e75','캐슈넛 + 골드키위 + 그릭요거트','cashew:20 gkiwi:90 greek:150',0,['무염 캐슈넛','골드키위','무가당 그릭요거트'],'',0],
+['e76','그릭요거트 + 그래놀라 + 블루베리','greek:150 granola:30 blueb:80',0,['무가당 그릭요거트','저당 그래놀라','블루베리(냉동 가능)'],'비타민C는 점심에서 채운 날 맞는 조합',0],
+['e77','그릭요거트 + 망고 + 그래놀라','greek:150 mango:100 granola:30',0,['무가당 그릭요거트','망고(냉동 가능)','저당 그래놀라'],'',0],
+['e78','그릭요거트 + 블루베리 + 망고','greek:150 blueb:70 mango:100',0,['무가당 그릭요거트','블루베리','망고'],'',0],
+['e79','그릭요거트 + 그래놀라 + 키위 2개','greek:150 granola:30 kiwi:150',0,['무가당 그릭요거트','저당 그래놀라','키위'],'비타민C까지 채우는 요거트볼',0],
+['e80','그릭요거트 + 블루베리 + 골드키위 + 그래놀라','greek:150 blueb:50 gkiwi:90 granola:25',0,['무가당 그릭요거트','블루베리','골드키위','저당 그래놀라'],'',0],
+['e81','망고 + 골드키위 + 피스타치오','mango:100 gkiwi:90 pist:20',0,['망고','골드키위','피스타치오'],'',0],
+['e82','그릭요거트 + 망고 + 골드키위','greek:150 mango:100 gkiwi:90',0,['무가당 그릭요거트','망고','골드키위'],'',0],
+['e83','오버나이트 오트 + 블루베리','oats:40 greek:150 blueb:70',0,['귀리(오트밀)','무가당 그릭요거트','블루베리'],'전날 밤 요거트에 귀리를 불려 두기',0],
+['e84','오버나이트 오트 + 키위 2개','oats:40 greek:100 kiwi:150',0,['귀리(오트밀)','무가당 그릭요거트','키위'],'',0],
+['e85','그릭요거트 + 치아씨드 + 블루베리','greek:150 chia:10 blueb:80',0,['무가당 그릭요거트','치아씨드','블루베리'],'치아씨드 한 스푼(10g)',0],
+['e86','그릭요거트 + 치아씨드 + 망고 + 키위','greek:150 chia:10 mango:80 kiwi:75',0,['무가당 그릭요거트','치아씨드','망고','키위'],'',0],
+['e87','피스타치오 한 줌 + 귤 3개','pist:30 tang:240',[10, 11, 12, 1, 2],['무염 피스타치오','귤'],'피스타치오는 견과 중 루테인이 많아요',0],
+['e88','피스타치오 한 줌 + 골드키위 1개','pist:30 gkiwi:90',0,['무염 피스타치오','골드키위'],'',0],
+['e89','낫토 1팩 + 파프리카 스틱','natto:45 paprika:100',0,['낫토','파프리카'],'와파린 복용 중이면 피하기(비타민K)',0],
+['e90','낫토 1팩 + 삶은 계란 1개 + 골드키위','natto:45 egg:50 gkiwi:90',0,['낫토','계란','골드키위'],'와파린 복용 중이면 피하기(비타민K)',0],
+['e91','사과 반 개 + 땅콩버터','apple:120 pb:16',0,['사과','100% 땅콩버터'],'',0],
+['e92','한라봉 1개 + 그릭요거트','hallabong:200 greek:150',[12, 1, 2, 3],['한라봉·천혜향','무가당 그릭요거트'],'제철',0],
+['e93','한라봉 1개 + 아몬드 15알','hallabong:200 almond:18',[12, 1, 2, 3],['한라봉·천혜향','무염 아몬드'],'제철',0],
+['e94','참외 + 그릭요거트 + 블루베리','melon:200 greek:150 blueb:50',[5, 6, 7, 8],['참외','무가당 그릭요거트','블루베리'],'제철',0],
+['e95','저당 그래놀라 + 무가당 두유 + 키위 2개','granola:30 soy:190 kiwi:150',0,['저당 그래놀라','무가당 두유','키위'],'',0],
+['e96','망고 + 블루베리 + 호박씨','mango:100 blueb:70 pump:20',0,['망고','블루베리','호박씨'],'',0]
+];
+/* 한 끼 v2 엔진 — DOM 없음. 날짜는 1970-01-01부터의 일수(t). */
+const MS=864e5,H_LOOK=7,BUDGET=40;
+const p2=n=>String(n).padStart(2,'0');
+function dnum(s){const a=s.split('-');return Math.round(Date.UTC(+a[0],+a[1]-1,+a[2])/MS)}
+function dstr(n){const x=new Date(n*MS);return x.getUTCFullYear()+'-'+p2(x.getUTCMonth()+1)+'-'+p2(x.getUTCDate())}
+const monthOf=t=>new Date(t*MS).getUTCMonth()+1;
+const wdOf=t=>new Date(t*MS).getUTCDay();
+const KEYS=HARD.map(h=>h.k).concat(SOFT.map(s=>s.k),['ret']);
+const KI={};KEYS.forEach((k,i)=>{KI[k]=i});
+const NH=HARD.length,NS=SOFT.length,NK=KEYS.length;
+const HW=HARD.map(h=>h.W),HMIN=HARD.map(h=>h.min),HWT=HARD.map(h=>h.w),HRATE=HARD.map(h=>h.min/h.W),HREF=HARD.map(h=>h.ref);
+const SI=SOFT.map(s=>KI[s.k]),ST7=SOFT.map(s=>s.T);
+const ULI=Object.keys(UL).map(k=>[KI[k],UL[k]]);
+const ANI=new Set(ANIMAL);
+const INGO={};
+Object.keys(ING).forEach(k=>{const v={};ING[k][1].split(' ').forEach(p=>{const q=p.split(':');if(KI[q[0]]===undefined)throw new Error('KEY '+q[0]+' @'+k);v[q[0]]=+q[1]});INGO[k]={n:ING[k][0],v}});
+function mk(comp){const v=new Float64Array(NK),parts=[];comp.split(' ').forEach(p=>{const q=p.split(':'),I=INGO[q[0]],g=+q[1];if(!I)throw new Error('ING '+q[0]);parts.push({k:q[0],n:I.n,g});Object.keys(I.v).forEach(n=>{v[KI[n]]+=I.v[n]*g/100});if(ANI.has(q[0])&&I.v.a)v[KI.ret]+=I.v.a*g/100});return {v,parts}}
+const LUN=D.map(a=>{const b=mk(a[9]),f=a[10]||'';return {kind:'L',id:a[0],cat:a[1],shop:a[2],ub:a[3],name:a[4],kw:a[5],tip:a[6],req:a[7],org:a[8],raw:f.includes('raw'),salt:f.includes('salt'),grill:f.includes('grill'),months:a[11]||null,fam:a[12],poly:!!a[13],red:'BLP'.includes(a[1]),redg:b.parts.reduce((x,p)=>x+(RED_ING.includes(p.k)?p.g:0),0),v:b.v,parts:b.parts}});
+const SNK=SN.map(a=>{const b=mk(a[2]);return {kind:'S',id:a[0],name:a[1],months:a[3]||null,buy:a[4],note:a[5],raw:!!a[6],v:b.v,parts:b.parts,main:b.parts[0].k}});
+const LUNI={},SNI={};
+LUN.forEach(x=>{if(LUNI[x.id])throw new Error('dup '+x.id);LUNI[x.id]=x});
+SNK.forEach(x=>{if(SNI[x.id])throw new Error('dup '+x.id);SNI[x.id]=x});
+
+/* 타임라인: {start, L:[], S:[]} — 인덱스 t-start. 비어 있으면 그날 섭취 0 */
+function gL(tl,u){return u<tl.start?null:(tl.L[u-tl.start]||null)}
+function gS(tl,u){return u<tl.start?null:(tl.S[u-tl.start]||null)}
+function setDay(tl,t,L,S){tl.L[t-tl.start]=L||null;tl.S[t-tl.start]=S||null}
+function cut(tl,t){const n=Math.max(0,t-tl.start);return {start:tl.start,L:tl.L.slice(0,n),S:tl.S.slice(0,n)}}
+function dayIn(tl,u,j){const l=gL(tl,u),s=gS(tl,u);return (l?l.v[j]:0)+(s?s.v[j]:0)}
+function enforced(tl,e,j){return e-HW[j]+1>=tl.start}
+function winSum(tl,e,j,upto){let s=0;const hi=upto===undefined?e:Math.min(e,upto);for(let u=e-HW[j]+1;u<=hi;u++)s+=dayIn(tl,u,j);return s}
+/* 오늘(t) 창의 남은 하한: 오늘 먹을 양이 이 값 이상이어야 함 */
+function reqOf(tl,t){const r=new Float64Array(NH);for(let j=0;j<NH;j++){r[j]=enforced(tl,t,j)?HMIN[j]-winSum(tl,t,j,t-1):-1e9}return r}
+/* 앞으로 끝나는 창들의 부족분(md)과 압력(pr: 하루에 필요한 속도 ÷ 기준 속도) */
+function needOf(tl,t){const md=new Float64Array(NH),pr=new Float64Array(NH);for(let j=0;j<NH;j++){let bd=0,bp=0;for(let k=0;k<HW[j];k++){const e=t+k;if(!enforced(tl,e,j))continue;const d=HMIN[j]-winSum(tl,e,j,t-1);if(d>0){if(d>bd)bd=d;const p=d/((k+1)*HRATE[j]);if(p>bp)bp=p}}md[j]=bd;pr[j]=bp}return {md,pr}}
+function softNeed(tl,t){const d=new Float64Array(NS);for(let i=0;i<NS;i++){let s=0;for(let u=t-6;u<t;u++)s+=dayIn(tl,u,SI[i]);d[i]=Math.max(0,ST7[i]-s)}return d}
+function hScore(v,nd,v2){let s=0;for(let j=0;j<NH;j++){const x=v[j]+(v2?v2[j]:0);if(x<=0||nd.md[j]<=0)continue;s+=HWT[j]*Math.min(nd.pr[j],4)*Math.min(Math.min(x,nd.md[j])/HRATE[j],3)}return s}
+function sScore(v,sd,v2){let s=0;for(let i=0;i<NS;i++){const x=v[SI[i]]+(v2?v2[SI[i]]:0);if(x<=0||sd[i]<=0)continue;s+=.35*Math.min(Math.min(x,sd[i])/(ST7[i]/7),2)}return s}
+/* 그날의 규칙 맥락을 한 번만 계산 */
+function ctxOf(tl,t){const mo=monthOf(t),ids=new Set(),fams=new Set(),sids=new Set();let so=0,gr=0,rd=0;
+ for(let u=t-1;u>t-RULE.GAP;u--){const x=gL(tl,u);if(x){ids.add(x.id);if(u>t-RULE.FAM)fams.add(x.fam)}}
+ for(let u=t-6;u<t;u++){const x=gL(tl,u);if(x){if(x.salt)so++;if(x.grill)gr++;rd+=x.redg}}
+ for(let u=t-1;u>t-RULE.SGAP;u--){const x=gS(tl,u);if(x)sids.add(x.id)}
+ return {mo,ids,fams,sids,so,gr,rd}}
+function okL(c,L){if(L.months&&!L.months.includes(c.mo))return false;if(L.raw&&RULE.RAW_OFF.includes(c.mo))return false;if(c.ids.has(L.id)||c.fams.has(L.fam))return false;return c.so+(L.salt?1:0)<=RULE.SALT&&c.gr+(L.grill?1:0)<=RULE.GRILL&&c.rd+L.redg<=RULE.REDG}
+function okS(c,S){if(S.months&&!S.months.includes(c.mo))return false;if(S.raw&&RULE.RAW_OFF.includes(c.mo))return false;return !c.sids.has(S.id)}
+function okLunch(tl,t,L){return okL(ctxOf(tl,t),L)}
+function okSnack(tl,t,S){return okS(ctxOf(tl,t),S)}
+function pairOK(L,S,req){for(let j=0;j<NH;j++){if(L.v[j]+S.v[j]<req[j]-1e-9)return false}for(const [i,m] of ULI){if(L.v[i]+S.v[i]>m)return false}return true}
+function viol(L,S,req){let s=0;const miss=[];for(let j=0;j<NH;j++){const x=L.v[j]+S.v[j];if(x<req[j]-1e-9){s+=HWT[j]*(req[j]-x)/HRATE[j];miss.push(j)}}return {s,miss}}
+function collect(Ls,Ss,req,nd){const out=[];for(const a of Ls){let k=0;for(const b of Ss){if(pairOK(a.x,b.x,req)){out.push({L:a.x,S:b.x,s:hScore(a.x.v,nd,b.x.v)});if(++k>=2)break}}}return out}
+/* 앞으로 depth일 동안 모든 기준을 지키는 이어가기가 있는지 (탐욕 + 첫 두 단계 2갈래) */
+function cont(tl,t,depth,bud){
+ if(depth<=0)return true;
+ if(bud.n<=0)return false;bud.n--;
+ const cx=ctxOf(tl,t),req=reqOf(tl,t),nd=needOf(tl,t),Ls=[],Ss=[];
+ for(const L of LUN)if(okL(cx,L))Ls.push({x:L,s:hScore(L.v,nd)});
+ for(const S of SNK)if(okS(cx,S))Ss.push({x:S,s:hScore(S.v,nd)});
+ if(!Ls.length||!Ss.length)return false;
+ Ls.sort((a,b)=>b.s-a.s);Ss.sort((a,b)=>b.s-a.s);
+ let pairs=collect(Ls.slice(0,24),Ss,req,nd);
+ if(!pairs.length)pairs=collect(Ls,Ss,req,nd);
+ if(!pairs.length)return false;
+ pairs.sort((a,b)=>b.s-a.s);
+ const tries=Math.min(pairs.length,depth>=H_LOOK-1?2:1);
+ for(let i=0;i<tries;i++){const p=pairs[i];setDay(tl,t,p.L,p.S);const ok=cont(tl,t+1,depth-1,bud);setDay(tl,t,null,null);if(ok)return true}
+ return false}
+/* 내일 고를 수 있는 점심 수 (tl에 t일이 채워진 상태) */
+function tomorrowCount(tl,t){const u=t+1,cx=ctxOf(tl,u),req=reqOf(tl,u),Ss=SNK.filter(S=>okS(cx,S));let n=0;for(const L of LUN){if(!okL(cx,L))continue;for(const S of Ss){if(pairOK(L,S,req)){n++;break}}if(n>=RULE.KOPT)break}return n}
+function rnd(t,id){let h=2166136261;const s=id+'@'+t;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return ((h>>>0)%10007)/10007}
+function lastOf(tl,t,id,isS){for(let u=t-1;u>=Math.max(tl.start,t-120);u--){const x=isS?gS(tl,u):gL(tl,u);if(x&&x.id===id)return u}return null}
+function pickDiverse(ok,keys){const out=[],cnt=keys.map(()=>({})),pool=ok.slice();while(out.length<10&&pool.length){let bi=0,bv=-1e9;pool.forEach((o,i)=>{let v=o.sc;keys.forEach((k,m)=>{const c=cnt[m][k[0](o)]||0;v-=k[1]*c+(k[2]&&c>=k[2]?50:0)});if(v>bv){bv=v;bi=i}});const o=pool.splice(bi,1)[0];out.push(o);keys.forEach((k,m)=>{const x=k[0](o);cnt[m][x]=(cnt[m][x]||0)+1})}return out}
+const snPen=n=>n===undefined||n>=8?0:n>=5?-4:n>=3?-8:-100;
+const optPen=tc=>tc===undefined||tc>=RULE.KOPT?0:tc>=6?-4:tc>=3?-8:-100;
+const noTrap=a=>{const g=a.filter(o=>o.sc>-50);return g.length>=3?g:a};
+function rankL(ok,tl,t,nd,sd){
+ const hs=ok.map(o=>hScore(o.L.v,nd)),mx=Math.max(1e-9,...hs),ss=ok.map(o=>sScore(o.L.v,sd)),ms=Math.max(1e-9,...ss);
+ const y1=gL(tl,t-1),y2=gL(tl,t-2);
+ ok.forEach((o,i)=>{const l=lastOf(tl,t,o.L.id,0),fr=l===null?1:Math.min(1,(t-l-10)/20);o.sc=(y1&&y1.cat===o.L.cat?-.8:0)+(y2&&y2.cat===o.L.cat?-.4:0)+3*hs[i]/mx+.7*ss[i]/ms+.5*fr+.12*o.L.ub+.9*rnd(t,o.L.id)+.8*Math.min(1,(o.nS||0)/12)+snPen(o.nS)+optPen(o.tc)});
+ return noTrap(pickDiverse(ok,[[o=>o.L.cat,.8,3],[o=>o.L.shop,.4],[o=>o.L.fam,1.5]]))}
+function rankS(ok,tl,t,L,nd,sd){
+ const b=hScore(L.v,nd),bs=sScore(L.v,sd);
+ const hs=ok.map(o=>hScore(L.v,nd,o.S.v)-b),mx=Math.max(1e-9,...hs),ss=ok.map(o=>sScore(L.v,sd,o.S.v)-bs),ms=Math.max(1e-9,...ss);
+ ok.forEach((o,i)=>{const l=lastOf(tl,t,o.S.id,1),fr=l===null?1:Math.min(1,(t-l-3)/14);o.sc=3*hs[i]/mx+.6*ss[i]/ms+.5*fr+.9*rnd(t,'s'+o.S.id)+optPen(o.tc)+(o.S.parts.some(p=>FAV.includes(p.k))?.5:0)});
+ return noTrap(pickDiverse(ok,[[o=>o.S.main,.9,4],[o=>o.S.parts.length>1?o.S.parts[1].k:'-',.3]]))}
+/* 점심 카드: tl은 t 이전만 담긴 타임라인. fixedS가 있으면 그 저녁과 짝이 맞는 점심만 */
+function lunchCards(tl,t,fixedS){
+ const cx=ctxOf(tl,t),req=reqOf(tl,t),nd=needOf(tl,t),sd=softNeed(tl,t);
+ const Ss0=fixedS?[fixedS]:SNK.filter(S=>okS(cx,S));
+ const Ls0=LUN.filter(L=>okL(cx,L));
+ for(const H of [H_LOOK,4,2,0]){
+  const ok=[];
+  for(const L of Ls0){
+   const Ss=Ss0.filter(S=>pairOK(L,S,req));if(!Ss.length)continue;
+   if(H===0){ok.push({L,S:Ss[0],nS:Ss.length,tc:99});continue}
+   const sc=Ss.map(S=>[S,hScore(L.v,nd,S.v)]).sort((a,b)=>b[1]-a[1]);let got=null;
+   let tc=0;for(let i=0;i<Math.min(2,sc.length)&&!got;i++){setDay(tl,t,L,sc[i][0]);if(cont(tl,t+1,H,{n:BUDGET})){got=sc[i][0];tc=tomorrowCount(tl,t)}setDay(tl,t,null,null)}
+   if(got)ok.push({L,S:got,nS:Ss.length,tc})}
+  if(ok.length)return {cards:rankL(ok,tl,t,nd,sd),H,mode:H===H_LOOK?'ok':'short',n:ok.length,miss:[]}}
+ const pool=Ls0.length?Ls0:LUN,sp=Ss0.length?Ss0:SNK;
+ const rs=pool.map(L=>{let b=null;for(const S of sp){const r=viol(L,S,req);if(!b||r.s<b.r.s)b={S,r}}return {L,S:b.S,vi:b.r.s,miss:b.r.miss,sc:0}}).sort((a,b)=>a.vi-b.vi);
+ return {cards:rs.slice(0,10),H:-1,mode:'relaxed',n:0,miss:rs.length?rs[0].miss:[]}}
+/* 저녁 카드: 그날 점심 L이 정해진 상태 */
+function snackCards(tl,t,L){
+ const cx=ctxOf(tl,t),req=reqOf(tl,t),nd=needOf(tl,t),sd=softNeed(tl,t);
+ const S0=SNK.filter(S=>okS(cx,S)),Ss0=S0.filter(S=>pairOK(L,S,req));
+ for(const H of [H_LOOK,4,2,0]){
+  const ok=[];
+  for(const S of Ss0){if(H===0){ok.push({S,tc:99});continue}setDay(tl,t,L,S);if(cont(tl,t+1,H,{n:BUDGET}))ok.push({S,tc:tomorrowCount(tl,t)});setDay(tl,t,null,null)}
+  if(ok.length)return {cards:rankS(ok,tl,t,L,nd,sd),H,mode:H===H_LOOK?'ok':'short',n:ok.length,miss:[]}}
+ const sp=S0.length?S0:SNK;
+ const rs=sp.map(S=>{const r=viol(L,S,req);return {S,vi:r.s,miss:r.miss,sc:0}}).sort((a,b)=>a.vi-b.vi);
+ return {cards:rs.slice(0,10),H:-1,mode:'relaxed',n:0,miss:rs.length?rs[0].miss:[]}}
+/* 그날 끝나는 창 중 하한 미달 */
+function dayStatus(tl,t){const miss=[];for(let j=0;j<NH;j++){if(enforced(tl,t,j)&&winSum(tl,t,j)<HMIN[j]-1e-9)miss.push(j)}return miss}
+/* 오늘까지 먹은 것만으로 버티는 기한: 다음으로 하한을 밑도는 창 */
+function nextNeed(tl,t,j){for(let k=1;k<HW[j];k++){const e=t+k;if(!enforced(tl,e,j))continue;const s=winSum(tl,e,j,t);if(s<HMIN[j]-1e-9)return {k,def:HMIN[j]-s}}return null}
+function limitStatus(tl,t){const out=[],L=gL(tl,t),S=gS(tl,t),mo=monthOf(t);
+ if(L){for(let u=t-1;u>t-RULE.GAP;u--){const x=gL(tl,u);if(x&&x.id===L.id)out.push('menu-repeat')}
+  for(let u=t-1;u>t-RULE.FAM;u--){const x=gL(tl,u);if(x&&x.fam===L.fam)out.push('fam-repeat')}
+  if(L.months&&!L.months.includes(mo))out.push('season');if(L.raw&&RULE.RAW_OFF.includes(mo))out.push('raw')}
+ if(S){for(let u=t-1;u>t-RULE.SGAP;u--){const x=gS(tl,u);if(x&&x.id===S.id)out.push('snack-repeat')}if(S.months&&!S.months.includes(mo))out.push('s-season')}
+ let so=0,gr=0,rd=0;for(let u=t-6;u<=t;u++){const x=gL(tl,u);if(x){if(x.salt)so++;if(x.grill)gr++;rd+=x.redg}}
+ if(so>RULE.SALT)out.push('salt');if(gr>RULE.GRILL)out.push('grill');if(rd>RULE.REDG)out.push('red');
+ if(L&&S){for(const [i,m] of ULI){if(L.v[i]+S.v[i]>m)out.push('UL '+KEYS[i])}}
+ return out}
+/* 한 끼 v2 화면 */
 const $=s=>document.querySelector(s);
-const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;');
-const pad=n=>String(n).padStart(2,'0');
-const WD=['일','월','화','수','목','금','토'];
-function dn(s){const a=s.split('-').map(Number);return Date.UTC(a[0],a[1]-1,a[2])/864e5}
-function ds(n){const x=new Date(n*864e5);return x.getUTCFullYear()+'-'+pad(x.getUTCMonth()+1)+'-'+pad(x.getUTCDate())}
-function todayStr(){const x=new Date();return x.getFullYear()+'-'+pad(x.getMonth()+1)+'-'+pad(x.getDate())}
-const E0=dn(EPOCH),tOf=s=>dn(s)-E0,sOf=t=>ds(t+E0);
-const wd=t=>WD[new Date((t+E0)*864e5).getUTCDay()];
-const md=t=>{const s=sOf(t);return Number(s.slice(5,7))+'/'+Number(s.slice(8,10))};
-const monthOf=t=>Number(sOf(t).slice(5,7));
-const nn=n=>NUT[n].n;
-const nl=n=>n==='km'?'칼륨':NUT[n].n;
-const axc=n=>AX[NUT[n].ax].c;
-const gl=g=>g===1?'매일':g+'일';
-const every=g=>g===1?'매일':g+'일마다';
-const fmt=(n,x)=>{const v=x>=10?Math.round(x):x>=1?Math.round(x*10)/10:Math.round(x*100)/100;return v.toLocaleString('ko-KR')+UNIT[n]};
-const pctOf=(n,x)=>Math.round((x||0)/REF[n]*100);
+const SQ=String.fromCharCode(39);
+const esc=s=>String(s==null?'':s).split('&').join('&amp;').split('<').join('&lt;').split('>').join('&gt;').split(SQ).join('&#39;');
+const WDN=['일','월','화','수','목','금','토'];
+const SHORT={pro:'단백질',c:'비타민C',zn:'아연',fol:'엽산',mg:'마그네슘',kal:'칼륨',fib:'식이섬유',cu:'구리',e:'비타민E',vk:'비타민K',o3:'오메가3',d:'비타민D',a:'비타민A',se:'셀레늄'};
+const GROUPS=[[1,'하루 단위'],[2,'2일 단위'],[3,'3일 단위'],[4,'4일 단위'],[7,'7일 단위']];
+const MAXF=3,SK='hankki-v2';
+function num(x){const v=x>=20?Math.round(x):x>=1?Math.round(x*10)/10:Math.round(x*100)/100;return v.toLocaleString('ko-KR')}
+const fmt=(j,x)=>num(x)+HARD[j].u;
 const pctTxt=p=>p>=1000?Math.round(p/100)+'배':p+'%';
-const ntc=n=>`<span class='nt' style='--x:${axc(n)}'>${nn(n)}</span>`;
-const TOP5={};NK.forEach(n=>{TOP5[n]=Object.values(ING).filter(I=>I.v[n]).sort((a,b)=>b.v[n]-a.v[n]).slice(0,5)});
-function avail(d,mo){if(d.months&&!d.months.includes(mo))return false;if(d.raw&&RAW_OFF.includes(mo))return false;return true}
-
-/* 스케줄 — 날짜 기준 결정적 계산
-   점수 = 필요도(간격이 지난 정도 + 최근 7일 부족분, 상위 3개 영양소) + 신선도(오래 안 먹은 메뉴 우선) − 제약
-   제약: 같은 메뉴 10일 금지(11일째부터) · 같은 재료 5일 금지 · 국물·직화 7일에 3회 · 날것 6~9월 제외 */
-let OVR={},SCH=null;
-function reset(){SCH={meal:[],eve:[],ctx:[],alt:[],la:{},ld:{},lf:{},ls:{}}}
-function urg(map,n,t){const l=map[n];return l===undefined?2:Math.min(2,(t-l)/NUT[n].g)}
-const RQ={};NK.forEach(n=>{RQ[n]=Math.ceil(7/NUT[n].g)});
-function build(upto){
- if(!SCH)reset();const s=SCH;
- for(let t=s.meal.length;t<=upto;t++){
-  const mo=monthOf(t),cats=SLOT[t%7];
-  let nS=0,nG=0;const c6={};NK.forEach(n=>{c6[n]=0});
-  for(let u=Math.max(0,t-6);u<t;u++){const a=s.meal[u].d,b=s.eve[u];if(a.salt)nS++;if(a.grill)nG++;NK.forEach(n=>{if(a.tags.includes(n)||b.tags.includes(n))c6[n]++})}
-  const prev=t>0?s.meal[t-1].d:null,U={},since={},VAL={};
-  NK.forEach(n=>{U[n]=urg(s.la,n,t);since[n]=s.la[n]===undefined?null:t-s.la[n];VAL[n]=(U[n]+Math.max(0,RQ[n]-c6[n])/RQ[n])*NUT[n].w});
-  const need=(tags,V)=>{const v=tags.map(n=>V[n]).sort((a,b)=>b-a);return v.slice(0,3).reduce((a,b)=>a+b,0)+v.slice(3).reduce((a,b)=>a+b,0)*.15};
-  const pen=d=>(d.salt?(nS>=SALT_MAX?-50:nS===SALT_MAX-1?-3:0):0)+(d.grill?(nG>=GRILL_MAX?-50:nG===GRILL_MAX-1?-3:0):0);
-  const okId=d=>s.ld[d.id]===undefined||t-s.ld[d.id]>=GAP;
-  const okFam=d=>s.lf[d.fam]===undefined||t-s.lf[d.fam]>=FAM_GAP;
-  let c=D.filter(d=>cats.includes(d.cat)&&avail(d,mo));
-  let f=c.filter(d=>okId(d)&&okFam(d));if(!f.length)f=c.filter(okId);if(f.length)c=f;
-  const sc=c.map(d=>{const fr=s.ld[d.id]===undefined?9:Math.min(9,(t-s.ld[d.id])/4);const fp=(s.lf[d.fam]!==undefined&&t-s.lf[d.fam]<9)?-2:0;
-   return{d,v:need(d.tags,VAL)+Math.min(d.o3,2.5)*.5+fr+fp+pen(d)+(prev&&prev.shop===d.shop?-2:0)}});
-  sc.sort((a,b)=>b.v-a.v||D.indexOf(a.d)-D.indexOf(b.d));
-  const orig=sc.length?sc[0].d:D[0];let m=orig,ovr=false;
-  const o=OVR[sOf(t)];if(o){const od=D.find(x=>x.id===o);if(od&&od!==orig){m=od;ovr=true}}
-  s.meal[t]={d:m,ovr,orig};s.ctx[t]={U,since,VAL,mo,nS,nG};
-  m.tags.forEach(n=>{s.la[n]=t});s.ld[m.id]=t;s.lf[m.fam]=t;
-  const V2={};NK.forEach(n=>{V2[n]=m.tags.includes(n)?0:(urg(s.la,n,t)+Math.max(0,RQ[n]-c6[n])/RQ[n])*NUT[n].w});
-  let ep=SN.filter(x=>!x.months||x.months.includes(mo));
-  const fe=ep.filter(x=>s.ls[x.id]===undefined||t-s.ls[x.id]>3);if(fe.length)ep=fe;
-  if(!m.tags.includes('c')){const cc=ep.filter(x=>x.tags.includes('c'));if(cc.length)ep=cc}
-  const es=ep.map(x=>({x,v:need(x.tags,V2)+(m.lite&&x.pro?3:0)+(s.ls[x.id]===undefined?3:Math.min(3,(t-s.ls[x.id])/5))}));
-  es.sort((a,b)=>b.v-a.v||SN.indexOf(a.x)-SN.indexOf(b.x));
-  const k=es[0].x;s.eve[t]=k;k.tags.forEach(n=>{s.la[n]=t});s.ls[k.id]=t;
- }
-}
-function near(id,t){for(let u=Math.max(0,t-GAP+1);u<=t+GAP-1;u++){if(u===t)continue;const M=SCH.meal[u];if(M&&M.d.id===id)return true}return false}
-const ROLE={A:['같은 재료 · 다른 가게','이 가게가 안 될 때'],B:['어디서나 되는 메뉴','동네 선택지가 적을 때'],C:['다른 단백질','이 재료가 안 당길 때']};
-function altsFor(t){
- build(t+GAP);const s=SCH;if(s.alt[t])return s.alt[t];
- const m=s.meal[t].d,cx=s.ctx[t],cats=SLOT[t%7],W={};let tot=0;
- m.tags.forEach(n=>{W[n]=Math.max(.25*NUT[n].w,cx.VAL[n]);tot+=W[n]});tot=tot||1;
- const all=D.filter(d=>d!==m&&avail(d,cx.mo)&&!near(d.id,t)&&!(d.salt&&cx.nS>=SALT_MAX)&&!(d.grill&&cx.nG>=GRILL_MAX)).map(d=>{const match=m.tags.reduce((a,n)=>a+(d.tags.includes(n)?W[n]:0),0)/tot;return{d,match,v:match*10+d.ub*.6+Math.min(d.o3,2.5)*.3}}).sort((a,b)=>b.v-a.v||D.indexOf(a.d)-D.indexOf(b.d));
- const out=[],shops=new Set([m.shop]);
- const take=(role,f,strict)=>{if(out.some(o=>o.role===role))return;const x=all.find(y=>!out.some(o=>o.d===y.d)&&(!strict||!shops.has(y.d.shop))&&f(y.d));if(x){shops.add(x.d.shop);out.push(Object.assign({role},x))}};
- take('A',d=>cats.includes(d.cat),true);take('A',d=>cats.includes(d.cat),false);
- take('B',d=>d.ub===3,true);take('B',d=>d.ub>=2,true);take('B',d=>d.ub===3,false);
- take('C',d=>!cats.includes(d.cat),true);take('C',d=>!cats.includes(d.cat),false);
- ['A','B','C'].forEach(r=>take(r,()=>true,false));
- const res=out.sort((a,b)=>a.role<b.role?-1:1).map(x=>({d:x.d,role:x.role,match:Math.round(x.match*100)}));
- s.alt[t]=res;return res;
-}
-function stats(t0){
- const rows=NK.map(n=>{const cells=[];let mc=0,ac=0;
-  for(let i=0;i<7;i++){const t=t0+i,a=SCH.meal[t].d.tags.includes(n),b=SCH.eve[t].tags.includes(n);cells.push(a?2:b?1:0);if(a)mc++;if(a||b)ac++}
-  return{n,cells,mc,ac,req:RQ[n]}});
- const by={};rows.forEach(r=>{by[r.n]=r});
- const axes=Object.keys(AX).map(k=>{const ns=NK.filter(n=>NUT[n].ax===k);return{k,ns,all:ns.reduce((a,n)=>a+Math.min(1,by[n].ac/by[n].req),0)/ns.length}});
- let o3=0,salt=0,grill=0;
- for(let i=0;i<7;i++){const d=SCH.meal[t0+i].d;o3+=d.o3;if(d.salt)salt++;if(d.grill)grill++}
- return{rows,axes,o3,salt,grill};
-}
-function weekTot(t0){const s={};NK.forEach(n=>{s[n]=0});for(let i=0;i<7;i++){[SCH.meal[t0+i].d,SCH.eve[t0+i]].forEach(x=>{Object.keys(x.amt).forEach(n=>{if(s[n]!==undefined)s[n]+=x.amt[n]})})}return s}
-function lastOf(n,t){for(let u=t;u>=Math.max(0,t-21);u--){if(SCH.meal[u].d.tags.includes(n)||SCH.eve[u].tags.includes(n))return u}return null}
-function nextOf(n,t){for(let u=t+1;u<=t+14;u++){const a=SCH.meal[u].d.tags.includes(n),b=SCH.eve[u].tags.includes(n);if(a||b)return{u,what:a?SCH.meal[u].d.name:'저녁 '+SCH.eve[u].name}}return null}
-
-const SK='hankki-skin-ovr';
-async function loadOvr(){try{if(window.storage){const r=await window.storage.get(SK,false);if(r&&r.value)OVR=JSON.parse(r.value)||{}}else{const v=localStorage.getItem(SK);if(v)OVR=JSON.parse(v)||{}}}catch(e){}}
-async function saveOvr(){const v=JSON.stringify(OVR);try{if(window.storage)await window.storage.set(SK,v,false);else localStorage.setItem(SK,v)}catch(e){}}
-let tt;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2000)}
-async function copy(txt){try{await navigator.clipboard.writeText(txt);toast('복사됨')}catch(e){const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('복사됨')}catch(_){toast('복사 실패')}ta.remove()}}
-
-const enc=new TextEncoder();
-const icsEsc=s=>String(s).split(BS).join(BS+BS).split(';').join(BS+';').split(',').join(BS+',').split(CR).join('').split(NL).join(BS+'n');
-function fold(line){let out='',cur='',len=0;for(const ch of line){const b=enc.encode(ch).length;if(len+b>73){out+=cur+CRLF+' ';cur='';len=1}cur+=ch;len+=b}return out+cur}
-const topAmt=x=>x.tags.filter(n=>n!=='poly').sort((a,b)=>pctOf(b,x.amt[b])-pctOf(a,x.amt[a])).slice(0,3).map(n=>nl(n)+' '+fmt(n,x.amt[n])+'('+pctTxt(pctOf(n,x.amt[n]))+')').join(', ');
-function makeIcs(){
- const n=+$('#icN').value||30,tl=$('#icL').value||'11:00',sk=$('#icS').checked,ts=$('#icT').value||'18:30';
- build(TODAY+n+GAP+1);
- const stamp=new Date().toISOString().slice(0,19).replace(/[-:]/g,'')+'Z';
- const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//hankki//skin//KO','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:식단'];
- const ev=(t,hm,tag,sum,desc)=>{const day=sOf(t).split('-').join(''),hh=hm.split(':');L.push('BEGIN:VEVENT','UID:hankki-'+day+'-'+tag+'@skin','DTSTAMP:'+stamp,'DTSTART:'+day+'T'+hh[0]+hh[1]+'00','DURATION:PT30M','SUMMARY:'+icsEsc(sum),'DESCRIPTION:'+icsEsc(desc),'BEGIN:VALARM','ACTION:DISPLAY','TRIGGER:-PT0M','DESCRIPTION:'+icsEsc(sum),'END:VALARM','END:VEVENT')};
- for(let i=0;i<n;i++){const t=TODAY+i,d=SCH.meal[t].d,k=SCH.eve[t],al=altsFor(t);
-  ev(t,tl,'L','🍽 '+d.name,['검색: '+d.kw,d.req?'요청사항: '+d.req:'',d.tip,'영양: '+topAmt(d),d.org?'원산지: '+d.org:'',d.salt?'국물은 1/3만':'','대체: '+al.map(x=>x.role+' '+x.d.name).join(' / ')].filter(Boolean).join(NL));
-  if(sk)ev(t,ts,'E','🌙 저녁 · '+k.name,'영양: '+topAmt(k)+(k.note?NL+k.note:''));
- }
- L.push('END:VCALENDAR');return L.map(fold).join(CRLF)+CRLF;
-}
-function dl(){const txt=makeIcs();try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar;charset=utf-8'}));a.download='hankki-skin.ics';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);toast('다운로드를 시도했어요')}catch(e){toast('막혔어요 — 텍스트 복사를 이용하세요')}}
-
-const sv=p=>`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>${p}</svg>`;
-const IC={today:sv(`<circle cx='12' cy='12' r='4'/><path d='M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4'/>`),week:sv(`<rect x='3.5' y='4.5' width='17' height='16' rx='3'/><path d='M3.5 9.5h17M8 2.5v4M16 2.5v4'/>`),guide:sv(`<path d='M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z'/><path d='M5 19.5A1.5 1.5 0 0 0 6.5 21H19'/>`),bell:sv(`<path d='M6 9a6 6 0 0 1 12 0c0 6 2.5 8 2.5 8h-17S6 15 6 9'/><path d='M10.3 20.5a1.9 1.9 0 0 0 3.4 0'/>`),l:sv(`<path d='m15 18-6-6 6-6'/>`),r:sv(`<path d='m9 18 6-6-6-6'/>`),search:sv(`<circle cx='11' cy='11' r='6.5'/><path d='m20 20-4.2-4.2'/>`),moon:sv(`<path d='M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z'/>`),book:sv(`<path d='M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z'/>`),clock:sv(`<circle cx='12' cy='12' r='8.5'/><path d='M12 7.5V12l3 2'/>`),chart:sv(`<path d='M5 20V11M12 20V5M19 20v-6'/>`),rot:sv(`<path d='M4.5 12a7.5 7.5 0 0 1 13-5.1M19.5 12a7.5 7.5 0 0 1-13 5.1'/><path d='M18 3.5v3.7h-3.7M6 20.5v-3.7h3.7'/>`),swap:sv(`<path d='M7 4 3.5 7.5 7 11M3.5 7.5h13M17 13l3.5 3.5L17 20M20.5 16.5h-13'/>`),minus:sv(`<circle cx='12' cy='12' r='8.5'/><path d='M8 12h8'/>`),alert:sv(`<path d='M12 3.5 2.8 19.5h18.4z'/><path d='M12 10v4M12 17v.3'/>`)};
-let TODAY=0,SEL=0,ANCHOR=0,TAB='today',SHEET=null;
-const MF={cat:'all',nut:'',q:''};
-
-function barRow(n,x,sub){const p=pctOf(n,x);return `<div class='nb' style='--x:${axc(n)}'><span class='nl'>${nl(n)}${sub?`<small>${sub}</small>`:''}</span><span class='na'>${fmt(n,x||0)}</span><span class='nbar'><b style='width:${Math.min(100,p)}%'></b></span><span class='np'>${pctTxt(p)}</span></div>`}
-function rings(axes){const W=132,c=66,sw=11;let r=c-sw/2-1,h='';
- axes.forEach(a=>{const C=2*Math.PI*r,p=Math.max(0,Math.min(1,a.all)),col=AX[a.k].c;
-  h+=`<circle cx='${c}' cy='${c}' r='${r}' fill='none' style='stroke:${col};stroke-opacity:.2' stroke-width='${sw}'/>`;
-  if(p>0)h+=`<circle cx='${c}' cy='${c}' r='${r}' fill='none' style='stroke:${col}' stroke-width='${sw}' stroke-linecap='round' stroke-dasharray='${(C*p).toFixed(1)} ${C.toFixed(1)}' transform='rotate(-90 ${c} ${c})'/>`;
-  r-=sw+2});
- return `<svg class='rg' viewBox='0 0 ${W} ${W}' width='132' height='132' aria-hidden='true'>${h}</svg>`}
-function ringBlock(st){return `<div class='rings'>${rings(st.axes)}<div class='legs'>${st.axes.map(a=>`<div class='lg' style='--x:${AX[a.k].c}'><i></i><span>${AX[a.k].n}</span><b>${Math.round(a.all*100)}%</b></div>`).join('')}</div></div>`}
-function miniBlock(st,ch){return `<div class='mini'><span>오메가3 <b>${st.o3.toFixed(1)}/${O3T}g</b></span><span>국물 <b>${st.salt}/${SALT_MAX}</b></span><span>직화 <b>${st.grill}/${GRILL_MAX}</b></span>${ch?`<span class='chev'>›</span>`:''}</div>`}
-
-function wkHead(){const cur=ANCHOR===TODAY;
- return `<div class='wkh'><span>${md(ANCHOR)} – ${md(ANCHOR+6)}</span>${cur?'':`<button class='tb' data-wk='0'>오늘</button>`}<button class='ib' data-wk='-1' aria-label='이전 7일' ${ANCHOR<=0?'disabled':''}>${IC.l}</button><button class='ib' data-wk='1' aria-label='다음 7일'>${IC.r}</button></div>`}
-function stripH(){let h=`<div class='strip'>`;for(let i=0;i<7;i++){const t=ANCHOR+i,d=SCH.meal[t].d;
- h+=`<button class='day${t===SEL?' on':''}${t===TODAY?' today':''}' data-day='${t}' style='--c:${CAT[d.cat].c}' aria-label='${md(t)} ${esc(d.name)}'><span class='w'>${wd(t)}</span><span class='n'>${Number(sOf(t).slice(8))}</span><i></i></button>`}return h+'</div>'}
-
-function heroCard(){
- const t=SEL,M=SCH.meal[t],d=M.d,cx=SCH.ctx[t];
- const num=d.tags.filter(n=>n!=='poly');
- const due=num.slice().sort((a,b)=>cx.VAL[b]-cx.VAL[a]).slice(0,3);
- const lab=n=>cx.since[n]==null?'처음 채움':cx.since[n]+'일 만';
- const n0=due[0],s0=n0&&d.src[n0]&&d.src[n0][0];
- const flags=[d.salt?'국물 1/3':'',d.raw?'날것':'',d.lite?'단백질 가벼움':'',d.months?'제철':''].filter(Boolean);
- return `<article class='card'><div class='hero'><div class='eye' style='--c:${CAT[d.cat].c}'><i></i>${SEL===TODAY?'오늘':md(t)} 점심 · ${CAT[d.cat].n}${flags.map(f=>`<span class='pill'>${f}</span>`).join('')}</div><h2>${d.name}</h2>
-${due.length?`<div class='cap'><span>오늘 채우는 것</span><span>하루 기준 대비</span></div><div class='nbs'>${due.map(n=>barRow(n,d.amt[n],lab(n))).join('')}</div>`:''}
-${s0?`<p class='learn'><b>알아두기</b>${s0.n} ${s0.g}g에 ${nl(n0)} ${fmt(n0,s0.v)} — 하루 기준의 ${pctTxt(pctOf(n0,s0.v))}</p>`:''}
-<div class='two'><button class='btn' data-copy='${esc(d.kw)}'>「${d.kw}」 복사</button>${d.req?`<button class='btn gh' data-copy='${esc(d.req)}'>요청사항 복사</button>`:''}</div>
-${M.ovr?`<div class='ovr'>직접 고른 메뉴 · 원래 추천은 ${M.orig.name}<button class='lnk' data-unpick>되돌리기</button></div>`:''}
-</div><button class='more' data-open='lunch'><span>주문 팁 · 원산지 · 영양 ${num.length}가지 전부</span><span class='chev'>›</span></button></article>`}
-
-function altCard(){const al=altsFor(SEL);
- return `<article class='card'><div class='ch'><span>배달이 안 되면</span><span>앞뒤 10일 겹침 없음</span></div><div class='list'>${al.map(x=>`<div class='row'><span class='ab' style='--c:${CAT[x.d.cat].c}'>${x.role}</span><div class='v'><div class='t ellip'>${x.d.name}</div><div class='s ellip'>${ROLE[x.role][1]} · 영양 ${x.match}% 겹침</div></div><button class='tb' data-pick='${x.d.id}'>바꾸기</button></div>`).join('')}</div><button class='more' data-open='menu'><span class='lnk'>다른 메뉴 고르기</span><span class='chev'>›</span></button></article>`}
-
-function eveCard(){
- const d=SCH.meal[SEL].d,k=SCH.eve[SEL],num=k.tags.filter(n=>n!=='poly').sort((a,b)=>pctOf(b,k.amt[b])-pctOf(a,k.amt[a]));
- const fill=num.filter(n=>!d.tags.includes(n)),show=(fill.length?fill:num).slice(0,3);
- return `<article class='card'><div class='pad' style='display:flex;gap:12px;align-items:center'><span class='ic' style='--c:var(--xA)'>${IC.moon}</span><div class='v'><div class='lb'>저녁 · 가볍게</div><div class='t sb'>${k.name}</div></div>${d.lite&&k.pro?`<span class='pill g'>단백질 보강</span>`:''}</div>${show.length?`<div class='pad' style='padding-top:0'><div class='nbs'>${show.map(n=>barRow(n,k.amt[n],fill.includes(n)?'점심에 없던 것':'')).join('')}</div>${k.note?`<p class='s' style='margin:10px 0 0'>${k.note}</p>`:''}</div>`:''}</article>`}
-
-function balCard(){const st=stats(ANCHOR);
- return `<div class='card' data-open='bal' role='button' tabindex='0' style='cursor:pointer'><div class='ch'><span>7일 밸런스</span><span>${md(ANCHOR)} – ${md(ANCHOR+6)}</span></div>${ringBlock(st)}${miniBlock(st,1)}</div>`}
-
-function renderToday(){$('#v-today').innerHTML=`${wkHead()}${stripH()}${heroCard()}${altCard()}${eveCard()}${balCard()}<p class='habit'>물 1.5–2L · 자외선차단제 · 식후 10분 걷기 · 20분마다 먼 곳 보기</p>`}
-
-function renderWeek(){const buy=new Set();let li='';
- for(let i=0;i<7;i++){const t=ANCHOR+i,M=SCH.meal[t],d=M.d,k=SCH.eve[t];k.buy.forEach(x=>buy.add(x));
-  li+=`<button class='row' data-day='${t}' data-go='today'><span class='dd${t===TODAY?' td':''}'><b>${wd(t)}</b><small>${md(t)}</small></span><i class='cb' style='--c:${CAT[d.cat].c}'></i><div class='v'><div class='t ellip'>${d.name}${M.ovr?' ·':''}</div><div class='s ellip'>저녁 · ${k.name}</div></div><span class='chev'>›</span></button>`}
- $('#v-week').innerHTML=`${wkHead()}${balCard()}<div class='card list'>${li}</div><div class='card'><div class='ch'><span>저녁 장보기</span><span>7일분</span></div><div class='pad nts'>${[...buy].map(x=>`<span class='nt plain'>${x}</span>`).join('')}</div></div>`}
-
-const GT=[['learn','영양소 사전','17가지 — 역할 · 하루 기준 · 많은 음식','var(--xS)','book'],['gap','얼마 후에 다시 먹나','매일 · 2일 · 3일 · 4일 · 7일','var(--blue)','clock'],['amt','얼마나 먹나','영양소별 1회 기준량','var(--green)','chart'],['rot','로테이션 규칙','10일 반복 금지 · 요일별 단백질','var(--orange)','rot'],['alt','대체 메뉴 3개','왜 이 셋인가','var(--cF)','swap'],['out','빼는 것','닭·가공육·정제 탄수화물·단 양념','var(--red)','minus'],['care','꼭 알아둘 것','자외선차단제 · 비타민D · 복용약','var(--cW)','alert']];
-function renderGuide(){$('#v-guide').innerHTML=`<div class='card pad' style='font-size:15px;color:var(--sub);line-height:1.55'>하루 한 끼 배달과 가벼운 저녁으로 <b style='color:var(--ink)'>피부 · 눈 · 혈관 · 건강한 노화</b>에 필요한 17가지 영양소를 간격에 맞춰 채웁니다. 메뉴마다 어떤 성분이 얼마나 들었는지 보여주니, 고르면서 자연스럽게 익히게 됩니다.</div><div class='card list'>${GT.map(g=>`<button class='row' data-open='g' data-g='${g[0]}'><span class='ic' style='--c:${g[3]}'>${IC[g[4]]}</span><div class='v'><div class='t'>${g[1]}</div><div class='s ellip'>${g[2]}</div></div><span class='chev'>›</span></button>`).join('')}</div><p class='habit'>모든 성분 수치는 일반 1인분 기준 추정치입니다.</p>`}
-
-/* 시트 */
-function openSheet(kind,arg){SHEET={kind,arg};drawSheet();$('#sheet').classList.remove('hide');document.body.style.overflow='hidden';const sc=$('#sheet .sc');if(sc)sc.scrollTop=0}
-function closeSheet(){$('#sheet').classList.add('hide');document.body.style.overflow='';SHEET=null}
-function drawSheet(){const r=({lunch:shLunch,bal:shBal,menu:shMenu,ics:shIcs,g:shGuide})[SHEET.kind](SHEET.arg);$('#sht').textContent=r[0];$('#shb').innerHTML=r[1];if(SHEET.kind==='menu')bindMenu()}
-
-function shLunch(){const M=SCH.meal[SEL],d=M.d;
- const num=NK.filter(n=>d.amt[n]>0).sort((a,b)=>pctOf(b,d.amt[b])-pctOf(a,d.amt[a]));
- const rows=num.map(n=>barRow(n,d.amt[n],d.tags.includes(n)?'✓ 섭취 인정':'')+`<div class='srcl'>${d.src[n].filter(x=>x.v>0).slice(0,2).map(x=>x.n+' '+x.g+'g → '+fmt(n,x.v)).join(' · ')}</div>`).join('');
- const notes=[d.salt?'국물은 1/3만, 건더기 위주로':'',d.raw?'날것 — 6~9월엔 자동 제외':'',d.lite?'단백질이 가벼워 저녁에 단백질 보강':''].filter(Boolean).join(' · ');
- return [d.name,`<div class='sec'><div class='sh'><span>주문</span><span>${SHOP[d.shop]} · ${UB[d.ub]}</span></div><div class='grp list'>
-<div class='row'><span class='k'>검색</span><div class='v t'>${d.kw}</div><button class='tb' data-copy='${esc(d.kw)}'>복사</button></div>
-${d.req?`<div class='row'><span class='k'>요청</span><div class='v t15'>${d.req}</div><button class='tb' data-copy='${esc(d.req)}'>복사</button></div>`:''}
-<div class='row'><span class='k'>팁</span><div class='v t15'>${d.tip}</div></div>
-${d.org?`<div class='row'><span class='k'>원산지</span><div class='v t15'>${d.org}</div></div>`:''}</div>${notes?`<p class='sf'>${notes}</p>`:''}</div>
-<div class='sec'><div class='sh'><span>이 한 끼에 든 양</span><span>하루 기준 대비</span></div><div class='grp cell'><div class='nbs'>${rows}</div>${d.tags.includes('poly')?`<p class='s' style='margin:12px 0 0'>+ 폴리페놀 (양파·마늘·올리브유 등 — 정량 기준 없음)</p>`:''}</div><p class='sf'>구성: ${d.comp.map(x=>x.n+' '+x.g+'g').join(' · ')}. 일반 1인분 기준 추정치. ✓는 하루 기준의 30% 이상(오메가3는 1g 이상, 비타민C는 50% 이상)이라 「섭취」로 인정한 것.</p></div>`]}
-
-function nutRow(r,k,tot){const N=NUT[r.n],L=lastOf(r.n,SEL),X=nextOf(r.n,SEL),due=L===null?'':(L+N.g<=SEL?'지금 필요':md(L+N.g)+'까지 다시');
- const h=r.n!=='poly';
- return `<details class='nr' style='--x:${AX[k].c}'><summary class='row ng'><span class='nn'>${N.n}</span>${r.cells.map(c=>`<i class='dt${c===2?' m':c===1?' s':''}'></i>`).join('')}<span class='fr${r.ac>=r.req?' ok':''}'>${r.ac}/${r.req}</span></summary>
-<div class='nd'><p>${N.why}</p><div class='kv'>
-<span>간격</span><p>${every(N.g)} · 7일에 ${r.req}회<i class='lv${N.lv==='연구'?' r':''}'>${N.lv}</i></p>
-${h?`<span>7일 섭취</span><p>${nl(r.n)} 합계 ${fmt(r.n,tot[r.n])} · 하루 평균 ${fmt(r.n,tot[r.n]/7)} — 하루 기준 ${fmt(r.n,REF[r.n])}${RLAB[r.n]?'('+RLAB[r.n]+')':''}의 ${pctOf(r.n,tot[r.n]/7)}%</p>`:''}
-<span>다음</span><p>${L===null?'최근 3주 없음':'마지막 '+md(L)+' → '+due}${X?' · 예정 '+wd(X.u)+' '+md(X.u)+' '+X.what:''}</p>
-<span>얼마나</span><p>${N.amt}</p>
-${h?`<span>많은 음식</span><div class='top5'>${TOP5[r.n].map(I=>`<div><span>${I.n}</span><span>100g당 ${fmt(r.n,I.v[r.n])}</span></div>`).join('')}</div>`:`<span>급원</span><p>${N.src}</p>`}
-</div></div></details>`}
-function shBal(){const st=stats(ANCHOR),tot=weekTot(ANCHOR);
- let h=`<div class='grp' style='margin-bottom:26px'>${ringBlock(st)}${miniBlock(st,0)}</div><div class='sh'><span>점 하나 = 하루 · 누르면 자세히</span><span class='lg2'><span><i class='dt m' style='--x:var(--sub)'></i>점심</span><span><i class='dt s' style='--x:var(--sub)'></i>저녁</span></span></div>`;
- Object.keys(AX).forEach(k=>{const days=[0,1,2,3,4,5,6].map(i=>`<i class='${ANCHOR+i===SEL?'cur':''}'>${wd(ANCHOR+i)}</i>`).join('');
-  h+=`<div class='sec'><div class='ngh'><span class='axn' style='--x:${AX[k].c}'>${AX[k].n}</span>${days}<span></span></div><div class='grp list'>${st.rows.filter(r=>NUT[r.n].ax===k).map(r=>nutRow(r,k,tot)).join('')}</div></div>`});
- return ['7일 밸런스 · '+md(ANCHOR)+'–'+md(ANCHOR+6),h]}
-
-function shMenu(){const cats=[['all','전체'],...Object.entries(CAT).map(([k,v])=>[k,v.n])];
- return [md(SEL)+' ('+wd(SEL)+') 점심 고르기',`<div class='search'>${IC.search}<input id='mq' type='search' placeholder='메뉴·재료 검색' value='${esc(MF.q)}'></div><div class='seg'>${cats.map(([k,n])=>`<button data-mc='${k}' class='${MF.cat===k?'on':''}'>${n}</button>`).join('')}<select id='mn' class='segsel' aria-label='영양소'><option value=''>영양소 ▾</option>${NK.map(n=>`<option value='${n}'${MF.nut===n?' selected':''}>${NUT[n].n} 많은 순</option>`).join('')}</select></div><div id='ml'></div>`]}
-function bindMenu(){$('#mq').oninput=e=>{MF.q=e.target.value;menuList()};$('#mn').onchange=e=>{MF.nut=e.target.value;menuList()};menuList()}
-function menuList(){
- const q=MF.q.trim(),mo=monthOf(SEL),cur=SCH.meal[SEL].d,nu=MF.nut&&MF.nut!=='poly'?MF.nut:'';
- const L=D.filter(d=>(MF.cat==='all'||d.cat===MF.cat)&&(!MF.nut||d.tags.includes(MF.nut))&&(!q||(d.name+d.kw+d.comp.map(x=>x.n).join('')).includes(q)));
- if(nu)L.sort((a,b)=>(b.amt[nu]||0)-(a.amt[nu]||0));
- $('#ml').innerHTML=`<div class='sh'><span>${L.length}개${nu?' · '+nl(nu)+' 많은 순':''}</span></div><div class='grp list'>`+(L.length?L.map(d=>{const nr=d!==cur&&near(d.id,SEL),na=!avail(d,mo);const top=d.tags.filter(n=>n!=='poly').sort((a,b)=>pctOf(b,d.amt[b])-pctOf(a,d.amt[a]));const sub=(nu?[nu]:top.slice(0,3)).map(n=>nl(n)+' '+fmt(n,d.amt[n]||0)).join(' · ');
-  return `<details class='mi'><summary class='row'><span class='mdot' style='--c:${CAT[d.cat].c}'></span><div class='v'><div class='t ellip'>${d.name}</div><div class='s ellip'>${sub}</div></div><span class='chev'>›</span></summary>
-<div class='nd'><p>${SHOP[d.shop]} · ${UB[d.ub]} · ${d.tip}</p><div class='nbs'>${top.slice(0,5).map(n=>barRow(n,d.amt[n])).join('')}</div><p class='s' style='margin-top:10px'>구성: ${d.comp.map(x=>x.n+' '+x.g+'g').join(' · ')}</p><div class='acts'>${d===cur?`<span class='pill g'>이날 메뉴</span>`:`<button class='tb f' data-pick='${d.id}'>이 메뉴로</button>`}${nr?`<span class='pill w'>10일 안에 겹침</span>`:''}${na?`<span class='pill w'>제철 아님·여름 날것</span>`:''}</div></div></details>`}).join(''):`<div class='row'><div class='v s'>검색 결과 없음</div></div>`)+'</div>'}
-
-function shIcs(){return ['캘린더 알림',`<p class='sf' style='padding:0 16px 14px'>아이폰·갤럭시 기본 캘린더에 매일 점심 메뉴·요청사항·대체 3개·핵심 영양, 그리고 저녁이 알림으로 뜹니다.</p>
-<div class='grp list'>
-<label class='row'><span class='v'>기간</span><select id='icN'>${[[14,'2주'],[30,'30일'],[60,'60일'],[90,'90일']].map(([v,n])=>`<option value='${v}'${v===30?' selected':''}>${n}</option>`).join('')}</select></label>
-<label class='row'><span class='v'>점심 알림</span><input id='icL' type='time' value='11:00'></label>
-<label class='row'><span class='v'>저녁 알림</span><input id='icS' class='sw' type='checkbox' checked></label>
-<label class='row'><span class='v'>저녁 시간</span><input id='icT' type='time' value='18:30'></label></div>
-<div class='bts'><button class='btn' data-dl>.ics 다운로드</button><button class='btn gh' data-ct>텍스트 복사</button></div>
-<p class='sf'>파일을 열고 「모두 추가」 → 새 캘린더 「식단」에 넣으세요. 메뉴를 바꾸면 「식단」 캘린더를 지우고 다시 내보내면 됩니다.</p>`]}
-
-function shGuide(key){
- const rows=a=>`<div class='grp list'>${a.map(x=>`<div class='row'><div class='v t15'>${x}</div></div>`).join('')}</div>`;
- if(key==='learn')return['영양소 사전',Object.keys(AX).map(k=>`<div class='sec'><div class='sh'><span class='axn' style='--x:${AX[k].c}'>${AX[k].n}</span></div><div class='grp list'>${NK.filter(n=>NUT[n].ax===k).map(n=>{const N=NUT[n],h=n!=='poly';return `<details class='mi'><summary class='row'><div class='v'><div class='t'>${N.n}</div><div class='s ellip'>${h?'하루 '+(n==='km'?'칼륨 ':'')+fmt(n,REF[n])+' · ':''}${every(N.g)} · ${N.lv}</div></div><span class='chev'>›</span></summary><div class='nd'><p>${N.why}</p><div class='kv'><span>얼마나</span><p>${N.amt}</p>${h?`<span>많은 음식</span><div class='top5'>${TOP5[n].map(I=>`<div><span>${I.n}</span><span>100g당 ${fmt(n,I.v[n])}</span></div>`).join('')}</div>`:`<span>급원</span><p>${N.src}</p>`}${N.rel?`<span>관련</span><p>${N.rel}</p>`:''}</div></div></details>`}).join('')}</div></div>`).join('')+`<p class='sf'>각 영양소는 주된 축 하나에만 넣어 겹치지 않게(MECE) 했습니다. <i class='lv'>확립</i> 생리 기능 확립 · <i class='lv r'>연구</i> 식품 효과는 연구 단계.</p>`];
- if(key==='gap'){const TW={1:'거의 저장되지 않음 — 저녁 과일·채소로 매일',2:'저장고가 없거나 금방 빠짐 — 이틀에 한 번',3:'회전이 빠르거나 연구 단계 성분 — 사흘에 한 번',4:'조직에 천천히 쌓임 — 주 2회면 충분',7:'간·지방에 저장 — 주 1회면 충분, 매일 많이는 과잉'};
-  return['얼마 후에 다시 먹나',`<div class='grp list'>${[1,2,3,4,7].map(x=>`<div class='row tier' style='align-items:flex-start'><span class='k'>${gl(x)}<small>7일 ${Math.ceil(7/x)}회</small></span><div class='v'><div class='t15'>${TW[x]}</div><div class='nts'>${NK.filter(n=>NUT[n].g===x).map(ntc).join('')}</div></div></div>`).join('')}</div><p class='sf'>예) 화요일에 소고기 150g(아연 7.5mg)을 먹었다면 목요일까지 굴·게·소고기 같은 아연 메뉴로 다시 채웁니다. 아연은 저장되지 않아 몰아먹기보다 간격이 중요하고, 비타민A·D는 저장되므로 주 1회면 충분합니다.</p>`]}
- if(key==='amt')return['얼마나 먹나',`<div class='grp list'>${NK.map(n=>`<div class='row amr' style='--x:${axc(n)}'><span class='nm'>${nn(n)}</span><div class='v t15' style='color:var(--sub)'>${NUT[n].amt}</div></div>`).join('')}</div><p class='sf'>권장량은 한국인 영양소 섭취기준(2020) 성인 기준, 함량은 1인분 추정치입니다.</p>`];
- if(key==='rot'){const PAT=[['월','등푸른생선','F','오메가3'],['화','소·양','B','아연·콜라겐'],['수','해산물','S','아연·구리'],['목','등푸른생선','F','오메가3'],['금','돼지','P','콜라겐'],['토','해산물·흰살','S','셀레늄'],['일','가벼운 날','V','채소·계란']];
-  return['로테이션 규칙',`<div class='grp cell' style='margin-bottom:26px'><div class='pat'>${PAT.map(x=>`<div style='--c:${CAT[x[2]].c}'><b>${x[0]}</b><i></i>${x[1]}<small>${x[3]}</small></div>`).join('')}</div></div>${rows(['같은 메뉴는 먹은 다음 날부터 <b>10일 동안</b> 다시 나오지 않습니다 (11일째부터)','같은 재료(고등어구이·고등어조림 등)는 5일 안에 다시 안 나옵니다','간격이 지났거나 최근 7일에 부족한 영양소를 많이 채우는 메뉴, 오래 안 먹은 메뉴를 우선합니다','국물 메뉴·직화 구이는 7일에 각 3회까지 — 탄 부분의 당화산물은 콜라겐에 불리','저녁은 점심에 빠진 영양소를 채우고, 점심에 비타민C가 없으면 반드시 과일·파프리카로','제철 자동 반영, 6~9월엔 날것 제외 · 어느 기기에서나 같은 날 같은 메뉴'])}`]}
- if(key==='alt')return['대체 메뉴 3개',`<div class='grp list'>${['A','B','C'].map(r=>`<div class='row'><span class='ab' style='--c:var(--cF)'>${r}</span><div class='v'><div class='t'>${ROLE[r][0]}</div><div class='s'>${ROLE[r][1]}</div></div></div>`).join('')}</div><p class='sf'>배달이 안 되는 이유별로 하나씩입니다. 셋은 가게 유형이 모두 다르고, 앞뒤 10일 메뉴와 겹치지 않습니다. 바꾸면 다음 날부터 빠진 영양소를 우선 채우도록 다시 계산됩니다.</p>`];
- if(key==='out')return['빼는 것',rows(['닭·오리, 가공육(햄·소시지·베이컨)','공기밥·면·사리·떡·빵·튀김옷 — 비빔밥·덮밥만 밥 1/3','단 양념 — 당은 콜라겐을 굳히는 당화를 늘립니다','배달 김치, 곱창·순대·내장류','생 조개·굴, 여름철 날것'])];
- return['꼭 알아둘 것',rows(['<b>자외선차단제가 1순위</b> — 라이코펜·오메가3는 보조','비타민D — 10~3월엔 식사만으론 부족하기 쉬움, 혈중 농도 검사 후 보충 고려','아연 보충제를 고용량으로 오래 먹으면 구리 결핍 위험 — 음식은 괜찮음','와파린 복용 중이면 녹즙·잎채소·청국장 양을 일정하게 (비타민K)','브라질너트는 하루 2알 이하 (셀레늄 과잉)','통풍·질환·복용약이 있으면 담당 의사와 먼저 상의'])+`<p class='sf'>참고: 한국인 영양소 섭취기준(2020), 국가표준식품성분표, 미국 NIH ODS·USDA, Stahl 2001·Rizwan 2011 토마토 페이스트 광보호 시험, 경구 콜라겐 메타분석(2023~2025), AREDS2.</p>`]}
-
-function render(){
- TODAY=Math.max(0,tOf(todayStr()));
- build(Math.max(ANCHOR+7,SEL,TODAY)+21);
- const s=sOf(SEL),dt=new Date(Date.UTC(+s.slice(0,4),+s.slice(5,7)-1,+s.slice(8,10)));
- const full=`${dt.getUTCMonth()+1}월 ${dt.getUTCDate()}일 ${WD[dt.getUTCDay()]}요일`;
- const T={today:[full,SEL===TODAY?'오늘':md(SEL)+' 식단'],week:[md(ANCHOR)+' – '+md(ANCHOR+6),ANCHOR===TODAY?'이번 주':'주간'],guide:['피부 · 눈 · 혈관 · 건강한 노화','원칙']}[TAB];
- $('#eyb').textContent=T[0];$('#h1').textContent=T[1];$('#ttl').textContent=T[1];
- document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-current',b.dataset.tab===TAB?'page':'false'));
- ['today','week','guide'].forEach(v=>$('#v-'+v).classList.toggle('hide',v!==TAB));
- ({today:renderToday,week:renderWeek,guide:renderGuide})[TAB]();
-}
-
+function full(t){const x=new Date(t*MS);return (x.getUTCMonth()+1)+'월 '+x.getUTCDate()+'일 '+WDN[x.getUTCDay()]+'요일'}
+function md(t){const x=new Date(t*MS);return (x.getUTCMonth()+1)+'/'+x.getUTCDate()}
+let STO={start:null,picks:{}},TODAY=0,START=0,SEL=0,TAB='today',BASE=null,VC={},ALT={L:false,S:false};
+function todayN(){const x=new Date();return dnum(x.getFullYear()+'-'+p2(x.getMonth()+1)+'-'+p2(x.getDate()))}
+function load(){try{const v=localStorage.getItem(SK);if(v){const o=JSON.parse(v);if(o&&typeof o==='object')STO=o}}catch(e){}if(!STO.picks||typeof STO.picks!=='object')STO.picks={}}
+function save(){try{localStorage.setItem(SK,JSON.stringify(STO))}catch(e){}}
+function initDates(){TODAY=todayN();if(!STO.start){STO.start=dstr(TODAY);save()}START=Math.min(dnum(STO.start),TODAY)}
+function rebuild(){BASE={start:START,L:[],S:[]};Object.keys(STO.picks).forEach(k=>{const t=dnum(k);if(!(t>=START&&t<=TODAY))return;const p=STO.picks[k]||{};setDay(BASE,t,(p.l&&LUNI[p.l])||null,(p.s&&SNI[p.s])||null)});VC={}}
+function pk(t){return (t<=TODAY&&STO.picks[dstr(t)])||{}}
+function dayView(t){
+ if(VC[t])return VC[t];
+ const tl=t<=TODAY?cut(BASE,t):cut(dayView(t-1).after,t);
+ const p=pk(t),fL=(p.l&&LUNI[p.l])||null,fS=(p.s&&SNI[p.s])||null;
+ const lc=lunchCards(tl,t,fS);
+ const L=fL||(lc.cards[0]?lc.cards[0].L:null);
+ const sc=L?snackCards(tl,t,L):{cards:[],mode:'none',miss:[]};
+ const S=fS||(sc.cards[0]?sc.cards[0].S:null);
+ const after=cut(tl,t);setDay(after,t,L,S);
+ const rec=cut(tl,t);setDay(rec,t,fL,fS);
+ return VC[t]={t,tl,lc,sc,L,S,fL,fS,after,rec,req:reqOf(tl,t),nd:needOf(tl,t)}}
+function lunchNeed(v){const a=new Float64Array(NH);for(let j=0;j<NH;j++)a[j]=v.nd.pr[j]>1.05?v.nd.md[j]:0;return a}
+function snackNeed(v,L){const a=new Float64Array(NH);for(let j=0;j<NH;j++)a[j]=Math.max(0,v.req[j]-(L?L.v[j]:0));return a}
+const medOf=(arr,j)=>{const a=arr.map(x=>x.v[j]).sort((p,r)=>p-r);return a[Math.floor(a.length/2)]};const MEDL=HARD.map((h,j)=>medOf(LUN,j)/h.ref),MEDS=HARD.map((h,j)=>medOf(SNK,j)/h.ref);
+function chips(vec,need,n,med){med=med||MEDL;const arr=[];for(let j=0;j<NH;j++){if(vec[j]<=0)continue;const p=vec[j]/HREF[j],nd=need[j]>0&&vec[j]>=.25*need[j];arr.push({j,p,nd,s:p/(med[j]+.2)*(nd?4:1)})}arr.sort((a,b)=>b.s-a.s);return arr.slice(0,n).map(x=>`<span class='cp${x.nd?' bl':''}'>${SHORT[HARD[x.j].k]} ${pctTxt(Math.round(x.p*100))}</span>`).join('')}
+function head(t){
+ const lead=t===TODAY?'오늘':t>TODAY?'미리보기':t<START?'기록 시작 전':'지난 날 — 고치면 이후 추천이 다시 계산돼요';
+ let h=`<div class='hd'><div><h1>${full(t)}</h1><div class='lead'>${lead}</div></div><div class='nav'>${t!==TODAY?`<button class='chipb' data-nav='0'>오늘</button>`:''}<button class='ib' data-nav='-1' aria-label='전날'>‹</button><button class='ib' data-nav='1' aria-label='다음날' ${t>=TODAY+MAXF?'disabled':''}>›</button></div></div><div class='wk'>`;
+ const w0=t-((wdOf(t)+6)%7);
+ for(let i=0;i<7;i++){const u=w0+i,p=pk(u),rec=!!(p.l||p.s),dis=u>TODAY+MAXF;h+=`<button class='wd${u===t?' on':''}${u===TODAY?' td':''}${u>TODAY?' fut':''}${rec?' rec':''}' data-day='${u}' ${dis?'disabled':''}><small>${WDN[wdOf(u)]}</small><b>${new Date(u*MS).getUTCDate()}</b><i></i></button>`}
+ return h+'</div>'}
+function notices(v,t){
+ const out=[];
+ if(t>TODAY)out.push(['','미리보기예요. 오늘부터 전날까지는 각 날 1번 카드를 고른다고 가정해 계산했어요. 고르는 건 그날이 되면 할 수 있어요.']);
+ if(t===TODAY){let m=0;for(let u=Math.max(START,t-7);u<t;u++){const p=pk(u);if(!p.l&&!p.s)m++}if(m)out.push(['','최근 7일 중 '+m+'일은 기록이 없어 그날 섭취를 0으로 계산했어요. 위 날짜를 눌러 먹은 걸 고르면 추천이 더 정확해져요.'])}
+ if(t<TODAY&&t>=START&&!v.fL&&!v.fS)out.push(['','이날은 기록이 없어요. 먹은 걸 고르면 이후 추천이 다시 계산돼요.']);
+ if(v.lc.mode==='short')out.push(['','앞으로 7일을 모두 맞추는 조합이 없어 '+v.lc.H+'일 앞까지 확인한 메뉴예요.']);
+ if(v.lc.mode==='relaxed')out.push(['rd','기록이 비어 있던 날 때문에 오늘은 '+v.lc.miss.map(j=>SHORT[HARD[j].k]).join('·')+' 하한을 다 채울 수 없어요. 가장 가깝게 채우는 순서로 보여드려요.']);
+ if(v.fL&&!v.lc.cards.some(c=>c.L===v.fL)&&v.lc.mode!=='relaxed')out.push(['','고른 점심이 지금 기준으론 후보에 없어요(이전 기록이 바뀌었을 수 있어요). 아래 영양 하한에서 부족한 게 있는지 확인하세요.']);
+ return out.map(x=>`<div class='note ${x[0]}'>${esc(x[1])}</div>`).join('')}
+function cardL(c,i,v,need){const L=c.L;return `<button class='fc${v.fL===L?' sel':''}' data-open='L:${L.id}'><div class='no'><b>${i+1}</b><span>${esc(SHOP[L.shop])}</span></div><div class='nm'>${esc(L.name)}</div><div class='cps'>${chips(L.v,need,3)}${c.nS!==undefined&&c.nS<6?`<span class='cp'>저녁 후보 ${c.nS}개</span>`:''}</div></button>`}
+function cardS(c,i,v,need){const S=c.S;return `<button class='fc${v.fS===S?' sel':''}' data-open='S:${S.id}'><div class='no'><b>${i+1}</b><span>${S.raw?'날것':''}</span></div><div class='nm'>${esc(S.name)}</div><div class='cps'>${chips(S.v,need,3,MEDS)}</div></button>`}
+function heroL(v){const L=v.fL;return `<div class='pk'><div class='k'>✓ 점심으로 골랐어요</div><h3>${esc(L.name)}</h3><div class='sb'>${esc(SHOP[L.shop])} · ${esc(L.tip)}</div><div class='cps'>${chips(L.v,lunchNeed(v),5)}</div><div class='acts'><button class='btn pri sm' data-copy='${esc(L.kw)}'>「${esc(L.kw)}」 복사</button>${L.req?`<button class='btn sm' data-copy='${esc(L.req)}'>요청사항 복사</button>`:''}<button class='btn sm' data-open='L:${L.id}'>자세히</button><button class='btn ghost sm' data-unpick='l'>바꾸기</button></div></div>`}
+function heroS(v){const S=v.fS;return `<div class='pk'><div class='k'>✓ 저녁으로 골랐어요</div><h3>${esc(S.name)}</h3><div class='sb'>${esc(S.buy.join(' · '))}${S.note?' — '+esc(S.note):''}</div><div class='cps'>${chips(S.v,snackNeed(v,v.L),5,MEDS)}</div><div class='acts'><button class='btn pri sm' data-copy='${esc(S.buy.join(', '))}'>장보기 복사</button><button class='btn sm' data-open='S:${S.id}'>자세히</button><button class='btn ghost sm' data-unpick='s'>바꾸기</button></div></div>`}
+function lunchSec(v,t){
+ const can=t<=TODAY&&t>=START,lc=v.lc,need=lunchNeed(v);
+ const info=lc.mode==='relaxed'?'가장 가깝게 채우는 순':lc.cards.length+'개 · 어느 걸 골라도 하한 유지';
+ let h=`<section class='sec' id='lun'><h2>점심 · 배달<span>${info}</span></h2>`;
+ if(!lc.cards.length&&!v.fL)return h+`<div class='empty'>조건에 맞는 메뉴가 없어요.</div></section>`;
+ if(v.fL&&can){h+=heroL(v);const o=lc.cards.filter(c=>c.L!==v.fL);if(o.length){h+=`<button class='lnk' data-alt='L'>${ALT.L?'다른 후보 접기':'다른 후보 '+o.length+'개 보기'}</button>`;if(ALT.L)h+=`<div class='grid'>${o.map((c,i)=>cardL(c,i,v,need)).join('')}</div>`}}
+ else{h+=`<div class='grid'>${lc.cards.map((c,i)=>cardL(c,i,v,need)).join('')}</div>`;if(can)h+=`<p class='hint'>카드를 눌러 자세히 보고 고르세요. 파란 표시는 기한이 가까워 지금 채워야 하는 영양소예요.</p>`}
+ return h+'</section>'}
+function snackSec(v,t){
+ if(!v.L)return '';
+ const can=t<=TODAY&&t>=START,sc=v.sc,need=snackNeed(v,v.L);
+ const info=sc.mode==='relaxed'?'가장 가깝게 채우는 순':sc.cards.length+'개 · '+(v.fL?'고른 점심에 맞춤':'1번 점심 기준');
+ let h=`<section class='sec' id='snk'><h2>저녁 · 가볍게<span>${info}</span></h2>`;
+ if(!v.fL&&can)h+=`<p class='hint' style='margin:0 6px 10px'>점심을 고르면 그 점심에 맞춰 다시 계산돼요.</p>`;
+ if(!sc.cards.length&&!v.fS)return h+`<div class='empty'>조건에 맞는 간식이 없어요.</div></section>`;
+ if(v.fS&&can){h+=heroS(v);const o=sc.cards.filter(c=>c.S!==v.fS);if(o.length){h+=`<button class='lnk' data-alt='S'>${ALT.S?'다른 후보 접기':'다른 후보 '+o.length+'개 보기'}</button>`;if(ALT.S)h+=`<div class='grid'>${o.map((c,i)=>cardS(c,i,v,need)).join('')}</div>`}}
+ else h+=`<div class='grid'>${sc.cards.map((c,i)=>cardS(c,i,v,need)).join('')}</div>`;
+ return h+'</section>'}
+function statusSec(v,t){
+ const tl=t>TODAY?v.after:v.rec,done=t>TODAY||(v.fL&&v.fS);
+ let h=`<section class='sec'><h2>영양 하한<span>${t>TODAY?'예상':done?'고른 것 포함':'고르기 전 — 오늘 채워야 할 양'}</span></h2><div class='card'>`;
+ GROUPS.forEach(([W,gn])=>{const js=[];for(let j=0;j<NH;j++)if(HW[j]===W)js.push(j);if(!js.length)return;h+=`<div class='gh'>${gn}</div>`;
+  js.forEach(j=>{const mn=HMIN[j],en=enforced(tl,t,j),sum=winSum(tl,t,j),r=Math.min(1,sum/mn);let rt,cls='';
+   if(sum>=mn-1e-9){const nn=W>1?nextNeed(tl,t,j):null;rt=nn?(nn.k===1?'내일까지 ':nn.k===2?'모레까지 ':nn.k+'일 뒤까지 ')+fmt(j,nn.def)+' 더':'충족'}
+   else if(!en)rt='집계 '+(t-START+1)+'/'+W+'일째';else if(!done){rt='오늘 '+fmt(j,mn-sum)+' 더';cls='bl'}else{rt=fmt(j,mn-sum)+' 부족';cls='rd'}
+   h+=`<div class='row'><div class='mn'><div class='nm'>${HARD[j].n}</div><div class='sb'>${W===1?'하루':W+'일에'} ${fmt(j,mn)} 이상 · 지금 ${fmt(j,sum)}</div></div><span class='bar'><b class='${cls==='rd'?'rd':''}' style='width:${Math.round(r*100)}%'></b></span><div class='rt ${cls}'>${rt}</div></div>`})});
+ return h+`</div><p class='hint'>각 줄은 오늘로 끝나는 기간(1·2·3·4·7일) 동안 먹은 양이에요. 하한은 원칙 탭에서 볼 수 있어요.</p></section>`}
+function renderToday(){
+ const t=SEL;let h=head(t);
+ if(t<START)return h+`<div class='empty' style='margin-top:24px'>기록은 ${full(START)}부터 시작했어요.</div>`;
+ const v=dayView(t);
+ return h+notices(v,t)+lunchSec(v,t)+snackSec(v,t)+statusSec(v,t)}
+function renderLog(){
+ const a=Math.max(START,TODAY-6),n=TODAY-a+1;
+ let h=`<div class='hd'><div><h1>기록</h1><div class='lead'>${full(START)}부터 · 고른 메뉴와 하한 충족</div></div></div>`;
+ h+=`<section class='sec'><h2>최근 ${n}일 하루 평균<span>하루 기준 대비 · 기록한 것만</span></h2><div class='card'>`;
+ for(let j=0;j<NH;j++){let s=0;for(let u=a;u<=TODAY;u++)s+=dayIn(BASE,u,j);const avg=s/n,p=Math.round(avg/HREF[j]*100);h+=`<div class='row'><div class='mn'><div class='nm'>${HARD[j].n}</div><div class='sb'>하루 ${fmt(j,avg)} · 기준 ${fmt(j,HREF[j])}</div></div><span class='bar'><b style='width:${Math.min(100,p)}%'></b></span><div class='rt'>${p}%</div></div>`}
+ h+=`</div></section><section class='sec'><h2>날짜별<span>누르면 그날로</span></h2><div class='card'>`;
+ for(let t=TODAY;t>=Math.max(START,TODAY-44);t--){const p=pk(t),L=p.l&&LUNI[p.l],S=p.s&&SNI[p.s];let st,cls='';
+  if(!L&&!S){st='기록 없음'}else if(t===TODAY&&!(L&&S)){st='고르는 중';cls='bl'}else{const m=dayStatus(BASE,t);if(m.length){st=m.map(j=>SHORT[HARD[j].k]).slice(0,2).join('·')+(m.length>2?' 외':'')+' 부족';cls='rd'}else st='✓ 하한 충족'}
+  h+=`<button class='row' data-day='${t}'><div class='mn'><div class='nm'>${md(t)} (${WDN[wdOf(t)]})${t===TODAY?' · 오늘':''}</div><div class='sb'>${L?esc(L.name):'점심 —'} · ${S?esc(S.name):'저녁 —'}</div></div><div class='rt ${cls}'>${st}</div><span class='chev'>›</span></button>`}
+ h+=`</div></section><section class='sec'><h2>기록 옮기기<span>이 기기의 브라우저에만 저장돼요</span></h2><div class='card'><div class='row'><div class='mn'><div class='nm'>다른 기기로 옮기기</div><div class='sb'>백업을 복사해 다른 기기에서 붙여넣으세요</div></div><button class='btn sm' data-act='backup'>백업 복사</button><button class='btn sm' data-act='restore'>붙여넣기</button></div></div></section>`;
+ return h}
+function topFoods(k){return Object.keys(INGO).filter(x=>INGO[x].v[k]).sort((a,b)=>INGO[b].v[k]-INGO[a].v[k]).slice(0,5)}
+function renderGuide(){
+ let h=`<div class='hd'><div><h1>원칙</h1><div class='lead'>피부 · 눈 · 혈관 · 건강한 노화</div></div></div>`;
+ h+=`<section class='sec'><div class='card txt'>점심 배달 한 끼와 가벼운 저녁으로 필요한 영양소를 <b>기간별 하한</b>에 맞춰 채웁니다. 매일 점심 10개·저녁 10개 카드를 보여주고, <b>고른 것을 기준으로 저녁과 다음 날부터 다시 계산</b>해요.<br><br>카드는 모두 「이걸 고르고도 앞으로 7일 동안 모든 하한을 지킬 길」이 실제로 있는지 계산해 통과한 것만 나옵니다. 그래서 <b>어느 카드를 골라도 하한이 깨지지 않아요.</b> 같은 조건이면 다음 날 고를 거리가 넉넉히 남는 카드를 앞에 둡니다.</div></section>`;
+ h+=`<section class='sec'><h2>반드시 지키는 하한 · ${NH}가지<span>누르면 설명</span></h2><div class='card'>`;
+ GROUPS.forEach(([W,gn])=>{const js=[];for(let j=0;j<NH;j++)if(HW[j]===W)js.push(j);if(!js.length)return;h+=`<div class='gh'>${gn}</div>`;
+  js.forEach(j=>{const H=HARD[j],p=Math.round(H.min/H.W/H.ref*100);h+=`<details class='row'><summary><div class='mn'><div class='nm'>${H.n}</div><div class='sb'>${W===1?'하루':W+'일에'} ${fmt(j,H.min)} 이상 · 하루 기준 ${fmt(j,H.ref)}의 ${p}%</div></div><span class='chev'>›</span></summary><div class='dd'>${esc(H.why)}<div class='top5'>${topFoods(H.k).map(x=>`<div><span>${esc(INGO[x].n)}</span><span>100g당 ${fmt(j,INGO[x].v[H.k])}</span></div>`).join('')}</div></div></details>`})});
+ h+=`</div><p class='hint'>하루 기준은 한국인 영양소 섭취기준(2020) 성인 남성 값(남녀 중 높은 쪽)입니다. 칼륨·식이섬유·마그네슘·비타민E·엽산은 점심 한 끼와 가벼운 저녁만으로는 하루 기준을 다 채우기 어려워 하한을 낮게 잡았어요. 아침이나 간식으로 더 채우면 좋습니다.</p></section>`;
+ h+=`<section class='sec'><h2>가능하면 채우는 것<span>순서에만 반영</span></h2><div class='card'>${SOFT.map(s=>`<div class='row'><div class='mn'><div class='nm'>${s.n}</div><div class='sb'>${esc(s.why)} 7일 목표 ${s.T}${s.u}.</div></div></div>`).join('')}</div></section>`;
+ const rules=['같은 점심 메뉴는 고른 다음 날부터 10일 동안 다시 나오지 않아요.','같은 재료(예: 고등어구이·고등어조림)는 4일 동안 다시 나오지 않아요.','같은 저녁 간식은 3일 동안 다시 나오지 않아요.','국물·짠 양념 메뉴와 직화 구이는 7일에 각각 3번까지 — 국물은 1/3만, 탄 부분은 피하세요.','붉은 고기(소·양·돼지)는 7일에 조리 전 '+RULE.REDG+'g까지 — 세계암연구기금 권고(조리 후 주 350~500g 이하) 안쪽이에요.','6~9월엔 회·육회 등 날것이 자동으로 빠지고, 굴·방어·과메기 등은 제철에만 나와요.','닭·오리, 가공육, 공기밥·면·사리·빵, 단 양념, 배달 김치는 메뉴에서 뺐어요.','자주 드시는 블루베리·망고·그릭요거트·그래놀라가 들어간 저녁은 같은 조건이면 조금 앞에 둬요. 블루베리·망고는 비타민C가 적어서, 점심에 채소가 적은 날엔 키위·골드키위를 곁들인 조합이 후보로 나와요.','기록하지 않은 날은 섭취 0으로 계산해요. 먹었다면 그날을 눌러 기록하세요.'];
+ h+=`<section class='sec'><h2>메뉴 규칙</h2><div class='card'>${rules.map(x=>`<div class='row'><div class='mn t'>${esc(x)}</div></div>`).join('')}</div></section>`;
+ const care=['자외선차단제가 피부 노화 예방의 1순위 — 라이코펜·오메가3는 보조예요.','비타민D는 10~3월엔 식사만으론 부족하기 쉬워요. 혈중 농도 검사 후 보충을 고려하세요.','아연 보충제를 고용량으로 오래 먹으면 구리 결핍 위험이 있어요. 음식은 괜찮아요.','와파린을 먹는다면 녹즙·잎채소·청국장(비타민K) 양을 일정하게 유지하세요.','자몽은 일부 고지혈증약·혈압약과 상호작용해요.','브라질너트는 하루 2알 이하(셀레늄 과잉).','그릭요거트는 무가당 플레인, 그래놀라는 100g당 당류 5g 이하 저당 제품으로 고르세요. 토핑이 들어간 요거트는 플레인보다 당류가 2~3배예요.','신장 질환·통풍이 있거나 복용약이 있으면 담당 의사와 먼저 상의하세요.'];
+ h+=`<section class='sec'><h2>꼭 알아둘 것</h2><div class='card'>${care.map(x=>`<div class='row'><div class='mn t'>${esc(x)}</div></div>`).join('')}</div><p class='hint'>모든 성분은 일반 1인분 기준 추정치예요. 참고: 한국인 영양소 섭취기준(2020), 국가표준식품성분표, USDA FoodData Central, 일본식품표준성분표(2020), WCRF/AICR 붉은 고기 권고, Stahl 2001·Rizwan 2011 토마토 광보호 시험, AREDS2, 경구 콜라겐 메타분석(2023~2025).</p></section>`;
+ h+=`<section class='sec'><div class='card'><div class='row'><div class='mn'><div class='nm'>기록 모두 지우기</div><div class='sb'>시작일과 고른 기록을 모두 지우고 오늘부터 다시 시작해요</div></div><button class='btn sm danger' data-act='reset'>지우기</button></div></div></section>`;
+ return h}
+function showModal(t,s,b,f){$('#mt').textContent=t;$('#ms').textContent=s;$('#mb').innerHTML=b;$('#mf').innerHTML=f;$('#ov').classList.add('on');document.body.style.overflow='hidden';$('#mb').scrollTop=0}
+function closeModal(){$('#ov').classList.remove('on');document.body.style.overflow=''}
+function openItem(kind,id){
+ const t=SEL,v=dayView(t),it=kind==='L'?LUNI[id]:SNI[id];if(!it)return;
+ const can=t<=TODAY&&t>=START,need=kind==='L'?lunchNeed(v):snackNeed(v,v.fL||v.L);
+ const inList=kind==='L'?v.lc.cards.some(c=>c.L===it):v.sc.cards.some(c=>c.S===it),picked=kind==='L'?v.fL===it:v.fS===it;
+ let b='';
+ if(kind==='L'){
+  b+=`<h4>주문</h4><div class='card'><div class='row'><div class='mn'><div class='sb'>배달앱 검색어</div><div class='nm'>${esc(it.kw)}</div></div><button class='btn sm' data-copy='${esc(it.kw)}'>복사</button></div>`+(it.req?`<div class='row'><div class='mn'><div class='sb'>요청사항</div><div class='t'>${esc(it.req)}</div></div><button class='btn sm' data-copy='${esc(it.req)}'>복사</button></div>`:'')+`<div class='row'><div class='mn'><div class='sb'>주문 팁</div><div class='t'>${esc(it.tip)}</div></div></div>`+(it.org?`<div class='row'><div class='mn'><div class='sb'>원산지</div><div class='t'>${esc(it.org)}</div></div></div>`:'')+`</div>`;
+  const fl=[it.salt?'국물·짠 양념 — 국물은 1/3만':'',it.grill?'직화 구이 — 탄 부분은 피하기':'',it.raw?'날것 — 6~9월엔 자동 제외':'',it.redg?'붉은 고기 '+it.redg+'g':''].filter(Boolean);
+  if(fl.length)b+=`<p class='hint'>${esc(fl.join(' · '))}</p>`;
+ }else{b+=`<h4>장보기</h4><div class='cps'>${it.buy.map(x=>`<span class='cp'>${esc(x)}</span>`).join('')}</div>`+(it.note?`<p class='hint'>${esc(it.note)}</p>`:'')}
+ const rows=[];for(let j=0;j<NH;j++)if(it.v[j]>0)rows.push(j);rows.sort((a,c)=>it.v[c]/HREF[c]-it.v[a]/HREF[a]);
+ b+=`<h4>${kind==='L'?'이 한 끼':'이 간식'}에 든 양<span>하루 기준 대비</span></h4><div class='card'>`+rows.map(j=>{const p=Math.round(it.v[j]/HREF[j]*100),nd=need[j]>0&&it.v[j]>=.25*need[j];return `<div class='nt'><span>${HARD[j].n}${nd?` <i class='cp bl'>지금 필요</i>`:''}</span><span class='a'>${fmt(j,it.v[j])}</span><span class='bar'><b style='width:${Math.min(100,p)}%'></b></span><span class='p'>${pctTxt(p)}</span></div>`}).join('')+`</div>`;
+ const soft=SOFT.map((s,i)=>{const x=it.v[SI[i]];return x>0?s.n+' '+num(x)+s.u:''}).filter(Boolean);if(it.poly)soft.push('폴리페놀(마늘·양파·올리브유 등)');
+ if(soft.length)b+=`<p class='hint'>그 밖에 ${esc(soft.join(' · '))}</p>`;
+ b+=`<h4>구성</h4><p class='t'>${it.parts.map(x=>esc(x.n)+' '+x.g+'g').join(' · ')}</p><p class='hint'>일반 1인분 기준 추정치예요.</p>`;
+ let f='';if(can){if(picked)f=`<button class='btn' data-unpick='${kind==='L'?'l':'s'}'>고른 것 취소</button>`;else if(inList)f=`<button class='btn pri' data-pick='${kind}:${it.id}'>${kind==='L'?'점심으로':'저녁으로'} 고르기</button>`}
+ showModal(it.name,kind==='L'?SHOP[it.shop]+' · '+UB[it.ub]+' · '+CAT[it.cat]:'저녁 · 가볍게',b,f)}
+let TT;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(TT);TT=setTimeout(()=>el.classList.remove('on'),2200)}
+async function copy(txt){try{await navigator.clipboard.writeText(txt);toast('복사했어요')}catch(e){const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('복사했어요')}catch(_){toast('복사하지 못했어요')}ta.remove()}}
+function doPick(kind,id){const t=SEL;if(t>TODAY||t<START)return;const k=dstr(t),p=Object.assign({},STO.picks[k]||{});let msg='';
+ if(kind==='L'){p.l=id;if(p.s){const sc=snackCards(cut(BASE,t),t,LUNI[id]);if(!sc.cards.some(c=>c.S.id===p.s)){delete p.s;msg='점심이 바뀌어 저녁은 다시 골라 주세요'}}}else p.s=id;
+ STO.picks[k]=p;save();rebuild();ALT={L:false,S:false};closeModal();render(false);
+ toast(msg||(kind==='L'?'점심을 골랐어요 · 저녁과 내일을 다시 맞췄어요':'저녁을 골랐어요 · 내일을 다시 맞췄어요'));
+ if(kind==='L'){const s=$('#snk');if(s)setTimeout(()=>s.scrollIntoView({behavior:'smooth',block:'start'}),60)}}
+function doUnpick(w){const k=dstr(SEL),p=Object.assign({},STO.picks[k]||{});delete p[w];if(!p.l&&!p.s)delete STO.picks[k];else STO.picks[k]=p;save();rebuild();closeModal();render(false);toast('선택을 취소했어요')}
+function act(a){
+ if(a==='reset'){if(!confirm('기록을 모두 지우고 오늘부터 다시 시작할까요?'))return;STO={start:dstr(todayN()),picks:{}};save();initDates();rebuild();SEL=TODAY;TAB='today';render(true);toast('새로 시작했어요');return}
+ if(a==='backup'){copy(JSON.stringify(STO));return}
+ if(a==='restore'){const s=prompt('복사해 둔 백업을 붙여넣으세요');if(!s)return;try{const o=JSON.parse(s);if(!o||typeof o.picks!=='object'||!o.start)throw 0;STO={start:o.start,picks:o.picks};save();initDates();rebuild();render(true);toast('기록을 불러왔어요')}catch(e){toast('백업 형식이 맞지 않아요')}}}
+function render(top){
+ document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===TAB));
+ const m=$('#main');
+ if(TAB==='today'){if(SEL>=START&&!VC[SEL]){m.innerHTML=head(SEL)+`<div class='empty' style='margin-top:24px'>계산하고 있어요…</div>`;if(top)scrollTo(0,0);setTimeout(()=>{dayView(SEL);render(false)},30);return}m.innerHTML=renderToday()}
+ else if(TAB==='log')m.innerHTML=renderLog();else m.innerHTML=renderGuide();
+ if(top)scrollTo(0,0)}
 document.addEventListener('click',e=>{
- const b=e.target.closest('button,[data-open],[data-close]');if(!b)return;const o=b.dataset;
- if('copy' in o){copy(o.copy);return}
- if('close' in o){closeSheet();return}
- if('open' in o){openSheet(o.open,o.g);return}
- if('tab' in o){TAB=o.tab;render();scrollTo(0,0);return}
- if('day' in o){SEL=+o.day;if(o.go){TAB=o.go;render();scrollTo(0,0)}else render();return}
- if('wk' in o){const v=+o.wk;if(v===0){ANCHOR=TODAY;SEL=TODAY}else{const off=SEL-ANCHOR;ANCHOR=Math.max(0,ANCHOR+7*v);SEL=ANCHOR+off}render();return}
- if('pick' in o){const key=sOf(SEL),orig=SCH.meal[SEL].orig.id,id=o.pick,d=D.find(x=>x.id===id);
-  const warn=!avail(d,monthOf(SEL))?'제철이 아니거나 여름 날것이에요':near(id,SEL)?'10일 안에 같은 메뉴가 있어요':'';
-  if(id===orig)delete OVR[key];else OVR[key]=id;SCH=null;saveOvr();if(SHEET)closeSheet();TAB='today';render();scrollTo(0,0);
-  toast(warn?'지정했어요 · '+warn:'바꿨어요 · 이후 일정도 다시 맞췄어요');return}
- if('unpick' in o){delete OVR[sOf(SEL)];SCH=null;saveOvr();render();toast('원래 추천으로 돌렸어요');return}
- if('mc' in o){MF.cat=o.mc;drawSheet();return}
- if('dl' in o){dl();return}
- if('ct' in o){copy(makeIcs());return}
-});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&SHEET)closeSheet();if(e.key==='Enter'&&e.target.dataset&&'open' in e.target.dataset)openSheet(e.target.dataset.open,e.target.dataset.g)});
-addEventListener('scroll',()=>{$('#nav').classList.toggle('sc',scrollY>44)},{passive:true});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)return;const nt=Math.max(0,tOf(todayStr()));if(nt!==TODAY){if(ANCHOR===TODAY)ANCHOR=nt;if(SEL===TODAY)SEL=nt;render()}});
-
-$('#tabs').innerHTML=[['today','오늘'],['week','주간'],['guide','원칙']].map(([k,n])=>`<button data-tab='${k}'>${IC[k]}<span>${n}</span></button>`).join('');
-$('#bell').innerHTML=IC.bell;
-(async()=>{TODAY=Math.max(0,tOf(todayStr()));SEL=ANCHOR=TODAY;await loadOvr();render()})();
+ const el=e.target.closest('[data-tab],[data-day],[data-nav],[data-open],[data-pick],[data-unpick],[data-copy],[data-alt],[data-act],[data-close]');if(!el)return;const d=el.dataset;
+ if('close' in d){if(el.id!=='ov'||e.target===el)closeModal();return}
+ if('copy' in d){copy(d.copy);return}
+ if('tab' in d){TAB=d.tab;render(true);return}
+ if('day' in d){if(el.disabled)return;SEL=+d.day;TAB='today';ALT={L:false,S:false};render(true);return}
+ if('nav' in d){const n=+d.nav;SEL=n===0?TODAY:Math.min(TODAY+MAXF,SEL+n);ALT={L:false,S:false};render(true);return}
+ if('open' in d){const q=d.open.split(':');openItem(q[0],q[1]);return}
+ if('pick' in d){const q=d.pick.split(':');doPick(q[0],q[1]);return}
+ if('unpick' in d){doUnpick(d.unpick);return}
+ if('alt' in d){ALT[d.alt]=!ALT[d.alt];render(false);return}
+ if('act' in d){act(d.act)}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if($('#ov').classList.contains('on')||TAB!=='today'||e.target.tagName==='INPUT')return;if(e.key==='ArrowLeft'){SEL--;ALT={L:false,S:false};render(true)}if(e.key==='ArrowRight'&&SEL<TODAY+MAXF){SEL++;ALT={L:false,S:false};render(true)}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)return;const n=todayN();if(n!==TODAY){const was=SEL===TODAY;initDates();rebuild();if(was)SEL=TODAY;render(false)}});
+load();initDates();SEL=TODAY;rebuild();render(true);
 </script>
 </body>
 </html>
