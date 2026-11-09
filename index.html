@@ -134,6 +134,11 @@ details.row .dd{padding:0 18px 14px;font-size:14px;color:var(--tx2);line-height:
 .nt .bar{width:56px}
 #toast{position:fixed;bottom:calc(28px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(16px);background:rgba(29,29,31,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:99;max-width:92vw;text-align:center}
 #toast.on{opacity:1;transform:translateX(-50%)}
+.sbox input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--sep);background:var(--card);font:inherit;font-size:16px;color:var(--tx);outline:none;-webkit-appearance:none}
+.sbox input:focus{border-color:var(--bl);box-shadow:0 0 0 3px var(--bl2)}
+.qseg{display:flex;gap:6px;margin:10px 0 0}
+.qseg button{flex:1;padding:8px;border-radius:10px;background:var(--card);font-size:14px;font-weight:500;color:var(--tx2);box-shadow:var(--sh);text-align:center}
+.qseg button.on{background:var(--bl);color:#fff}
 </style>
 </head>
 <body>
@@ -173,7 +178,7 @@ const RED_ING=['beef','galbi','shank','tendon','oxtail','lamb','porkl','belly','
 const CAT={F:'등푸른생선',W:'흰살생선',S:'조개·해산물',B:'소고기',L:'양고기',P:'돼지고기',V:'두부·계란·채소'};
 const SHOP={sal:'샐러드·포케',gri:'생선구이집',raw:'횟집',eel:'장어집',bbq:'고깃집',soup:'국·탕집',shabu:'샤브·전골',west:'양식·브런치',bossam:'보쌈집',jok:'족발집',sea:'해물찜·탕',hansik:'한식',lamb:'양고기집',yuk:'육회집',don:'덮밥집'};
 const UB={3:'어디서나',2:'흔함',1:'지역 따라'};
-const ANIMAL=['mack','salm','smsalm','sawara','eel','buri','shad','hair','tuna','saury','atka','whitef','sekk','oyster','mussel','egg','mozz'];
+const ANIMAL=['mack','salm','smsalm','sawara','eel','buri','shad','hair','tuna','saury','atka','whitef','sekk','oyster','mussel','egg','mozz','chicken','chickfry','cheese','milk','icecream'];
 const ING={
 mack:['고등어','pro:20 o3:2.3 d:7 a:37 e:1.3 se:44 zn:1.1 cu:.12 kal:330 mg:30 fol:11'],
 salm:['연어','pro:20 o3:2.1 d:8 a:14 e:3.8 se:24 zn:.4 cu:.05 kal:360 mg:27 fol:26'],
@@ -274,6 +279,19 @@ natto:['낫토','pro:16.5 fib:6.7 vk:600 fol:120 mg:100 kal:690 zn:1.9 cu:.61 e:
 apple:['사과','pro:.3 c:4 fib:2.4 kal:107 mg:5 vk:2'],
 hallabong:['한라봉·천혜향','pro:.9 c:45 a:40 fol:25 kal:170 mg:11 fib:1'],
 melon:['참외','pro:.8 c:20 fol:20 kal:240 mg:12 fib:1'],
+chicken:['닭고기(살)','pro:23 zn:1.5 se:24 cu:.05 kal:250 mg:25 fol:6 a:15 e:.3'],
+chickfry:['치킨(튀김옷 포함)','pro:19 zn:1.4 se:20 kal:220 mg:22 e:2 fol:10 a:20 cu:.07'],
+noodle:['면(삶은 것)','pro:4.5 fib:1.4 kal:40 mg:15 se:15 zn:.4 cu:.08 fol:7'],
+kimchi:['김치','pro:1.6 c:12 a:20 vk:40 fol:50 kal:300 mg:15 fib:2.4 cu:.06'],
+bread:['빵','pro:9 fib:2.7 kal:115 mg:25 se:22 zn:.8 cu:.1 fol:45 e:.2'],
+tteok:['떡','pro:3.5 fib:.5 kal:30 mg:10 zn:.6 cu:.08 se:3'],
+potato:['감자','pro:2 c:13 fib:1.8 kal:420 mg:23 fol:16 cu:.1'],
+ham:['햄·소시지','pro:14 zn:1.8 se:18 kal:250 mg:15 cu:.05'],
+cheese:['치즈','pro:24 zn:3.2 a:260 se:15 kal:90 mg:25'],
+vegmix:['볶음 채소(양파·당근·양배추)','pro:1.2 c:20 a:150 vk:40 fol:30 kal:200 mg:12 fib:2'],
+milk:['우유','pro:3.2 a:55 zn:.4 se:3 kal:150 mg:11'],
+chips:['과자(감자칩 등)','pro:6.5 c:10 e:5 kal:1200 mg:65 fib:3'],
+icecream:['아이스크림','pro:3.5 a:100 zn:.5 kal:200 mg:14'],
 soy:['무가당 두유','pro:3.3 fol:18 kal:120 mg:25 cu:.12 zn:.3 fib:.5']
 };
 /* [id, 분류, 가게, 흔함, 이름, 검색어, 주문팁, 요청사항, 원산지, 구성(재료:g), 플래그, 제철월, 재료군, 폴리페놀] */
@@ -468,6 +486,70 @@ const SN=[
 ['e95','저당 그래놀라 + 무가당 두유 + 키위 2개','granola:30 soy:190 kiwi:150',0,['저당 그래놀라','무가당 두유','키위'],'',0],
 ['e96','망고 + 블루베리 + 호박씨','mango:100 blueb:70 pump:20',0,['망고','블루베리','호박씨'],'',0]
 ];
+
+/* 메뉴에 없는 음식 기록용 — 추천에는 나오지 않음. x: 일반 메뉴, g: 가까운 유형 */
+const ETCD=[
+['x1','김치찌개 + 밥','belly:60 kimchi:150 tofu:60 rice:210','salt'],
+['x2','된장찌개 + 밥','tofu:80 vegmix:80 clam:20 rice:210','salt'],
+['x3','제육볶음 정식','belly:150 vegmix:60 rice:210',''],
+['x4','불고기 정식','beef:120 vegmix:60 rice:210',''],
+['x5','비빔밥','nara:120 egg:50 rice:250',''],
+['x6','김밥 1줄','rice:200 egg:30 ham:20 vegmix:40 nara:20',''],
+['x7','라면','noodle:300 vegmix:20','salt'],
+['x8','짜장면','noodle:400 belly:30 vegmix:100',''],
+['x9','짬뽕','noodle:400 haemul:60 vegmix:100 belly:20','salt'],
+['x10','냉면','noodle:350 beef:20 egg:25 vegmix:30','salt'],
+['x11','칼국수','noodle:400 clam:50 vegmix:50','salt'],
+['x12','떡볶이','tteok:250 vegmix:30','salt'],
+['x13','돈까스','porkl:150 bread:30 vegmix:50 rice:150',''],
+['x14','치킨 반 마리','chickfry:350',''],
+['x15','닭가슴살 샐러드','chicken:120 greens:80 tomraw:40',''],
+['x16','삼계탕','chicken:300 rice:50','salt'],
+['x17','닭갈비','chicken:200 vegmix:100 tteok:50',''],
+['x18','햄버거 세트','bread:90 beef:100 cheese:20 vegmix:20 potato:120',''],
+['x19','피자 2조각','bread:120 cheese:60 ham:30 tomsauce:30 vegmix:20',''],
+['x20','토마토 파스타','noodle:300 tomsauce:120 olive:10',''],
+['x21','크림 파스타','noodle:300 cheese:30 ham:20 milk:80',''],
+['x22','샌드위치','bread:100 ham:30 cheese:20 egg:30 ssam:20 tomraw:20',''],
+['x23','쌀국수','noodle:350 beef:60 sprout:50','salt'],
+['x24','카레라이스','rice:250 potato:60 vegmix:60 beef:30',''],
+['x25','초밥 10개','rice:200 salm:40 whitef:40 tuna:20 shrimp:20','raw'],
+['x26','회덮밥','rice:210 whitef:80 ssam:60 vegmix:30','raw'],
+['x27','마라탕','noodle:150 beef:60 tofu:60 napa:80 mush:50','salt'],
+['x28','우동','noodle:400','salt'],
+['x29','편의점 도시락','rice:250 ham:40 chicken:40 egg:30 kimchi:30 vegmix:30',''],
+['x30','생선구이 백반 (밥 포함)','mack:120 nara:80 kimchi:40 rice:210','grill'],
+['x31','김치볶음밥','rice:250 kimchi:80 ham:30 egg:50',''],
+['x32','오므라이스','rice:250 egg:100 ham:20 vegmix:40',''],
+['x33','떡국','tteok:250 beef:30 egg:30','salt'],
+['x34','만두 8개','belly:50 noodle:120 vegmix:60 tofu:30',''],
+['x35','부대찌개 + 밥','ham:80 noodle:100 kimchi:80 tofu:40 belly:30 rice:150','salt'],
+['x36','감자탕','porkbone:200 woog:80 potato:100','salt'],
+['x37','순대국','porkl:100 noodle:60 chive:20 rice:150','salt'],
+['x38','회식 · 삼겹살','belly:250 ssam:80 kimchi:40 rice:100','grill'],
+['x39','회식 · 소고기 구이','beef:250 ssam:80 rice:100','grill'],
+['x40','회식 · 횟집','whitef:200 salm:50 ssam:80','raw'],
+['x41','쌀밥 한 공기','rice:210',''],
+['x42','바나나 1개','banana:120',''],
+['x43','사과 1개','apple:250',''],
+['x44','우유 한 잔','milk:200',''],
+['x45','라떼 한 잔','milk:200',''],
+['x46','과자 한 봉지','chips:60',''],
+['x47','아이스크림','icecream:100',''],
+['x48','빵 한 개','bread:80',''],
+['x49','떡 한 팩','tteok:150',''],
+['x50','컵라면','noodle:200','salt'],
+['g1','한식 백반 (국·찌개 + 밥 + 반찬)','rice:210 tofu:40 nara:80 kimchi:40 whitef:40','salt'],
+['g2','고기 요리 + 밥','porkl:120 vegmix:60 rice:210',''],
+['g3','생선 요리 + 밥','mack:60 whitef:60 nara:60 rice:210',''],
+['g4','면 요리','noodle:350 vegmix:60 belly:20','salt'],
+['g5','밥 요리 (덮밥·볶음밥)','rice:280 egg:40 vegmix:60 porkl:40',''],
+['g6','튀김·패스트푸드','chickfry:150 bread:60 potato:80',''],
+['g7','샐러드','greens:120 chicken:60 tomraw:40 olive:10',''],
+['g8','분식 (떡볶이·김밥·순대)','tteok:150 rice:100 egg:20 vegmix:30','salt'],
+['g9','빵·디저트','bread:120 cheese:10',''],
+['g10','과일 한 접시','apple:150 orange:100','']
+];
 /* 한 끼 v2 엔진 — DOM 없음. 날짜는 1970-01-01부터의 일수(t). */
 const MS=864e5,H_LOOK=7,BUDGET=40;
 const p2=n=>String(n).padStart(2,'0');
@@ -486,30 +568,35 @@ const INGO={};
 Object.keys(ING).forEach(k=>{const v={};ING[k][1].split(' ').forEach(p=>{const q=p.split(':');if(KI[q[0]]===undefined)throw new Error('KEY '+q[0]+' @'+k);v[q[0]]=+q[1]});INGO[k]={n:ING[k][0],v}});
 function mk(comp){const v=new Float64Array(NK),parts=[];comp.split(' ').forEach(p=>{const q=p.split(':'),I=INGO[q[0]],g=+q[1];if(!I)throw new Error('ING '+q[0]);parts.push({k:q[0],n:I.n,g});Object.keys(I.v).forEach(n=>{v[KI[n]]+=I.v[n]*g/100});if(ANI.has(q[0])&&I.v.a)v[KI.ret]+=I.v.a*g/100});return {v,parts}}
 const LUN=D.map(a=>{const b=mk(a[9]),f=a[10]||'';return {kind:'L',id:a[0],cat:a[1],shop:a[2],ub:a[3],name:a[4],kw:a[5],tip:a[6],req:a[7],org:a[8],raw:f.includes('raw'),salt:f.includes('salt'),grill:f.includes('grill'),months:a[11]||null,fam:a[12],poly:!!a[13],red:'BLP'.includes(a[1]),redg:b.parts.reduce((x,p)=>x+(RED_ING.includes(p.k)?p.g:0),0),v:b.v,parts:b.parts}});
-const SNK=SN.map(a=>{const b=mk(a[2]);return {kind:'S',id:a[0],name:a[1],months:a[3]||null,buy:a[4],note:a[5],raw:!!a[6],v:b.v,parts:b.parts,main:b.parts[0].k}});
+const SNK=SN.map(a=>{const b=mk(a[2]);return {kind:'S',id:a[0],name:a[1],months:a[3]||null,buy:a[4],note:a[5],raw:!!a[6],v:b.v,parts:b.parts,main:b.parts[0].k,redg:0,salt:false,grill:false,fam:'s-'+a[0],cat:'Z'}});
 const LUNI={},SNI={};
 LUN.forEach(x=>{if(LUNI[x.id])throw new Error('dup '+x.id);LUNI[x.id]=x});
 SNK.forEach(x=>{if(SNI[x.id])throw new Error('dup '+x.id);SNI[x.id]=x});
+const ETCI={};const ETC=ETCD.map(a=>{const b=mk(a[2]),f=a[3]||'';const x={kind:'X',id:a[0],name:a[1],tpl:a[0][0]==='g',raw:f.includes('raw'),salt:f.includes('salt'),grill:f.includes('grill'),redg:b.parts.reduce((s,p)=>s+(RED_ING.includes(p.k)?p.g:0),0),fam:'x-'+a[0],cat:'X',v:b.v,parts:b.parts};if(ETCI[x.id]||LUNI[x.id]||SNI[x.id])throw new Error('dup '+x.id);ETCI[x.id]=x;return x});
+function itemById(id){return LUNI[id]||SNI[id]||ETCI[id]||null}
 
 /* 타임라인: {start, L:[], S:[]} — 인덱스 t-start. 비어 있으면 그날 섭취 0 */
 function gL(tl,u){return u<tl.start?null:(tl.L[u-tl.start]||null)}
 function gS(tl,u){return u<tl.start?null:(tl.S[u-tl.start]||null)}
+function gX(tl,u){return u<tl.start||!tl.X?null:(tl.X[u-tl.start]||null)}
+function xIn(tl,u,j){const a=gX(tl,u);if(!a)return 0;let s=0;for(const x of a)s+=x.v[j];return s}
+function dayItems(tl,u){const o=[],a=gL(tl,u),b=gS(tl,u),c=gX(tl,u);if(a)o.push(a);if(b)o.push(b);if(c)for(const x of c)o.push(x);return o}
 function setDay(tl,t,L,S){tl.L[t-tl.start]=L||null;tl.S[t-tl.start]=S||null}
-function cut(tl,t){const n=Math.max(0,t-tl.start);return {start:tl.start,L:tl.L.slice(0,n),S:tl.S.slice(0,n)}}
-function dayIn(tl,u,j){const l=gL(tl,u),s=gS(tl,u);return (l?l.v[j]:0)+(s?s.v[j]:0)}
+function cut(tl,t){const n=Math.max(0,t-tl.start);return {start:tl.start,L:tl.L.slice(0,n),S:tl.S.slice(0,n),X:tl.X?tl.X.slice(0,n):[]}}
+function dayIn(tl,u,j){const l=gL(tl,u),s=gS(tl,u);return (l?l.v[j]:0)+(s?s.v[j]:0)+xIn(tl,u,j)}
 function enforced(tl,e,j){return e-HW[j]+1>=tl.start}
 function winSum(tl,e,j,upto){let s=0;const hi=upto===undefined?e:Math.min(e,upto);for(let u=e-HW[j]+1;u<=hi;u++)s+=dayIn(tl,u,j);return s}
 /* 오늘(t) 창의 남은 하한: 오늘 먹을 양이 이 값 이상이어야 함 */
-function reqOf(tl,t){const r=new Float64Array(NH);for(let j=0;j<NH;j++){r[j]=enforced(tl,t,j)?HMIN[j]-winSum(tl,t,j,t-1):-1e9}return r}
+function reqOf(tl,t){const r=new Float64Array(NH);for(let j=0;j<NH;j++){r[j]=enforced(tl,t,j)?HMIN[j]-winSum(tl,t,j,t-1)-xIn(tl,t,j):-1e9}return r}
 /* 앞으로 끝나는 창들의 부족분(md)과 압력(pr: 하루에 필요한 속도 ÷ 기준 속도) */
-function needOf(tl,t){const md=new Float64Array(NH),pr=new Float64Array(NH);for(let j=0;j<NH;j++){let bd=0,bp=0;for(let k=0;k<HW[j];k++){const e=t+k;if(!enforced(tl,e,j))continue;const d=HMIN[j]-winSum(tl,e,j,t-1);if(d>0){if(d>bd)bd=d;const p=d/((k+1)*HRATE[j]);if(p>bp)bp=p}}md[j]=bd;pr[j]=bp}return {md,pr}}
-function softNeed(tl,t){const d=new Float64Array(NS);for(let i=0;i<NS;i++){let s=0;for(let u=t-6;u<t;u++)s+=dayIn(tl,u,SI[i]);d[i]=Math.max(0,ST7[i]-s)}return d}
+function needOf(tl,t){const md=new Float64Array(NH),pr=new Float64Array(NH);for(let j=0;j<NH;j++){let bd=0,bp=0;for(let k=0;k<HW[j];k++){const e=t+k;if(!enforced(tl,e,j))continue;const d=HMIN[j]-winSum(tl,e,j,t-1)-xIn(tl,t,j);if(d>0){if(d>bd)bd=d;const p=d/((k+1)*HRATE[j]);if(p>bp)bp=p}}md[j]=bd;pr[j]=bp}return {md,pr}}
+function softNeed(tl,t){const d=new Float64Array(NS);for(let i=0;i<NS;i++){let s=0;for(let u=t-6;u<t;u++)s+=dayIn(tl,u,SI[i]);s+=xIn(tl,t,SI[i]);d[i]=Math.max(0,ST7[i]-s)}return d}
 function hScore(v,nd,v2){let s=0;for(let j=0;j<NH;j++){const x=v[j]+(v2?v2[j]:0);if(x<=0||nd.md[j]<=0)continue;s+=HWT[j]*Math.min(nd.pr[j],4)*Math.min(Math.min(x,nd.md[j])/HRATE[j],3)}return s}
 function sScore(v,sd,v2){let s=0;for(let i=0;i<NS;i++){const x=v[SI[i]]+(v2?v2[SI[i]]:0);if(x<=0||sd[i]<=0)continue;s+=.35*Math.min(Math.min(x,sd[i])/(ST7[i]/7),2)}return s}
 /* 그날의 규칙 맥락을 한 번만 계산 */
 function ctxOf(tl,t){const mo=monthOf(t),ids=new Set(),fams=new Set(),sids=new Set();let so=0,gr=0,rd=0;
  for(let u=t-1;u>t-RULE.GAP;u--){const x=gL(tl,u);if(x){ids.add(x.id);if(u>t-RULE.FAM)fams.add(x.fam)}}
- for(let u=t-6;u<t;u++){const x=gL(tl,u);if(x){if(x.salt)so++;if(x.grill)gr++;rd+=x.redg}}
+ for(let u=t-6;u<=t;u++){const it=u<t?dayItems(tl,u):(gX(tl,u)||[]);for(const x of it){if(x.salt)so++;if(x.grill)gr++;rd+=x.redg||0}}
  for(let u=t-1;u>t-RULE.SGAP;u--){const x=gS(tl,u);if(x)sids.add(x.id)}
  return {mo,ids,fams,sids,so,gr,rd}}
 function okL(c,L){if(L.months&&!L.months.includes(c.mo))return false;if(L.raw&&RULE.RAW_OFF.includes(c.mo))return false;if(c.ids.has(L.id)||c.fams.has(L.fam))return false;return c.so+(L.salt?1:0)<=RULE.SALT&&c.gr+(L.grill?1:0)<=RULE.GRILL&&c.rd+L.redg<=RULE.REDG}
@@ -590,7 +677,7 @@ function limitStatus(tl,t){const out=[],L=gL(tl,t),S=gS(tl,t),mo=monthOf(t);
   for(let u=t-1;u>t-RULE.FAM;u--){const x=gL(tl,u);if(x&&x.fam===L.fam)out.push('fam-repeat')}
   if(L.months&&!L.months.includes(mo))out.push('season');if(L.raw&&RULE.RAW_OFF.includes(mo))out.push('raw')}
  if(S){for(let u=t-1;u>t-RULE.SGAP;u--){const x=gS(tl,u);if(x&&x.id===S.id)out.push('snack-repeat')}if(S.months&&!S.months.includes(mo))out.push('s-season')}
- let so=0,gr=0,rd=0;for(let u=t-6;u<=t;u++){const x=gL(tl,u);if(x){if(x.salt)so++;if(x.grill)gr++;rd+=x.redg}}
+ let so=0,gr=0,rd=0;for(let u=t-6;u<=t;u++){for(const x of dayItems(tl,u)){if(x.salt)so++;if(x.grill)gr++;rd+=x.redg||0}}
  if(so>RULE.SALT)out.push('salt');if(gr>RULE.GRILL)out.push('grill');if(rd>RULE.REDG)out.push('red');
  if(L&&S){for(const [i,m] of ULI){if(L.v[i]+S.v[i]>m)out.push('UL '+KEYS[i])}}
  return out}
@@ -612,19 +699,23 @@ function todayN(){const x=new Date();return dnum(x.getFullYear()+'-'+p2(x.getMon
 function load(){try{const v=localStorage.getItem(SK);if(v){const o=JSON.parse(v);if(o&&typeof o==='object')STO=o}}catch(e){}if(!STO.picks||typeof STO.picks!=='object')STO.picks={}}
 function save(){try{localStorage.setItem(SK,JSON.stringify(STO))}catch(e){}}
 function initDates(){TODAY=todayN();if(!STO.start){STO.start=dstr(TODAY);save()}START=Math.min(dnum(STO.start),TODAY)}
-function rebuild(){BASE={start:START,L:[],S:[]};Object.keys(STO.picks).forEach(k=>{const t=dnum(k);if(!(t>=START&&t<=TODAY))return;const p=STO.picks[k]||{};setDay(BASE,t,(p.l&&LUNI[p.l])||null,(p.s&&SNI[p.s])||null)});VC={}}
+function rebuild(){BASE={start:START,L:[],S:[],X:[]};Object.keys(STO.picks).forEach(k=>{const t=dnum(k);if(!(t>=START&&t<=TODAY))return;const p=STO.picks[k]||{};setDay(BASE,t,p.l?itemOf(p.l,p.lq,p.ln):null,p.s?itemOf(p.s,p.sq,p.sn):null);if(p.x&&p.x.length)BASE.X[t-START]=p.x.map(e=>itemOf(e.i,e.q,e.n)).filter(Boolean)});VC={}}
 function pk(t){return (t<=TODAY&&STO.picks[dstr(t)])||{}}
+const ICACHE={};
+function itemOf(id,qq,n){const b=itemById(id);if(!b)return null;qq=+qq||1;if(qq===1&&!n)return b;const k=id+'|'+qq+'|'+(n||'');if(ICACHE[k])return ICACHE[k];const v=new Float64Array(b.v.length);for(let i=0;i<v.length;i++)v[i]=b.v[i]*qq;return ICACHE[k]=Object.assign({},b,{v,redg:(b.redg||0)*qq,name:(n||b.name)+(qq<1?' (적게)':qq>1?' (많이)':''),q:qq,cust:true,parts:b.parts.map(p=>({k:p.k,n:p.n,g:Math.round(p.g*qq)}))})}
+function custOf(p,w){const id=p[w];if(!id)return false;return (w==='l'?!LUNI[id]:!SNI[id])||(p[w+'q']&&+p[w+'q']!==1)||!!p[w+'n']}
+function withDay(tl,t,L,S){const n=cut(tl,t);setDay(n,t,L,S);if(tl.X&&tl.X[t-tl.start])n.X[t-tl.start]=tl.X[t-tl.start];return n}
 function dayView(t){
  if(VC[t])return VC[t];
  const tl=t<=TODAY?cut(BASE,t):cut(dayView(t-1).after,t);
- const p=pk(t),fL=(p.l&&LUNI[p.l])||null,fS=(p.s&&SNI[p.s])||null;
+ if(t<=TODAY&&BASE.X[t-START])tl.X[t-START]=BASE.X[t-START];
+ const p=pk(t),fL=p.l?itemOf(p.l,p.lq,p.ln):null,fS=p.s?itemOf(p.s,p.sq,p.sn):null,cL=custOf(p,'l'),cS=custOf(p,'s');
  const lc=lunchCards(tl,t,fS);
  const L=fL||(lc.cards[0]?lc.cards[0].L:null);
  const sc=L?snackCards(tl,t,L):{cards:[],mode:'none',miss:[]};
  const S=fS||(sc.cards[0]?sc.cards[0].S:null);
- const after=cut(tl,t);setDay(after,t,L,S);
- const rec=cut(tl,t);setDay(rec,t,fL,fS);
- return VC[t]={t,tl,lc,sc,L,S,fL,fS,after,rec,req:reqOf(tl,t),nd:needOf(tl,t)}}
+ const after=withDay(tl,t,L,S),rec=withDay(tl,t,fL,fS);
+ return VC[t]={t,tl,lc,sc,L,S,fL,fS,cL,cS,after,rec,req:reqOf(tl,t),nd:needOf(tl,t)}}
 function lunchNeed(v){const a=new Float64Array(NH);for(let j=0;j<NH;j++)a[j]=v.nd.pr[j]>1.05?v.nd.md[j]:0;return a}
 function snackNeed(v,L){const a=new Float64Array(NH);for(let j=0;j<NH;j++)a[j]=Math.max(0,v.req[j]-(L?L.v[j]:0));return a}
 const medOf=(arr,j)=>{const a=arr.map(x=>x.v[j]).sort((p,r)=>p-r);return a[Math.floor(a.length/2)]};const MEDL=HARD.map((h,j)=>medOf(LUN,j)/h.ref),MEDS=HARD.map((h,j)=>medOf(SNK,j)/h.ref);
@@ -633,19 +724,21 @@ function head(t){
  const lead=t===TODAY?'오늘':t>TODAY?'미리보기':t<START?'기록 시작 전':'지난 날 — 고치면 이후 추천이 다시 계산돼요';
  let h=`<div class='hd'><div><h1>${full(t)}</h1><div class='lead'>${lead}</div></div><div class='nav'>${t!==TODAY?`<button class='chipb' data-nav='0'>오늘</button>`:''}<button class='ib' data-nav='-1' aria-label='전날'>‹</button><button class='ib' data-nav='1' aria-label='다음날' ${t>=TODAY+MAXF?'disabled':''}>›</button></div></div><div class='wk'>`;
  const w0=t-((wdOf(t)+6)%7);
- for(let i=0;i<7;i++){const u=w0+i,p=pk(u),rec=!!(p.l||p.s),dis=u>TODAY+MAXF;h+=`<button class='wd${u===t?' on':''}${u===TODAY?' td':''}${u>TODAY?' fut':''}${rec?' rec':''}' data-day='${u}' ${dis?'disabled':''}><small>${WDN[wdOf(u)]}</small><b>${new Date(u*MS).getUTCDate()}</b><i></i></button>`}
+ for(let i=0;i<7;i++){const u=w0+i,p=pk(u),rec=!!(p.l||p.s||(p.x&&p.x.length)),dis=u>TODAY+MAXF;h+=`<button class='wd${u===t?' on':''}${u===TODAY?' td':''}${u>TODAY?' fut':''}${rec?' rec':''}' data-day='${u}' ${dis?'disabled':''}><small>${WDN[wdOf(u)]}</small><b>${new Date(u*MS).getUTCDate()}</b><i></i></button>`}
  return h+'</div>'}
 function notices(v,t){
  const out=[];
  if(t>TODAY)out.push(['','미리보기예요. 오늘부터 전날까지는 각 날 1번 카드를 고른다고 가정해 계산했어요. 고르는 건 그날이 되면 할 수 있어요.']);
  if(t===TODAY){let m=0;for(let u=Math.max(START,t-7);u<t;u++){const p=pk(u);if(!p.l&&!p.s)m++}if(m)out.push(['','최근 7일 중 '+m+'일은 기록이 없어 그날 섭취를 0으로 계산했어요. 위 날짜를 눌러 먹은 걸 고르면 추천이 더 정확해져요.'])}
  if(t<TODAY&&t>=START&&!v.fL&&!v.fS)out.push(['','이날은 기록이 없어요. 먹은 걸 고르면 이후 추천이 다시 계산돼요.']);
- if(v.lc.mode==='short')out.push(['','앞으로 7일을 모두 맞추는 조합이 없어 '+v.lc.H+'일 앞까지 확인한 메뉴예요.']);
+ if(v.lc.mode==='short')out.push(['',v.lc.H>0?'앞으로 7일을 모두 맞추는 조합이 없어 '+v.lc.H+'일 앞까지 확인한 메뉴예요.':'기록이 비었거나 메뉴 밖 음식 때문에 며칠은 모든 하한을 맞추기 어려워요. 오늘 하한을 지키는 메뉴를 보여드려요.']);
+ if(v.sc.mode==='relaxed'&&v.L&&!v.fS)out.push(['rd','오늘 먹은 것 기준으로는 '+v.sc.miss.map(j=>SHORT[HARD[j].k]).join('·')+' 하한을 오늘 다 채울 수 없어요. 저녁은 가장 가깝게 채우는 순서이고, 모자란 만큼은 다음 날부터 우선 채워요.']);
  if(v.lc.mode==='relaxed')out.push(['rd','기록이 비어 있던 날 때문에 오늘은 '+v.lc.miss.map(j=>SHORT[HARD[j].k]).join('·')+' 하한을 다 채울 수 없어요. 가장 가깝게 채우는 순서로 보여드려요.']);
- if(v.fL&&!v.lc.cards.some(c=>c.L===v.fL)&&v.lc.mode!=='relaxed')out.push(['','고른 점심이 지금 기준으론 후보에 없어요(이전 기록이 바뀌었을 수 있어요). 아래 영양 하한에서 부족한 게 있는지 확인하세요.']);
+ if(v.fL&&!v.cL&&!v.lc.cards.some(c=>c.L===v.fL)&&v.lc.mode!=='relaxed')out.push(['','고른 점심이 지금 기준으론 후보에 없어요(이전 기록이 바뀌었을 수 있어요). 아래 영양 하한에서 부족한 게 있는지 확인하세요.']);
  return out.map(x=>`<div class='note ${x[0]}'>${esc(x[1])}</div>`).join('')}
 function cardL(c,i,v,need){const L=c.L;return `<button class='fc${v.fL===L?' sel':''}' data-open='L:${L.id}'><div class='no'><b>${i+1}</b><span>${esc(SHOP[L.shop])}</span></div><div class='nm'>${esc(L.name)}</div><div class='cps'>${chips(L.v,need,3)}${c.nS!==undefined&&c.nS<6?`<span class='cp'>저녁 후보 ${c.nS}개</span>`:''}</div></button>`}
 function cardS(c,i,v,need){const S=c.S;return `<button class='fc${v.fS===S?' sel':''}' data-open='S:${S.id}'><div class='no'><b>${i+1}</b><span>${S.raw?'날것':''}</span></div><div class='nm'>${esc(S.name)}</div><div class='cps'>${chips(S.v,need,3,MEDS)}</div></button>`}
+function heroC(w,it,v){const need=w==='l'?lunchNeed(v):snackNeed(v,v.L);return `<div class='pk'><div class='k'>✓ ${w==='l'?'점심':'저녁'} · 직접 기록</div><h3>${esc(it.name)}</h3><div class='sb'>${esc(it.parts.map(x=>x.n+' '+x.g+'g').join(' · '))} — 추정치</div><div class='cps'>${chips(it.v,need,5,w==='s'?MEDS:MEDL)}</div><div class='acts'><button class='btn ghost sm' data-unpick='${w}'>지우기</button></div></div>`}
 function heroL(v){const L=v.fL;return `<div class='pk'><div class='k'>✓ 점심으로 골랐어요</div><h3>${esc(L.name)}</h3><div class='sb'>${esc(SHOP[L.shop])} · ${esc(L.tip)}</div><div class='cps'>${chips(L.v,lunchNeed(v),5)}</div><div class='acts'><button class='btn pri sm' data-copy='${esc(L.kw)}'>「${esc(L.kw)}」 복사</button>${L.req?`<button class='btn sm' data-copy='${esc(L.req)}'>요청사항 복사</button>`:''}<button class='btn sm' data-open='L:${L.id}'>자세히</button><button class='btn ghost sm' data-unpick='l'>바꾸기</button></div></div>`}
 function heroS(v){const S=v.fS;return `<div class='pk'><div class='k'>✓ 저녁으로 골랐어요</div><h3>${esc(S.name)}</h3><div class='sb'>${esc(S.buy.join(' · '))}${S.note?' — '+esc(S.note):''}</div><div class='cps'>${chips(S.v,snackNeed(v,v.L),5,MEDS)}</div><div class='acts'><button class='btn pri sm' data-copy='${esc(S.buy.join(', '))}'>장보기 복사</button><button class='btn sm' data-open='S:${S.id}'>자세히</button><button class='btn ghost sm' data-unpick='s'>바꾸기</button></div></div>`}
 function lunchSec(v,t){
@@ -653,8 +746,8 @@ function lunchSec(v,t){
  const info=lc.mode==='relaxed'?'가장 가깝게 채우는 순':lc.cards.length+'개 · 어느 걸 골라도 하한 유지';
  let h=`<section class='sec' id='lun'><h2>점심 · 배달<span>${info}</span></h2>`;
  if(!lc.cards.length&&!v.fL)return h+`<div class='empty'>조건에 맞는 메뉴가 없어요.</div></section>`;
- if(v.fL&&can){h+=heroL(v);const o=lc.cards.filter(c=>c.L!==v.fL);if(o.length){h+=`<button class='lnk' data-alt='L'>${ALT.L?'다른 후보 접기':'다른 후보 '+o.length+'개 보기'}</button>`;if(ALT.L)h+=`<div class='grid'>${o.map((c,i)=>cardL(c,i,v,need)).join('')}</div>`}}
- else{h+=`<div class='grid'>${lc.cards.map((c,i)=>cardL(c,i,v,need)).join('')}</div>`;if(can)h+=`<p class='hint'>카드를 눌러 자세히 보고 고르세요. 파란 표시는 기한이 가까워 지금 채워야 하는 영양소예요.</p>`}
+ if(v.fL&&can){h+=v.cL?heroC('l',v.fL,v):heroL(v);const o=v.cL?[]:lc.cards.filter(c=>c.L!==v.fL);if(o.length){h+=`<button class='lnk' data-alt='L'>${ALT.L?'다른 후보 접기':'다른 후보 '+o.length+'개 보기'}</button>`;if(ALT.L)h+=`<div class='grid'>${o.map((c,i)=>cardL(c,i,v,need)).join('')}</div>`}}
+ else{h+=`<div class='grid'>${lc.cards.map((c,i)=>cardL(c,i,v,need)).join('')}</div>`;if(can)h+=`<p class='hint'>카드를 눌러 자세히 보고 고르세요. 파란 표시는 기한이 가까워 지금 채워야 하는 영양소예요.</p><button class='lnk' data-custom='l'>＋ 메뉴에 없는 걸 먹었어요</button>`}
  return h+'</section>'}
 function snackSec(v,t){
  if(!v.L)return '';
@@ -663,9 +756,25 @@ function snackSec(v,t){
  let h=`<section class='sec' id='snk'><h2>저녁 · 가볍게<span>${info}</span></h2>`;
  if(!v.fL&&can)h+=`<p class='hint' style='margin:0 6px 10px'>점심을 고르면 그 점심에 맞춰 다시 계산돼요.</p>`;
  if(!sc.cards.length&&!v.fS)return h+`<div class='empty'>조건에 맞는 간식이 없어요.</div></section>`;
- if(v.fS&&can){h+=heroS(v);const o=sc.cards.filter(c=>c.S!==v.fS);if(o.length){h+=`<button class='lnk' data-alt='S'>${ALT.S?'다른 후보 접기':'다른 후보 '+o.length+'개 보기'}</button>`;if(ALT.S)h+=`<div class='grid'>${o.map((c,i)=>cardS(c,i,v,need)).join('')}</div>`}}
- else h+=`<div class='grid'>${sc.cards.map((c,i)=>cardS(c,i,v,need)).join('')}</div>`;
+ if(v.fS&&can){h+=v.cS?heroC('s',v.fS,v):heroS(v);const o=v.cS?[]:sc.cards.filter(c=>c.S!==v.fS);if(o.length){h+=`<button class='lnk' data-alt='S'>${ALT.S?'다른 후보 접기':'다른 후보 '+o.length+'개 보기'}</button>`;if(ALT.S)h+=`<div class='grid'>${o.map((c,i)=>cardS(c,i,v,need)).join('')}</div>`}}
+ else{h+=`<div class='grid'>${sc.cards.map((c,i)=>cardS(c,i,v,need)).join('')}</div>`;if(can)h+=`<button class='lnk' data-custom='s'>＋ 메뉴에 없는 걸 먹었어요</button>`}
  return h+'</section>'}
+function topTxt(it){const a=[];for(let j=0;j<NH;j++)if(it.v[j]>0)a.push([j,it.v[j]/HREF[j]]);a.sort((x,y)=>y[1]-x[1]);return a.slice(0,3).map(x=>SHORT[HARD[x[0]].k]+' '+Math.round(x[1]*100)+'%').join(' · ')}
+function extraSec(v,t){if(t>TODAY||t<START)return '';const xs=pk(t).x||[];let h=`<section class='sec'><h2>그 밖에 먹은 것<span>점심·저녁 말고 따로 먹은 것</span></h2>`;if(xs.length)h+=`<div class='card'>${xs.map((e,i)=>{const it=itemOf(e.i,e.q,e.n);return it?`<div class='row'><div class='mn'><div class='nm'>${esc(it.name)}</div><div class='sb'>${topTxt(it)}</div></div><button class='btn ghost sm' data-xdel='${i}'>지우기</button></div>`:''}).join('')}</div>`;return h+`<button class='lnk' data-custom='x'>＋ 추가로 먹은 것 기록</button></section>`}
+let CU={w:'l',q:1,query:''};const QL=[[.6,'적게'],[1,'보통'],[1.4,'많이']];
+function openCustom(w){CU={w,q:1,query:''};showModal(w==='l'?'점심으로 먹은 것':w==='s'?'저녁으로 먹은 것':'추가로 먹은 것','이름으로 찾고, 없으면 가까운 유형을 고르세요',`<div class='sbox'><input id='cq' type='search' placeholder='예: 김치찌개, 짜장면, 치킨, 회식' autocomplete='off'></div><div class='qseg' id='cqs'></div><div id='cr'></div>`,'');drawCustom()}
+function drawCustom(){$('#cqs').innerHTML=QL.map(([a,n])=>`<button class='${CU.q===a?'on':''}' data-cq='${a}'>${n}</button>`).join('');
+ const nq=CU.query.split(' ').join(''),pool=ETC.filter(x=>!x.tpl).concat(LUN,SNK),kindN=x=>x.kind==='X'?'일반 메뉴':x.kind==='L'?'추천 점심':'저녁 간식';
+ const hit=nq?pool.filter(x=>(x.name+(x.kw||'')).split(' ').join('').includes(nq)).slice(0,24):ETC.filter(x=>!x.tpl).slice(0,20);
+ const row=(x,sub)=>`<button class='row' data-cpick='${x.id}'><div class='mn'><div class='nm'>${esc(x.name)}</div><div class='sb'>${sub}</div></div><span class='rt bl'>기록</span></button>`;
+ let h=`<h4>${nq?'찾은 메뉴 '+hit.length+'개':'자주 먹는 일반 메뉴'}</h4>`;
+ h+=hit.length?`<div class='card'>${hit.map(x=>row(x,kindN(x)+' · '+esc(x.parts.map(p=>p.n).slice(0,3).join('·')))).join('')}</div>`:`<p class='hint'>목록에 없어요. 아래에서 가까운 유형을 고르면 「${esc(CU.query.trim())}」 이름으로 기록돼요.</p>`;
+ h+=`<h4>목록에 없으면 가까운 유형으로<span>추정치</span></h4><div class='card'>${ETC.filter(x=>x.tpl).map(x=>row(x,nq?'「'+esc(CU.query.trim())+'」 이름으로 기록':esc(x.parts.map(p=>p.n).slice(0,3).join('·')))).join('')}</div>`;
+ $('#cr').innerHTML=h}
+function doCustomPick(id){const t=SEL;if(t>TODAY||t<START)return;const it=itemById(id);if(!it)return;const k=dstr(t),p=Object.assign({},STO.picks[k]||{}),w=CU.w,n=it.tpl&&CU.query.trim()?CU.query.trim().slice(0,30):'';
+ if(w==='x'){const e={i:id};if(CU.q!==1)e.q=CU.q;if(n)e.n=n;p.x=(p.x||[]).concat([e])}else{p[w]=id;if(CU.q!==1)p[w+'q']=CU.q;else delete p[w+'q'];if(n)p[w+'n']=n;else delete p[w+'n']}
+ STO.picks[k]=p;save();rebuild();ALT={L:false,S:false};closeModal();render(false);toast('기록했어요 · 이후 추천을 다시 맞췄어요')}
+function delExtra(i){const k=dstr(SEL),p=Object.assign({},STO.picks[k]||{});p.x=(p.x||[]).filter((_,j)=>j!==+i);if(!p.x.length)delete p.x;if(!p.l&&!p.s&&!p.x)delete STO.picks[k];else STO.picks[k]=p;save();rebuild();render(false);toast('지웠어요')}
 function statusSec(v,t){
  const tl=t>TODAY?v.after:v.rec,done=t>TODAY||(v.fL&&v.fS);
  let h=`<section class='sec'><h2>영양 하한<span>${t>TODAY?'예상':done?'고른 것 포함':'고르기 전 — 오늘 채워야 할 양'}</span></h2><div class='card'>`;
@@ -679,16 +788,16 @@ function renderToday(){
  const t=SEL;let h=head(t);
  if(t<START)return h+`<div class='empty' style='margin-top:24px'>기록은 ${full(START)}부터 시작했어요.</div>`;
  const v=dayView(t);
- return h+notices(v,t)+lunchSec(v,t)+snackSec(v,t)+statusSec(v,t)}
+ return h+notices(v,t)+lunchSec(v,t)+snackSec(v,t)+extraSec(v,t)+statusSec(v,t)}
 function renderLog(){
  const a=Math.max(START,TODAY-6),n=TODAY-a+1;
  let h=`<div class='hd'><div><h1>기록</h1><div class='lead'>${full(START)}부터 · 고른 메뉴와 하한 충족</div></div></div>`;
  h+=`<section class='sec'><h2>최근 ${n}일 하루 평균<span>하루 기준 대비 · 기록한 것만</span></h2><div class='card'>`;
  for(let j=0;j<NH;j++){let s=0;for(let u=a;u<=TODAY;u++)s+=dayIn(BASE,u,j);const avg=s/n,p=Math.round(avg/HREF[j]*100);h+=`<div class='row'><div class='mn'><div class='nm'>${HARD[j].n}</div><div class='sb'>하루 ${fmt(j,avg)} · 기준 ${fmt(j,HREF[j])}</div></div><span class='bar'><b style='width:${Math.min(100,p)}%'></b></span><div class='rt'>${p}%</div></div>`}
  h+=`</div></section><section class='sec'><h2>날짜별<span>누르면 그날로</span></h2><div class='card'>`;
- for(let t=TODAY;t>=Math.max(START,TODAY-44);t--){const p=pk(t),L=p.l&&LUNI[p.l],S=p.s&&SNI[p.s];let st,cls='';
-  if(!L&&!S){st='기록 없음'}else if(t===TODAY&&!(L&&S)){st='고르는 중';cls='bl'}else{const m=dayStatus(BASE,t);if(m.length){st=m.map(j=>SHORT[HARD[j].k]).slice(0,2).join('·')+(m.length>2?' 외':'')+' 부족';cls='rd'}else st='✓ 하한 충족'}
-  h+=`<button class='row' data-day='${t}'><div class='mn'><div class='nm'>${md(t)} (${WDN[wdOf(t)]})${t===TODAY?' · 오늘':''}</div><div class='sb'>${L?esc(L.name):'점심 —'} · ${S?esc(S.name):'저녁 —'}</div></div><div class='rt ${cls}'>${st}</div><span class='chev'>›</span></button>`}
+ for(let t=TODAY;t>=Math.max(START,TODAY-44);t--){const p=pk(t),L=p.l?itemOf(p.l,p.lq,p.ln):null,S=p.s?itemOf(p.s,p.sq,p.sn):null,nx=(p.x||[]).length;let st,cls='';
+  if(!L&&!S&&!nx){st='기록 없음'}else if(t===TODAY&&!(L&&S)){st='고르는 중';cls='bl'}else{const m=dayStatus(BASE,t);if(m.length){st=m.map(j=>SHORT[HARD[j].k]).slice(0,2).join('·')+(m.length>2?' 외':'')+' 부족';cls='rd'}else st='✓ 하한 충족'}
+  h+=`<button class='row' data-day='${t}'><div class='mn'><div class='nm'>${md(t)} (${WDN[wdOf(t)]})${t===TODAY?' · 오늘':''}</div><div class='sb'>${L?esc(L.name):'점심 —'} · ${S?esc(S.name):'저녁 —'}${nx?' · 그 밖에 '+nx+'개':''}</div></div><div class='rt ${cls}'>${st}</div><span class='chev'>›</span></button>`}
  h+=`</div></section><section class='sec'><h2>기록 옮기기<span>이 기기의 브라우저에만 저장돼요</span></h2><div class='card'><div class='row'><div class='mn'><div class='nm'>다른 기기로 옮기기</div><div class='sb'>백업을 복사해 다른 기기에서 붙여넣으세요</div></div><button class='btn sm' data-act='backup'>백업 복사</button><button class='btn sm' data-act='restore'>붙여넣기</button></div></div></section>`;
  return h}
 function topFoods(k){return Object.keys(INGO).filter(x=>INGO[x].v[k]).sort((a,b)=>INGO[b].v[k]-INGO[a].v[k]).slice(0,5)}
@@ -700,7 +809,7 @@ function renderGuide(){
   js.forEach(j=>{const H=HARD[j],p=Math.round(H.min/H.W/H.ref*100);h+=`<details class='row'><summary><div class='mn'><div class='nm'>${H.n}</div><div class='sb'>${W===1?'하루':W+'일에'} ${fmt(j,H.min)} 이상 · 하루 기준 ${fmt(j,H.ref)}의 ${p}%</div></div><span class='chev'>›</span></summary><div class='dd'>${esc(H.why)}<div class='top5'>${topFoods(H.k).map(x=>`<div><span>${esc(INGO[x].n)}</span><span>100g당 ${fmt(j,INGO[x].v[H.k])}</span></div>`).join('')}</div></div></details>`})});
  h+=`</div><p class='hint'>하루 기준은 한국인 영양소 섭취기준(2020) 성인 남성 값(남녀 중 높은 쪽)입니다. 칼륨·식이섬유·마그네슘·비타민E·엽산은 점심 한 끼와 가벼운 저녁만으로는 하루 기준을 다 채우기 어려워 하한을 낮게 잡았어요. 아침이나 간식으로 더 채우면 좋습니다.</p></section>`;
  h+=`<section class='sec'><h2>가능하면 채우는 것<span>순서에만 반영</span></h2><div class='card'>${SOFT.map(s=>`<div class='row'><div class='mn'><div class='nm'>${s.n}</div><div class='sb'>${esc(s.why)} 7일 목표 ${s.T}${s.u}.</div></div></div>`).join('')}</div></section>`;
- const rules=['같은 점심 메뉴는 고른 다음 날부터 10일 동안 다시 나오지 않아요.','같은 재료(예: 고등어구이·고등어조림)는 4일 동안 다시 나오지 않아요.','같은 저녁 간식은 3일 동안 다시 나오지 않아요.','국물·짠 양념 메뉴와 직화 구이는 7일에 각각 3번까지 — 국물은 1/3만, 탄 부분은 피하세요.','붉은 고기(소·양·돼지)는 7일에 조리 전 '+RULE.REDG+'g까지 — 세계암연구기금 권고(조리 후 주 350~500g 이하) 안쪽이에요.','6~9월엔 회·육회 등 날것이 자동으로 빠지고, 굴·방어·과메기 등은 제철에만 나와요.','닭·오리, 가공육, 공기밥·면·사리·빵, 단 양념, 배달 김치는 메뉴에서 뺐어요.','자주 드시는 블루베리·망고·그릭요거트·그래놀라가 들어간 저녁은 같은 조건이면 조금 앞에 둬요. 블루베리·망고는 비타민C가 적어서, 점심에 채소가 적은 날엔 키위·골드키위를 곁들인 조합이 후보로 나와요.','기록하지 않은 날은 섭취 0으로 계산해요. 먹었다면 그날을 눌러 기록하세요.'];
+ const rules=['같은 점심 메뉴는 고른 다음 날부터 10일 동안 다시 나오지 않아요.','같은 재료(예: 고등어구이·고등어조림)는 4일 동안 다시 나오지 않아요.','같은 저녁 간식은 3일 동안 다시 나오지 않아요.','국물·짠 양념 메뉴와 직화 구이는 7일에 각각 3번까지 — 국물은 1/3만, 탄 부분은 피하세요.','붉은 고기(소·양·돼지)는 7일에 조리 전 '+RULE.REDG+'g까지 — 세계암연구기금 권고(조리 후 주 350~500g 이하) 안쪽이에요.','6~9월엔 회·육회 등 날것이 자동으로 빠지고, 굴·방어·과메기 등은 제철에만 나와요.','닭·오리, 가공육, 공기밥·면·사리·빵, 단 양념, 배달 김치는 메뉴에서 뺐어요.','자주 드시는 블루베리·망고·그릭요거트·그래놀라가 들어간 저녁은 같은 조건이면 조금 앞에 둬요. 블루베리·망고는 비타민C가 적어서, 점심에 채소가 적은 날엔 키위·골드키위를 곁들인 조합이 후보로 나와요.','메뉴에 없는 걸 먹었으면 「메뉴에 없는 걸 먹었어요」로 기록하세요. 일반 메뉴 50가지에서 찾거나, 없으면 이름을 쓰고 가까운 유형을 고르면 추정치로 계산해요. 점심·저녁 말고 따로 먹은 것도 더할 수 있어요.','기록하지 않은 날은 섭취 0으로 계산해요. 먹었다면 그날을 눌러 기록하세요.'];
  h+=`<section class='sec'><h2>메뉴 규칙</h2><div class='card'>${rules.map(x=>`<div class='row'><div class='mn t'>${esc(x)}</div></div>`).join('')}</div></section>`;
  const care=['자외선차단제가 피부 노화 예방의 1순위 — 라이코펜·오메가3는 보조예요.','비타민D는 10~3월엔 식사만으론 부족하기 쉬워요. 혈중 농도 검사 후 보충을 고려하세요.','아연 보충제를 고용량으로 오래 먹으면 구리 결핍 위험이 있어요. 음식은 괜찮아요.','와파린을 먹는다면 녹즙·잎채소·청국장(비타민K) 양을 일정하게 유지하세요.','자몽은 일부 고지혈증약·혈압약과 상호작용해요.','브라질너트는 하루 2알 이하(셀레늄 과잉).','그릭요거트는 무가당 플레인, 그래놀라는 100g당 당류 5g 이하 저당 제품으로 고르세요. 토핑이 들어간 요거트는 플레인보다 당류가 2~3배예요.','신장 질환·통풍이 있거나 복용약이 있으면 담당 의사와 먼저 상의하세요.'];
  h+=`<section class='sec'><h2>꼭 알아둘 것</h2><div class='card'>${care.map(x=>`<div class='row'><div class='mn t'>${esc(x)}</div></div>`).join('')}</div><p class='hint'>모든 성분은 일반 1인분 기준 추정치예요. 참고: 한국인 영양소 섭취기준(2020), 국가표준식품성분표, USDA FoodData Central, 일본식품표준성분표(2020), WCRF/AICR 붉은 고기 권고, Stahl 2001·Rizwan 2011 토마토 광보호 시험, AREDS2, 경구 콜라겐 메타분석(2023~2025).</p></section>`;
@@ -728,11 +837,11 @@ function openItem(kind,id){
 let TT;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(TT);TT=setTimeout(()=>el.classList.remove('on'),2200)}
 async function copy(txt){try{await navigator.clipboard.writeText(txt);toast('복사했어요')}catch(e){const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('복사했어요')}catch(_){toast('복사하지 못했어요')}ta.remove()}}
 function doPick(kind,id){const t=SEL;if(t>TODAY||t<START)return;const k=dstr(t),p=Object.assign({},STO.picks[k]||{});let msg='';
- if(kind==='L'){p.l=id;if(p.s){const sc=snackCards(cut(BASE,t),t,LUNI[id]);if(!sc.cards.some(c=>c.S.id===p.s)){delete p.s;msg='점심이 바뀌어 저녁은 다시 골라 주세요'}}}else p.s=id;
+ if(kind==='L'){p.l=id;delete p.lq;delete p.ln;if(p.s&&!custOf(p,'s')){const tl0=cut(BASE,t);if(BASE.X[t-START])tl0.X[t-START]=BASE.X[t-START];const sc=snackCards(tl0,t,LUNI[id]);if(!sc.cards.some(c=>c.S.id===p.s)){delete p.s;msg='점심이 바뀌어 저녁은 다시 골라 주세요'}}}else{p.s=id;delete p.sq;delete p.sn}
  STO.picks[k]=p;save();rebuild();ALT={L:false,S:false};closeModal();render(false);
  toast(msg||(kind==='L'?'점심을 골랐어요 · 저녁과 내일을 다시 맞췄어요':'저녁을 골랐어요 · 내일을 다시 맞췄어요'));
  if(kind==='L'){const s=$('#snk');if(s)setTimeout(()=>s.scrollIntoView({behavior:'smooth',block:'start'}),60)}}
-function doUnpick(w){const k=dstr(SEL),p=Object.assign({},STO.picks[k]||{});delete p[w];if(!p.l&&!p.s)delete STO.picks[k];else STO.picks[k]=p;save();rebuild();closeModal();render(false);toast('선택을 취소했어요')}
+function doUnpick(w){const k=dstr(SEL),p=Object.assign({},STO.picks[k]||{});delete p[w];delete p[w+'q'];delete p[w+'n'];if(!p.l&&!p.s&&!(p.x&&p.x.length))delete STO.picks[k];else STO.picks[k]=p;save();rebuild();closeModal();render(false);toast('선택을 취소했어요')}
 function act(a){
  if(a==='reset'){if(!confirm('기록을 모두 지우고 오늘부터 다시 시작할까요?'))return;STO={start:dstr(todayN()),picks:{}};save();initDates();rebuild();SEL=TODAY;TAB='today';render(true);toast('새로 시작했어요');return}
  if(a==='backup'){copy(JSON.stringify(STO));return}
@@ -744,9 +853,13 @@ function render(top){
  else if(TAB==='log')m.innerHTML=renderLog();else m.innerHTML=renderGuide();
  if(top)scrollTo(0,0)}
 document.addEventListener('click',e=>{
- const el=e.target.closest('[data-tab],[data-day],[data-nav],[data-open],[data-pick],[data-unpick],[data-copy],[data-alt],[data-act],[data-close]');if(!el)return;const d=el.dataset;
+ const el=e.target.closest('[data-custom],[data-cpick],[data-cq],[data-xdel],[data-tab],[data-day],[data-nav],[data-open],[data-pick],[data-unpick],[data-copy],[data-alt],[data-act],[data-close]');if(!el)return;const d=el.dataset;
  if('close' in d){if(el.id!=='ov'||e.target===el)closeModal();return}
  if('copy' in d){copy(d.copy);return}
+ if('custom' in d){openCustom(d.custom);return}
+ if('cpick' in d){doCustomPick(d.cpick);return}
+ if('cq' in d){CU.q=+d.cq;drawCustom();return}
+ if('xdel' in d){delExtra(d.xdel);return}
  if('tab' in d){TAB=d.tab;render(true);return}
  if('day' in d){if(el.disabled)return;SEL=+d.day;TAB='today';ALT={L:false,S:false};render(true);return}
  if('nav' in d){const n=+d.nav;SEL=n===0?TODAY:Math.min(TODAY+MAXF,SEL+n);ALT={L:false,S:false};render(true);return}
@@ -755,6 +868,7 @@ document.addEventListener('click',e=>{
  if('unpick' in d){doUnpick(d.unpick);return}
  if('alt' in d){ALT[d.alt]=!ALT[d.alt];render(false);return}
  if('act' in d){act(d.act)}});
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='cq'){CU.query=e.target.value;drawCustom()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if($('#ov').classList.contains('on')||TAB!=='today'||e.target.tagName==='INPUT')return;if(e.key==='ArrowLeft'){SEL--;ALT={L:false,S:false};render(true)}if(e.key==='ArrowRight'&&SEL<TODAY+MAXF){SEL++;ALT={L:false,S:false};render(true)}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)return;const n=todayN();if(n!==TODAY){const was=SEL===TODAY;initDates();rebuild();if(was)SEL=TODAY;render(false)}});
 load();initDates();SEL=TODAY;rebuild();render(true);
